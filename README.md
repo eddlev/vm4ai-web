@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="github/readme-header.png" alt="AIR by VM4AI — Configure. Organize. Execute." width="100%">
+  <img src="https://raw.githubusercontent.com/eddlev/air-brand/main/github/readme-header.png" alt="AIR by VM4AI — Configure. Organize. Execute." width="100%">
 </p>
 
 # AIR by VM4AI — Brand Kit
@@ -46,10 +46,10 @@ brand/
 If your project is built with AIR, add the badge:
 
 ```markdown
-[![Made with AIR](made-with-air/made-with-air.svg)](https://vm4ai.com)
+[![Made with AIR](https://raw.githubusercontent.com/eddlev/air-brand/main/made-with-air/made-with-air.svg)](https://vm4ai.com)
 ```
 
-[![Made with AIR](made-with-air/made-with-air.svg)](https://vm4ai.com)
+[![Made with AIR](https://raw.githubusercontent.com/eddlev/air-brand/main/made-with-air/made-with-air.svg)](https://vm4ai.com)
 
 ## License
 
