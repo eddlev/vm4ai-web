@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /blog-post-template.html
+
+Sitemap: https://vm4ai.com/sitemap.xml

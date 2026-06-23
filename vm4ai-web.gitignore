@@ -1,0 +1,23 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Logs / temp
+*.log
+*.tmp
+
+# Node (only if you later add tooling)
+node_modules/
+npm-debug.log*
+.cache/
+dist/
+
+# Local env
+.env
+.env.local
+
+# Cloudflare / Wrangler (if you use the CLI later)
+.wrangler/
