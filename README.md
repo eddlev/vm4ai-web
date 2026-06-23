@@ -69,6 +69,8 @@ The site deploys via Cloudflare Pages' Git integration:
 
 ## License
 
+This site's own code and content are © Edward Levin (VM4AI) — all rights reserved. The bundled web fonts are licensed under the SIL Open Font License (see OFL-Space-Grotesk.txt and OFL-JetBrains-Mono.txt).
+
 The AIR framework is licensed **Apache-2.0** — see [vm4ai-air-kit](https://github.com/eddlev/vm4ai-air-kit). The **AIR** and **VM4AI** names and the dot-in-frame mark are **not** granted by that license; please don't use the marks to imply endorsement or affiliation. See [air-brand/USAGE.md](https://github.com/eddlev/air-brand/blob/main/USAGE.md). The "Made with AIR" stamp is welcome on genuine AIR-built projects.
 
 — [vm4ai.com](https://vm4ai.com)
