@@ -2,57 +2,73 @@
   <img src="https://raw.githubusercontent.com/eddlev/air-brand/main/github/readme-header.png" alt="AIR by VM4AI — Configure. Organize. Execute." width="100%">
 </p>
 
-# AIR by VM4AI — Brand Kit
+# AIR by VM4AI — Website
 
-![License](https://img.shields.io/badge/license-Apache--2.0-C9A227?labelColor=1A1613)
-![Framework](https://img.shields.io/badge/framework-prompt--based-9A8F80?labelColor=1A1613)
-![Made with AIR](https://img.shields.io/badge/made%20with-AIR-FF5A1F?labelColor=1A1613)
+[![Made with AIR](https://raw.githubusercontent.com/eddlev/air-brand/main/made-with-air/made-with-air.svg)](https://vm4ai.com)
+![Static site](https://img.shields.io/badge/site-static%20%C2%B7%20no%20build-9A8F80?labelColor=1A1613)
+![Deploy](https://img.shields.io/badge/deploy-Cloudflare%20Pages-FF5A1F?labelColor=1A1613)
 
 **Configure. Organize. Execute.** — Structure for any AI work.
 
-The complete brand system for **AIR**, the prompt-based framework from VM4AI. Open **`brand-book.html`** for the full reference (strategy, voice, logo, color, type, the AIR model diagrams, and usage rules).
+The source for **[vm4ai.com](https://vm4ai.com)**, the public site for **AIR**, the prompt-based framework from VM4AI. This repository is the deployable site itself — a self-contained static bundle in [`public/`](public/) with no build step and no runtime dependencies.
+
+> AIR is an overlay for AI chatbots — ChatGPT, Claude, Gemini, Grok, Mistral, or the model you choose. It configures a session into a structured, auditable, cooperative environment. This repo is the website that explains it; the framework lives in **[vm4ai-air-kit](https://github.com/eddlev/vm4ai-air-kit)**.
 
 ---
 
 ## Structure
 
 ```
-brand/
-├─ brand-book.html        the full brand book (open in a browser)
-├─ brand-ai-brief.md      paste into any AI for on-brand output
-├─ USAGE.md               brand mark & stamp usage terms
-├─ logos/                 12 logo SVGs (primary · stacked · wordmark · mono · mark · favicon)
-├─ tokens/
-│  ├─ air-tokens.css      design tokens (color · type · light/dark · @font-face)
-│  ├─ tokens.json         the same tokens as JSON
-│  └─ fonts/              self-hosted Space Grotesk + JetBrains Mono (.woff)
-├─ web/                   favicon set · site.webmanifest · og-image (1200×630)
-├─ social/                X · LinkedIn · GitHub avatars, banners, post templates
-├─ made-with-air/         attribution stamp — pill & seal, clean & period, SVG + PNG
-├─ diagrams/              the AIR model diagrams (standalone SVG + PNG)
-├─ templates/             deck (.pptx) · letterhead (.docx) · email signature · cheat-sheet (.pdf)
-└─ github/                README header, divider, section header
+vm4ai-web/
+├─ public/                 the deployable site (this is what Cloudflare Pages serves)
+│  ├─ index.html           home
+│  ├─ how-it-works.html · get-started.html · use-cases.html · services.html
+│  ├─ about.html · blog.html
+│  ├─ built-with-air.html  case study — how AIR built its own brand & site
+│  ├─ made-with-air.html   showcase — projects carrying the "Made with AIR" stamp
+│  ├─ privacy.html · terms.html · 404.html
+│  ├─ og-image.png · favicon.* · apple-touch-icon.png · icon-192/512.png
+│  ├─ air-mark.svg · site.webmanifest
+│  ├─ robots.txt · sitemap.xml
+│  └─ _headers            Cloudflare Pages security headers (CSP, HSTS, etc.)
+├─ OFL-Space-Grotesk.txt   font license (Space Grotesk)
+├─ OFL-JetBrains-Mono.txt  font license (JetBrains Mono)
+└─ README.md
 ```
 
-## Quick start
+The pages are self-contained: web fonts (Space Grotesk + JetBrains Mono) are inlined as base64, so the site loads **no external CSS, JS, fonts, or images** and ships **no analytics or tracking**. That privacy posture is stated in [`privacy.html`](public/privacy.html) and enforced by the Content-Security-Policy in [`public/_headers`](public/_headers).
 
-- **Colors & type** — drop `tokens/air-tokens.css` into any page; it ships light/dark theming and `@font-face`.
-- **Logos** — use `logos/air-logo-primary-dark.svg` on dark, `…-light.svg` on light; `logos/air-mark.svg` for square/avatar use.
-- **Fonts** — self-host from `tokens/fonts/`, or load Space Grotesk + JetBrains Mono from Google Fonts.
-- **Generating with AI** — paste `brand-ai-brief.md` into any AI tool before producing posts, docs, decks, or images.
+## Local preview
 
-## Made with AIR
+No toolchain required — serve `public/` with any static server:
 
-If your project is built with AIR, add the badge:
-
-```markdown
-[![Made with AIR](https://raw.githubusercontent.com/eddlev/air-brand/main/made-with-air/made-with-air.svg)](https://vm4ai.com)
+```bash
+cd public
+python3 -m http.server 8080
+# → http://localhost:8080
 ```
 
-[![Made with AIR](https://raw.githubusercontent.com/eddlev/air-brand/main/made-with-air/made-with-air.svg)](https://vm4ai.com)
+## Deploy (Cloudflare Pages)
+
+The site deploys via Cloudflare Pages' Git integration:
+
+| Setting | Value |
+| --- | --- |
+| Framework preset | None |
+| Build command | *(empty)* |
+| Build output directory | `public` |
+
+`public/_headers` is applied automatically by Pages and sets the CSP, `Strict-Transport-Security`, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, and `Permissions-Policy`. `robots.txt` and `sitemap.xml` are served from the site root.
+
+> Note: `og:image` and `<link rel="canonical">` reference the production origin `https://vm4ai.com`, so social/share previews resolve correctly only once deployed to that domain.
+
+## Related repositories
+
+- **[vm4ai-air-kit](https://github.com/eddlev/vm4ai-air-kit)** — the AIR framework: runtime, control surface, profiles, and docs.
+- **[air-brand](https://github.com/eddlev/air-brand)** — the AIR brand kit: logos, tokens, fonts, diagrams, and the assets this site's header and stamp link to.
 
 ## License
 
-The framework code is licensed under **Apache-2.0**. The brand itself — the **AIR** and **VM4AI** names and the dot-in-frame mark — is **not** granted by that license; please don't use the marks to imply endorsement or affiliation. The "Made with AIR" stamp is welcome on genuine AIR-built projects.
+The AIR framework is licensed **Apache-2.0** — see [vm4ai-air-kit](https://github.com/eddlev/vm4ai-air-kit). The **AIR** and **VM4AI** names and the dot-in-frame mark are **not** granted by that license; please don't use the marks to imply endorsement or affiliation. See [air-brand/USAGE.md](https://github.com/eddlev/air-brand/blob/main/USAGE.md). The "Made with AIR" stamp is welcome on genuine AIR-built projects.
 
-— vm4ai.com
+— [vm4ai.com](https://vm4ai.com)
