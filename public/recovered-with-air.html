@@ -3,25 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Use cases — AIR by VM4AI</title>
-<meta name="description" content="One framework across development, brand &amp; marketing, and world-building — plus honest case studies of projects built with AIR.">
+<title>Recovering from session loss — with AIR — AIR by VM4AI</title>
+<meta name="description" content="An honest case study: how AIR's handoff cards recovered a real multi-session project across two unplanned session failures — a context cap and a silent stall — with no restart and no lost work.">
 <meta name="theme-color" content="#1A1613">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="canonical" href="https://vm4ai.com/use-cases.html">
+<link rel="canonical" href="https://vm4ai.com/recovered-with-air.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AIR by VM4AI">
-<meta property="og:title" content="Use cases — AIR by VM4AI">
-<meta property="og:description" content="One framework across development, brand &amp; marketing, and world-building — plus honest case studies of projects built with AIR.">
-<meta property="og:url" content="https://vm4ai.com/use-cases.html">
+<meta property="og:title" content="Recovering from session loss — with AIR — AIR by VM4AI">
+<meta property="og:description" content="An honest case study: how AIR's handoff cards recovered a real multi-session project across two unplanned session failures — a context cap and a silent stall — with no restart and no lost work.">
+<meta property="og:url" content="https://vm4ai.com/recovered-with-air.html">
 <meta property="og:image" content="https://vm4ai.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Use cases — AIR by VM4AI">
-<meta name="twitter:description" content="One framework across development, brand &amp; marketing, and world-building — plus honest case studies of projects built with AIR.">
+<meta name="twitter:title" content="Recovering from session loss — with AIR — AIR by VM4AI">
+<meta name="twitter:description" content="An honest case study: how AIR's handoff cards recovered a real multi-session project across two unplanned session failures — a context cap and a silent stall — with no restart and no lost work.">
 <meta name="twitter:image" content="https://vm4ai.com/og-image.png">
 <style>
 @font-face{font-family:'Space Grotesk';src:url(data:font/woff;base64,d09GRgABAAAAADrAAA8AAAAAatgAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAABHREVGAAAvLAAAAJIAAADGE3QMWkdQT1MAAC/AAAAKUQAAGx7/B+YaR1NVQgAAOhQAAAB9AAAAmifPKNJPUy8yAAArOAAAAE0AAABgEmT141NUQVQAADqUAAAAKwAAAC55kWzdY21hcAAAK4gAAAHeAAACboXcaYpnYXNwAAAvJAAAAAgAAAAIAAAAEGdseWYAAAFYAAAk5QAAP1bxd4emaGVhZAAAKHwAAAA2AAAANhrT9BJoaGVhAAArFAAAACEAAAAkCF4CKmhtdHgAACi0AAACYAAABDAnujcVbG9jYQAAJmAAAAIaAAACGkZiNVVtYXhwAAAmQAAAAB0AAAAgAR0Aw25hbWUAAC1oAAABpQAABA5mEozMcG9zdAAALxAAAAATAAAAIP+fADJ4nKV7DUBb1dnwPTeFUEguBAiBAoEkJCEkEPIfyA8hkJCQhAAJUKDlry32v4Wq/bPVdrNWrTqrVqe+U7vq1Gqd1n3btM7ptm/V127v5qZT16r79m1fp3Pv6s90lsv3nHNvfqitbt9Hm5ub557z/J3nPM9znnMuRVMVFEUvp09QQqqAoraUWEpUWoXQYRGoKn53+++G7Oxr9sj8NoY+Mdf55JNz6AAloIzQYwJ6VFAqqhH62CwSlU1hLiuTSktzc4VSOU1uVFqL2W6zWTUqlS19Z5yaQuOecZvGWlFhVzvGPQ/f5w8G/fcddoe6PIcjtCZiiNvyTG2qPCZX5TPltyT0Ua9tsc0b9ZjzLR4KUe75c3QP/TJVQ1EBpQaw2i1moKzC6JW5QLmMELMACyi26/bbd111bWJgeHjlyuHhgcS1zK033n/jrTdsy8mLr9owdWRqw6p4kXjbDRRNpJoEqcSULEsmLEmWIJh9yQ133nnD6Oj06tXTo5jhA7fuPXhjdOWa69dNUcBfL+BZBHiwNiUKaepfL3qCfRC1sS8gUF30L9EPolxb9A9ouzirraQXfYd9HDnZk9DuvSj7c17mCMisJTIvFHqB1MAz8K1iaNTZs7UDZN+bqIu6QPiRpYnfIE2UKajvZNp3Lwcd7J/NEZp7GokSViYkIfZ4tKxhSUoCX0oCi0QBHxVce5MolEyyP6BPsC8hx1wnaiG8QWvqCLQWcK17k9hUAK4DnjUAl/LjZOF5xHqVqiQwOsLLtiYCgWDrTlQZXc9cvt5ub+/v86NvRaPs1IYtKU4GAYeIw21BFoRUSAVEGFS/mT2KJrewvwTbZH+JTOxD7LeQg30p1S8X+uXwEkiB9yng6xtR/qlAAk8LyVOweCyfSgD/JL33PyN+5v4+5oe3/hCb/Hb6urlO+tq5nfjD4+1Kawb6WSSk17c/Eie+/WGmx/65bWBReNQmYdTEVOVCWy3N1fIGxQ0d6tl1xx27dt9xx+7RlStHR1au5KyUXCIbJh+a3EAuQJxw4ExbqSQ961QqiSRtpb1I1Lai1bXS84MnOnpinU/QJ0wjPnHbaDP7JzTd4cn3dMBouefH0txpvpw/GT9+Fov0C6x+Td3YX+W/OMNvN2p72uSBFN9Yc2VUbTbfQmlZau4uFKCyfYXT31hnTCgU554PRLqDz9MnGhOtBYFehkGNje+9K69l30XrOtxCdwce02bQtRWksaZmSMrcYIJotU00iIZly54zpWVlMhn4KtAeaoluCySme/sHtUGj1TNmc60Lds20J/SR5kCyzt9k9Uy2emcY+4Z+qXRooNupbaouEBc1RVyuwSbTeKihweKVe5xqDBU3xrzeZRbME4w6bSKeFSTmrP78u3TZu/TmaHTuG7hFBLjuhRYlPNdgT/wkgRtgK9ZzuS+xLJFYlvRdwTg39aFfs42D8IdeZZv6NjkBA/be/TwNAbFlwfuvDj0vfn7oVbDGrfT1ZC6qweKDvMVzrUhLbPN3ziZXMHsOXcOsSM4e2sPsgV476H3k00nfMHcl9IYRo8eIzUF84ImU4L61f3h7xVPi41Nn/jD1ffH/QJNolH0bKdgH2fuQln0DejLQM8n5t0kJ31OChJ9NnGBOTHyGCtCT7HdRLxtnP8baMEPrEn522ZBNARpD4BHNaB+7D51id6CbN6FPRJFNbL4ogm3KjD0M+gdYr4mihrD+8CBbOLsVar00Z8xgtSpswOAViVlzY3/WkmxuTlof9LhdflG3yDrkGVtd1RhQ1IsK1L6G4NBho6eNqes0mdsVdVZ3S3O5rkM3ufS0vENdk1Oiq+xMRAp0Ol0T5iMBfISJbdeRcdSqYKTBNxAGuOl5wXyfig6UMLE4IzJ0WXxrvG1rktHx8WhkcpJpVfeBO3tHpqv0zPSIe2bdwcmhxUOT5IJ15AJaSpBZmYkExK5lwiYasBP02IIcMogBVrDh9pmu4IqWvFiO2t9sijU2xkzh2OKegtYVjGe2pyA+47EOmorq3HWG/pbFLf2GqFPSPGjFUmFKpiypsmgRv2dTfUEsZdtar3eNz9JlEDHxGFOadKTEcs+CMDOeSp0M1c519qlbs8XiaFWAVBXY1hbQkkoVaXkECjJxkaV7s9e7sSuw1s3OCCZCbZ3FnYW2gb8g76IBf8cg0zYbEUVn21wbu+viw631ihpvAzJ2RnG8rQYV3gsyFXMz0oIdHrYOqRSukuOHDjU27Fwlv/tudCSwq76pUz4TYJdxunDSRuCvmtJT1FaeN5nFhmepCuzUTKwLrEwjW6ARl3dtWyxRykQMDezTyCGHAQ9aQUnneb2cY2Ib3a66vrkH65uC8mfKGirdm1ZNJPMGxscH8pITwHECyJeTUeAiIG9TELB4Iok4k69rNzuGrPGwt2sYjOftMu0S47Cf/R1Shv3LRj+Zn6e8EKO/Tx/L1VB/hbtc6vd51Pz8/IfzTuqHBPoBB82neIq5WTHXYcnJUYFJA6F3NrJ/R7INZ3HEXfnSB5//9rdce+pwJv4n4nz8B7iAQeew7wG41MLrjB/WtACZm0SMYXytLV1FjCTgNXXr4y0We4Bc0FnPEoO5rs5cH7Gy30Odppagn30z9Z3SEtCSZtNaoKUYUxSLpJSEziZULU0jGRWl7B2PsYTPLLNt8Isz2NY909Y2081de5Yv74mNjTHemZg4Ouv1zkbFsRlv14rk4uQKcuG8hJMOA34yn4ayuCThG+hpVZKSBUSA6ZKBaNuattScOsqbzUn6SZhCns1x7CAqG8rY9xB1wXxy0qYUrYCEt01btuEKFsrzh5QvAouNJkuZ2D9TtJAUmyXM3/hmD3inufgCWkT3aAi9h319Svd4SnEDKrYbWtts7eisu1YecnnZ17CFWebPodPAXQPnLR1ymgvUfJzGHApTIZqP0Kh8dJc4kmdoVzt8HpvO2NM0nUxcVti9uNNsbnU06awJ0zomOSppdsgMak1NvjBP2Wrwd0c6S2x6dZ1KkSdcXNNqDPXwPuA++k7sAyYhLBA3YCHzn+Q3wobG226L339/9YametQTOHYswP5Iju05Nv8Puhid5fPZrFht450hYmzDFrCv4Aj4vqKexU2j7aiePUMMjJWBxVFcLEXnAUtWvP7lE8nbmNuST6CzbD86xsqglQ0M5n1odbF4PdXbx6z72jqmr3fquvXi9dArip4mHxn+ht7goyAuniXx2qG1yGAKC2UwhYX6n/5o/CBz68TzP504xBz69O/PPff3T3/yEyKbk8gGuhnK9mYLhARXdzMqrwZ34zenJW3UnwzKn5LqKppG2pGOPR3C0mJ3Blg9IOsvAesF8dwDWfqr6Br2JPJNI0tBYJo9Jeqk+Hw58C/ly76tN920ddtNN20bGVm2dOnoCHPTTUcO3HzzgSM33RReP/n45Lr1E49PrcP6hlFGfH40KVEJVZCzI1S4f+l3vknv+wwZiafC2m4AujrMJ0wRh8NLp6mpFngBoZCBxa1CarON+x2NnZploehEr382FNrktY/77JYOJfqPcGTEUSphdG1Ni/yxvn5GHF3rsE/4FncOO0slRSp7kySMOWsEaXXAmfrCjJXkpyqbmigsR5qmjYzdV3T0TcV7hw2RxllUwM6g/81+bnatcHk3M861kZLi2NJEW15TS+Wqo6LwzMMi/YCvwD9lB83W8uuofGxRk4AYgWOXqqRqWC0idBN7G9LctW0bfFUx7LlbJiDZqgrf8jt0nB3m5yuthd71F+EU5xxCFVm7Zuc7qCm22du3LNo7MhSot8rzN6JX2GuZAq3f5Fnhcm9mXGsCosXx5EjP4shwhVqCdobPlWqWOFeHCrrWe1K2YIIxUeDcbqE3VvEjY/mid9akUiBkD820e2d6Yhta+nv7+keY4mSkbbW3fTYUHdNHLeaofoxpWRv+KL7R5Rj3emPDPZNyi3M6KOpa3RIe7M4zh3S6kDmve5Cfs7SUz56BCwdvypjSXSIJDMQE+pg9K1pcoWpWoLcKwhOsSKpcIoOI2ARS+EAKNWWh2rPkcNia6IXhJV01WWjpCwMCcvRtbTe0VVa2qNtnw90z7XXOqiqv3re1f2DF1ODA1Ipk7+iyeHzZMsY07C6wdqpzxHl13saClj6Doa+loNFblyfOUXdaC9zDprC/La/NTy4o4XHmtXg8LXlOons83vULdG9JlRe4SLWQdYgk2UyWIX1sg7OvP54YFpckIm1rvP6ZUHjG55mNgNqXR2EAYoxjwpOl9NBlLS1ruj/q2eRCnbqwKS8yMBDJM4V1OLrMS5GbPgtRGWf4NkkqYSPO+gGVXq+6Z29l5d73GpUCu7IxID9/Dq83EVUyL6XO8/1sFjN0JFUoyAnAjZXgLvcq9XrlewG5gJEHGpXnX1Y24n5aoPcf0E/FeSC+WzZdWGpLOUQ4XCBFo31w0N6ouHdvJXhYoUpLmEEd5qgZdWCO2P+qMzCGOva/gDHCF7qewz+URmxTZUjxiHlSJRms9yoM9qEhu0EBPKNmghM1Y9bZ54AW+xzHvxvwz3Byc1EKj5QUTBX8uAzNTNzY3X3jxNbZ2a3vdd66BXVe/o3OANqzj/2f1+5F0FsIvT0prcGoQvqktZFMCpvo9s2bt0/eEInc8F4A7b0Wte7bgwKd37icPbHl1k5Mm5p3oiu4THAAV2o0cfbNk4Kvn78KV07m86n7BBr8bAhXieKfLKr6/I+kMpB+Aj46Ac8E5Hk8jjaiH7ChuXvxlULzc4B9C4c9QOpA7Ju9SEPwQ4bbin5DvUC/nCukkoC0j4OgjfTLi7QchMJPHk89wW0XFQLkczr2Y+pL+xupJHoEt6IuaH8p7PNfo16gtufm4ifcb7SR2r5Ig39z7Sisrdb5c9SL1A4cHbFlc6GuNHd3tVZbLddoGI0crvDh2hKcOJoRqyEGkwqOqkh1HYN7VWsGd5nrausqq+s01csHCW2ggf4BGX6C0Ma52i6eRwzXchDI/ZOI4/UcvZ7asYhrj5/+luuHHqXwWBF8ZAzAF26FcRJmcT7Yp+N5f5ZGc/MvpQXA/ZyYHtcPj7+A9OCkgH64IfQ9iT5h8+nnM5LTlB44KgNfVEc1cysvh8Nuz3j6THQmwRmDsln6q1JfZW1tCMGy19jXPhPq2uDRd+oqS4rqeYrPeppsJaIyj0PnlNe0NatUgXGTZbi1JWIqFuUtKXe/lM1L07yOXgJSEF4CfL2B8EOqzYQ8t/rmIbnZYqIaTD1QX1VSmFAYqiyuhrChKWrs98+4eLW9bhlpcUbMhLLZAoyJy1zO+lZ5jc9YV9cxYaJ/kW0TVqoM7Udv4NrKKrVNbYFUIUeK9rJPoZ5c9p8ot+ypsePJ/aL9CWgbgLZ3c223QmKhtlmgcQAJ2c9yUZx9siwB7ZLHx57CeOPUabQVkZm6FcJcHNWfDoc5OF2YDf9xGi5oy4LT/w1wsKUK6i3qAbRiEVjP/NvUWeybqBuRAW0jtpOq1vBD97TCUVtrVyodNbWOG2vsCqW9pgZ+2uUUyU730TXzvyS+AyjE0K93AGUaZ62CH9I/BukS2TlCKjCpUlUf1cLihY3ktJlMK101sUgXLoro0n2nLt/4s73Sq06sXT6g0DUweSpXk2vMZl3mamxV5jOxAkbkNPXftVay4fDI+GMzP/19W29vG3xOrv7ZTdIDP1u96pm9yqt3q2vypboq3+ZAcddGX4WmJMheVSgaWlW16Z7+5EM7i3Z8J9mFBGPJ/OT4RL+obwIkM4C5dcA8U+JcfkvK0mypCpeUL19aUisXrYWvav2zdcwOSmzqdC5z7r7cGVO7626IT02dvvnmlnifod9l8OsLCphIuzvZ0OnxNtgr1q0LsC90fu7x+bygaSMqRm8AXSN4YptF5tBqHTK4AhWhzOGQCeEK5LRCmUyohStMP4dWKNQ64GocCOQ43Rq3vmCxfXGBHu6cOYGBiwHRK3Df4FG7HVwDh1vtaYAGefkX9srPI3ZE0csFs7nEwsAX/Zm6i/hVDr4pDf8Vdeoi8FzqtcEM9PIUFC0ez0A3ptu+OZ2BHk1jnqMOE+8HcEEhqU9K8Wois7ejQKAVAXyE6OvoOvYUkrFnkWMuH1X3iB849p9d/IYPfcLIbo4+CRTc8xa8hwUUcgiF31BPEN75PSiA5xIuF/0ZQ8mOEtGAkNfAjVQGvikN/xX1/EXgoIFwBroxDX1zGENhjUg9RXAXEOifX8dQP9z/mWDgoL8S4XrRKzAZ67Ogrx3C0LcAWkHwctA3H0xR6yL6LuL0PUsRuc/Rk4SahJfkKJWBb0rDf0W9cxE4UFybgV6egi7AvTGN402IrRz8EYAL060RsQdSeSecyHhOHqUy8E1p+K+oty8CB07WZKAb09A3t2EoqXqTtpU8jp9Q2Xs3UmxJW23Zu6OpMlAOxMYj3KbND7gtHPaj5F3RTne+pyNqGvGJ2pY130UKbEDHzO2wAZ1qQv1P6zPQ4zxUCLOCs62F8Fzqt44M9HAKivI6MtCj6bZvdGegZ9KYz1N74HsRhgumIS6WQ1bbToUysfHCAq46U36XcVF6YbFehusUDF3C1Xnpm0PrXa7VHYFVDnZPztKQp724rdjSw1qCQw+a2ztNAxvX9z/c4fZ0iUNi+1Kvf0AqKxMvERl7foCMdG+7P8kEt4bDWzrc60L66HCLWqNoVfkHuvN19Tqjv6e7O6S1uluaZDq/ztJwzz1VViVqCEXjIKcLZqeSZE01/OwEjwO+gFQI6f8DcmqxX85EHDtwriGFLH4Ft2AJBz4U2SIzXvfaDme0Qlx69aaKNbfHvJujlph+LBYbG3MZdhhI1TqyqQ2pq2M7FN7a7d/fObrb39WYcAoTq1YlhMmV6M81j9QS7s7RFWTUFYS7P1HXkPHl4MfT8FPY6r4Ah3GPZKBH09A3xjAU+7snCG6uTvynUxgahPtzBAMHPVWE5/0vYN5rsqC/vQtD3wVoKcHLQd84ijFwVWxsZQ2clS1P8WAk1PS8JNdRGfjxNPwU9fJF4EAxkYEeTkFR3lgGejTd9o1VHPRFgCrSbWkXqXhD2yHIMd3cmGodZZmdQ2LIXMpJEgVcUs7KOHHGl95E/KZrqS0vXBC0W9015mq1uk4trzV1mLVxW49vc9g1ZFLYawtFNer6zgbjAKPtMpY47CZDlaZaVFTUWKmsLy4x1zc01Q91sx3oh4M72nVBvd6tLxEW5ZeKJRKdp9kY1mIpSCWS6M3E620vlYEfT8NPUT+9CBz0FstAj6ahb4xzUCff1sbj+BmVgR/l4dB6IlXTxru6MlzFGrpgz+viNe0esRgXmld7vatxUVssfixVaBZ8PXvfq1JXxr6/oNQM9OpREt1M/wTyIljsJi5wIXb7gv2+hdt9jzliMcfm+ga9XugWRTr8sdJa45IaUe4SwxKTYz3kdigJo2wuUzdoq4oavEHfHWXWinJxZYndZFlcUVVZDdS1PPUC7O0TWcsMrZm3DyD0Vt+KFX19U1N9Vp/PCh+UnBwanJwcHJq0BT3uYNDtCZKdX7j8LXWSIFOC/vjRR3sffRR9O/jqq0F2eVa7Elx7wu3SbckH2pMejz76QvC7weefh8sL3KoJPQcW7eC9cfZ2OG/S6Yx4wY64DNu1kBvAEjvfXMs/QdSK2e6ugL21tWN0SMxUmvpMg+u7a22KRk/YnRwqLxCNixbluNsrm0vyvZ21OmbdaGmRN2TT6XUFRV2+8vpilSnH6K9L9tQuURhkOp2xXizxe8zKYq1MGBpFOmFhgUotyinKY6R1daJcEUgCERT9HeSX4LtJSSaVJ2c2JAL44mtjOYW+Fc6Wlb7PupeOFBUFu7uRyTjoKnAPNs110lvnrkdXIDroyHWEyNmHj+iv0ydBqyqq42Jrh+wzPxx+x1edNRoZ3NPVtWdQPHRNMHjNUEH+9JYt0/mXbdky0xnv8wVCgVqtwtBUo1QHgqKO/as3rt7fwX+1X7Fr464ryKW3t+fy3v4+X0lFrUGvO6it19RLS3y9EGOdqAH9Hka0EPRgpJwU1X7BCirbBh02zi7TpytUKqmNG32VCuW7xx2OcTd3jS5fHoXPogG1pkQqKdRKbUZJcbHEiBpsYx7PmI27akkj+LjPqMtLq/LyUCnj9Uj7r5QyTCmZGWdoAamQwsxot5EtB6CrEuKNQxW2WbBVJOg2Cy3d9UKL2yr8fvRHEXTmzDPPnHkW/6lUz5LVPlzwTnoljrwL7D3L5gGfVAIPHtkNf+FbwlfDX/iWW255JXB34BX4476Q5G5Sy6RG6VZ6CsbZAjmX1sEZP4RkbicM1jREfUJY0BCPpXWYs+oLsMa6zOqqgD+X1VUTaWiIyt1Wt6yyUgZf8mhDQ6TmdnOv0dhrxte+0Us1cnFIpMZeqw03tFr7yMmB5vkDtFXQDGt55//TuRUhuNzM2RVN0GiDwXKv7era7OfOrqj8TTb3VIt3Zjb275xemRYcOb8MnzYAJvGpmmpyIs7G75gvmAJ4RBRSV3cwuGVqxWxvwNcW2LULjYXf67hqzcaNa9xufzTqv6rjvTDOoGAtQC8jXq8Qe7RJiZbfAxNKtLCyV+Oyuqjwr1PPMc9N/bXwE3QXuxrdhaqFcPMkirOrhez/urOjY1dHB9khOECr6JUQCzT/wlkIoilb9nmIOr8pdR4iP5bvWrGm+8tOREzTv5urB42Uz39Mb6F/TmoRWiTrMtIGY4GGfgyv5FSQR/wBtCUge8iNWHu4jeDLdrK+5Nl1drrRtjk8NBTuWjoUajCZGvQmE/toeHAwHBoCgNmMAYyeflw/lxwI54YHyKXVrhcZbDaDSG8HnxTiwKHBLDBF5WFeBd9bwGsbFaNG//84RmC9Cw9AyBa0JhLtaY/F2v1dXW6twaDVGAzsdy+QiGaYDeRZY6Ohvaur3R+LpYQM5YXhkhsedDkMiw1Wq0FksKLhiwrJbnnhhVzSwApNHa5BeD6QDOeFBiCbKZn/WCCnf75IQ30K2YyGetqAc50/oodIroOfll/4FOWjl8jTSni6AT9FQu7pVVzfT0hVdyV1gM6jm3FcX5UVq1HRY49FH3vswLHQMfiP26FWOg/txXaUAKtfiY6g1lAIY9hM3YnO02qMAfwVeCrwUeCdjlhvu8168CC53omv3P/bAcNKahvQ7CTV1UoOX3YRVJB1D3R+XaVWV2V9MN0X4U6jgV8orOHguGq7kvob8HiKr8zjzUiOU3YZcHttKHQIGMYS7wXqrbgNrkPiMiSdh5uwj6PE3kemH0nuFe1d2I6rQeYAriT7GDqyF7dIPjJNEZoUtNIRD7FAg0LsGzgtfoqO3P5Q+CH4fzupQHajh2klt8ebIOeXVcLuY1cdG9svug49jErZ98+cwVk+yqPL0dPYlyW0Ds79c+4BFMz5fuJfhXuNy4s15dXKwoJCcUHR4r6m5RJNRbWisIBhCgrzkbglXFgml0mKF+f5W8KMTC4rlizOwyO3inqdFsKY5mDOyRbhj9kH0eHXV4SOgmR14MmG+QiOs8dLRu/nDUGdLmjQ46teYzRqNM3N6C5t0NAY0GoDjYag1t+srTca67XN2B7ttIX6A31iEazWKO63Hn4fh9+n+N9WtIY+Cr/fIBZqp9vQWvqalOXZkZVua28nLectSExJoeVvyHoXNEUPk9NSZfi82UVOTOGDYNnmRU5QbZuSf/jhh/H6CpWqolKpzD5Lhc6yMtqqXFKpUFQuUeLxxjQ6eRqXopA5l/VhPBsbqYMQiYjERCKHRWiPjU/Q+v378UxGY9TLsFISUv+AhmN49qIxFKdfyoX5nIb0oUHcBuViCMH3CfWWYFMaX8fUUvqT7dvBvnoh5uyBeM2dfDfBWqgFn3L4t07Al4BYJfBbBh9cM+wlJ+LHYEKUlzuyTsQ/4Al1eR+Q+vHfDnL9ytPxc8cOCooPHjx4/oODFB8he4DbmtRu5pflryRAfvG8/Ldjlzgxz6UIWFuc1eDMb0iZtXhWqUB3xCpy75PbpeUSLWSOFeXq/NZcbbPcfKpIbM5nioqLitb46zVVagk/krDCOk5mssNCzqzYr5rcORxlInhEk0ludNBtMDrZba4ev3qyS9yFRwk8goBInuQl13617DmQgeAsBPXuPnRo9+59icHRkenpkdHBxD72F/f47nbe47uHue3Gew8cPLB9kbD3sk1T909tuqy3ULT9AFEDUYWAaoD4fyOJqWSOpyJpanKgrPtxG22wTddZzGq12cwuxTcak5kLcwmTus7UrFE3042mOjW5w6PJz2Nu9dmehUuVTaOxQqmsgOn12hKlcgl8aKuisrK2thLPOO6bw/Up2iLY+BW4nASHQvFOCteniiUYB4D4b1z9c4Gud/PnROvxzsW/dFYUu3MBdpGXPDN6E/r1P1HXl54cfcxqpb9jtXKWY6OeoI/hqJm9Mt+yRKUirNvA6SiV2OkISJ62lZxvUOMzP7x1LDCPC9Z2qdx0+87bOrb37/xaMjHkShgmRob7knvYRtTPHkP9zK0HvrXsav/1V+bnx1eaR30PTWxYGS8quvJ6JPFDAtyR8nZniLdTX8LbXfJQ6s6dH27bBnfT1QuPpy44qroIUxDczVPQ4VrN5BdRKi4GWujI0ceY2LYV1efOsZvSHNDWXs6rKxSXYuFCDw8czTvTHDXjGtu/xlEOOR1BTp2VfCVj6NeB6t5GffNXMHcyKKdj+HAafT7DIYlzgn1pnf2L45IdmLLH5lzvpaiTcCXA+uCjavUlqMkuLnomuH4jII83NhgvEmAvKiG3d1udvXf7i9NkB1UKD7dCzMvnzjapbA4u2cL7icL3X390fTR66mbR3oTvP1+zJfY/SFbUOGzXkjP94uy3lvD6bXvqzaWjKEmfiJ6Jss9c7feT2UlyFBJRtRbZoYmJKG25/nry5DOItbOpJ7cMT3XQn0Gs5aJXBHz4glr7pd56snBvPZEg9sU3n3ruJy8+JWNf+uoTH9FoWI2X0tPoTZCwJLW3LpTKpIr0HT2B33PIPXOG/YB9B9Xmnj5d+r1l3xuAfHMw9Y3xBADP1jQem8OmJfvuivQd6jt9OhfVsu+wH5w5k4sU7Nulg9eJ9g8AktQ3zsv4HfbcXGqC4n/jHXr4PUZRqRPY6GzmBDaehBQi57uPABwyna6MSYk7sfGkDYUf0avJie+iC96zwh56O37XagY83PJZ9hfMUfRH+gR7EgYZv27lZV9EPhhhQbpSgPe2uGqB5IKAK+F8KP64utO1AjTGFuAUHZWG0aOZggE7GP4LLPQBNXgQVfqNOlw1IG/nZY5Y4JkogGUHXnq80j/d1B+44bnkI0jNvoXUUed0h1i8/LownnqoNDAerAuOBUBi/PrIGrAtDlu6op85i+4ArJGOHf39OzoSUyMjU3f0oBeGrnS7rxxi29CLY+PjY6z38lT+GYcZnQQ9y7kaeObALFeJ1vLH5rQqaby3y9MxGK9qDCq0SFwY6dA5i5iT9JPs6a6O0ZFP2W3yDnVtodpZWfw+nhvoOepuftbgPLQoqUHPkV2aOuD/lUwdJftdNAGv46sOfyxOHP5I/Bj98NxS+uHsV9OQgAtICPelXob5z72hJISMTXJAbPD1XoYqh+9lD38xgwba2Fqe5t9Aq7z0O2g4wO9EBb6Vra6Vbd9/oqO3J/DE4/RB+oRptF3kW97M/gVNBTz53s6HYZAXXYC15svxqgluYfu0y7PKd/xooK83eBRwz23E+M3L/KL2MRP732hZsC3fF3jTbl9rt5P3i+Y/pz+ihdjXBciZBVijcWccpHSe5VblIt3c67ROt0h5q+X9HMutMlFOOFckgx9WLmeqoc7TZ768+v9NXWtrfUNrq65UJiuFD11ja9DbbHq91VZeXFJeXlJczuF6nzovOPpv4nrfpm+wEXyAp6IC8KX88ST/Ni7eVSbeMEt3fM3UkalnDw0NIaZtqqVlpeeZjz5KJo/jGXf8Kb/LjyLGQa/IM2Bw+Z966vn21vxWH/FjFH0ZUJBjWpMYhyJdTcZvtUnLMsVmnCqhG2oV7PmT3fF490laeULR6GuqM7KX0crX5IpooDMQCPmZEr/ZHxMzqNHwLnoJLIDG1o48xNq5zB5bo/A3ZYmG0wUJBbZ7sEa82ngEPSsQpupvm1tRtGVIJuiSkWcvoh/RitSz1WY0aPbK6Xb5RXxmCLnh947UKjiEjMjt9aZytHfJ+wHqi74hYLnkSwPXXFO94ccNTbOz8QcekC94fWDBqwT4zcD5D9EgzKbqL6yZIDZgnQo5neY+61u2qE3g1OgszU2eHa8i8zWezvousc+Tq6nXyBVyh7vA1uYroM22OrucusRqVo6uoA9/dd1jtblGpJJJa4pFpQUFTG65uaZAWS6tlcBPEZNDK6udpTJJCVMiztdXt8BtqbhEvJjLvT9EewWXfzWFVcZasXKJTFUiLhaJCoVLjLUi5ZJyJflZJKQ/qTWXVJSWiguZfF2tuXgJ3DJMPv8mJYqjdVQVfwI7tR+b2vQrxTuxQou0MhC024xarVXQljvY7u8PttnNi/5WY+8sEqnk1SqNbpHP1wbdGZG8yoZXApD53Uz2LbhIcMG7Fqm8/xn8juQ1h/bgdyTv3MPsYV8VrDt/h2Ddhe9Kphzr/wWJgWQ2AAAAeJxjYGRgYORhiGHgYEhhYGUA8pAAMwMTABQCAOIAAAAAAAAAAAAAAAAZAFgAhACoAL4A0gEJASABLAFOAWoBeQGWAa0B1wH8AjMCYwKtAr4C3wLyAxEDLgNFA10DoQPXBAwEQgR2BJIEzwTyBP0FCAUgBSwFYgWEBbQF6gYgBjkGeAaUBrcGygbpBwIHLQdFB28HgQe8B/IIEQhLCJEIrgkJCU8JawmHCbcJ5woGCiUKMwpAClQKYwpsCnkKgwqMCpsKqAqwCrwK0gruCvoLBgsWCzILTwuVC9wL8gwIDBQMIAwsDDUMUQxdDMoNBg1QDVwNaA1zDX4NiQ2VDboNxg3RDd0N6Q30Df8OCg4VDiAOKw42DkIOTg5ZDmQOcA57DocOkw6eDqkOtQ7dDugO9A7/DwoPFQ8hD4kPlQ/YD+QP8A/7EAYQERAcECcQMhA9EEkQVRBgEGsQdhCBENkQ5RDxEPwRBxETER4RVhGVEbsRzxHqEk8SehLTEyITRhNvE74UDhQ2FFwUlxSlFPsVehWJFZgVpxW7FcgV4RYNFiAWNBZHFmEWdBalFrQW4BboFvAW+BcFFw0XPxdhF24XdxeAF4kXlhftGCAYRhhYGGoYpRjUGPoZIBljGXkZthnnGjAagRq4GvIa/hsYGzIbPxtMG4kbrRvRG9kb4RvtHAEcIxxRHHocoRzNHNoc/hz+HQ8dGB1DHXUdlB26HeAeER5EHlceZR5zHnseiB66Huce8B8hH1Iffh+rAAAAAQAAAAIAAKmMsKRfDzz1AAMD6AAAAADbnCKZAAAAANucjWP/xv7rBL0ESAAAAAYAAgAAAAAAAHicbZPNa1NREMXPzC2oC6sYhMYYiIlSv9pKE2NJoqHaiKglqQ+0YkDUFsWmfpSgFlExuFAU6kJRhCKKINKNgnWhm+4ELd2Jgiv/AkVbXJQQz31N0odk8WPm3nlz39w5c80p5LUfEAH0Evz6EB1aQkof0UaR07XkAdf3kcMs/UPYpCdpw8iZE7SPyTjjR6v2Mu0gtulBBPQJDugQ/GYIG/Q6Qsxr1m50aprcgqOHkaRNag5JeY8g/5tkroM57MLfyh9d4/qOyfNb7utZ93vH5sgo7QpEZZp5A+jVAEJmHbZrH7a462XYqTeRkudYpce4n0ebXmQNRxBlPKUx+ufRTj8qWTjEJ6/RSnxylXmjWCIjAH7x3kRGKmXMIyGvkLC25tfWri1XY+UF9KXH72FdPWiXGcRIRj4iq8eRNWPI4gP8coY1FdDbpKw9j626lP23ejTApGm9GnmgRsvJbsxWpsn3uj6NsPp4sfpYHdNVjf7DjNNazU4vaOaFOhmyF3OVGfKjrlcjioxZjRpRohYvsFEm0aoJ1kTkN3vXzXmaYs0+dGmcsSL3CtTSzlqRZxawktqm9C5aTBMi5ivpgM/sIDeYW8BAlQse38t+4pBBuYb10oK4y1PyjOxBnP0OWjgVcersk3MIyBUE7FrfsW/UxI1V0dusZxKb6+vP7JO1E4joPILm2yLu2QVk5Q5Wawbheo59exOIkYydFTs39k247+Mewny7Se3ieW/Zq2HGPjHnJ+vne7Y1WvQLvyMmhM76uSXujXEOhxfrtWfLFPaZZgTtvWp3c2O8q3mDyD9JesdpeJxjYGRgYL7x7w4DA8uH/8f+BrLsZQCKIANGHgC94geNAAAAeJxjYGGyYJzAwMrAwNTFFMHAwOANoRnjGIwYlRmQQAMDAzOQyoLx3byBxAEGXiUh5hv/7jAwsNQxqgD1MYLkGJ8x7QFSCgzMAOslC0YAAAB4nEWSWUiVQRiGnzkaXQmhBRIhn0foVjOIPHhxMsuy3RbKoMVWW63Mckkr67RYabbb5m4n21TElKOWpVkX2X2LP4SQddFmQV309/UnOPC+8zEMz8z3zgAuIEg1Vt04c7ArVedEvIwimBCiidM6lTXkkI8tY2ScjJcIcctEiZHJ4pFESZEKqZY68ctdaZRmaZN26Yx0R5a6Q21baSEIMXiYxkrWkku5UkIlXCaIOJRYiRumVEmtUuqlQSmtEhih2EPKGQ12lyqgNdYbhoc1yfKpR1kZls+a4qykOR7heFh/UX/6O7/TX4JqlWqzKoMsMLFmqok33n87/7tTeUy8urNuvCaBkeFiOXO5xwOa2cAcZjCTjbSxRLmLSWIpy+ikg0ea2XrtOFnP7GIdPUxnlub6hJ+soIkG7tPIbPz0Uk8Ngzw1QdzhOd08po9XPOM7tzWvF7yklo+08JBWTXCT3j6dLWxlG9vZoX3sYjd7yGSvdrSPnewnW18rlzwOENBXK+AghzhMIUe4zlF8HOM4JzhJEac4QzElnKWUc5znAqe5yCUuc4UyrtLONW5wk3IqqKSaKt6zWn/DJ+Yxn0UsYCEp1HGLNIY04gG+8INfvOYtn/nNB2y+8o0/fwF0cZfLAAB4nJ1Ty07CQBQ9Y9FIRExcsjCNC4NGEFm40I3EBDWSgI/ommcpIiW0SPwNv8S1a7/DL3DhJ3jmdtAWE2JMM51zZ+6598yZFsAaXmFBJZIA3jhCrJBhFOIFpPFusIVDfBicwI7aMngRGVUzeAlZ1TN4GRvq2eBkBK/gWL0YnIrgVbWpPg1O48BaD7ECUtaZwaGeE3gY4gkjuHDQRQAbRRRk2LjhSpvzNXPqaAo+Za7HvDZ83DOuSdxj3BR2CWPOXa6NmGEjK1UDVvB56j0+DnvpjDEayJPl4YGrHfSF47LTgJXrwtd9Btz1vxXkyI8q2J6j7oqzwz59qVZkt4I8Ryjjgu8fZpyXm2HOO38885aR1u0yZyBeTnv+tVc55oNNnVEnZr3sSJ+AcX6ug1Of9Y26ci9lw9S365EbYCIMfcYwo8+5KWyf7xZXxsQtOaEtNxh+G+eocK5SVVsU/1SuxCrscmXWn30q08OOKIv3naqp45HDFZcafOudifmS9K7uW8Kl4IDu2L+88llVuzM0fvlSLS+eOdyvskLln6w76jF/0BdLJKYsAAAAeJxjYGYAg/9zGIwYsAAAKoMB0QAAAQAB//8AD3icLY1fCgFRHIW/c5kxpFBTkidRlBL582gFHq1CWQSvtmAr3ryxhotZidM0ff2+e+7t9LsIaHtOnkCHGg1Ek56d07cHRgwZ2WMm9pS5vWBlr43YsrPPRtyMePH2vkhBUKLEOSfjwIwlG7N3PrqXlc3Ihy8/CjdFHele/h/okqLwdEpp+f3iW6w61+p8/AGN5hTaAAB4nKWZe3DUVxXHT35JdpNAA4EkhDyaEJJAwysEKOVRKIUmGjsOrYxl+KNirfIK6GgporRoEUqhVVuo+KCUFmcEhioK9B9m1NGp6BAdZqBlbEsSQnkkgYUEyBIIvX7u2d9udpddEuLvzPd3f/d9z/me+9i7kiAiaVIileLMqXp8nqTXfv25FZIuSaSLMWLzE5Z987srJMV+KZLEIeZImncesXNadkXC+55yp8gz1yl3KpyphF8ATzrznWc8C5w1zibPQs9ub4oVZ6vnmHeGd4bnGKGN/9456PzNueC0O10BSXQSHe+cxJSkR5OueUpU0j0l3jlWPOVhMtcz3VPFu1sWuLLQs9Szu1sCPYfE9v4+ciw81fOx5mR7873F3pG2DKJ9omsxsHp6kES0TyHWH0nGVumkZchQ8UoeMlAKpJD4MOpkYtkyyZYHZDT5Y6WCvEqZIEUyGSmWh5HhMlNmUW62PCYjpBoplxpklDwh86j3FFIhT8tCGS+LpFYmyreRqbISmSarkOmyWt6ipd8iz8hR5BvyHzkmz0q9NFKnCVkqrXJRliUkJiTKcsmVRHNVsuA325yTHL6Hmk7JI5xtzsgTpkGeBF8B88BT4GnSvwYWgkWUWwyWgKVgGagFy8E60EqZi+ZMQiKhI1XmllSbG3hKtTlGvNocR7tkrOjQdxU5NebfWs5P3gHK2Ro23kXcj21tuWrzHrVSZItplq1Y6C1Try1cJeew5jjEOol9RI1Sc0HKwEhQYS6T2kSZwToGW6/K3Oari567JFWKya0wK+UoqAP1oAE0gtOgCdjx2NbPhzS6qiPt4F0m+fJlLNohyea6pIL+5qxkEA4GWfRRQH+Fpl2KwDBQTHw4YRk+MIpwDBhHWgUYT/lK+ppAL5P4nky7D8HAFOLTGP3DxGeCR0AVOi0iXAyWgKVgGagFy8EK+l8NfgB+CNaAF8CLYD19bQAvg43gFbAJbAavMp7XwE/Bz8DPwetgK177JtjG9y/Br8CvwW/AdrCD8b4NdoJ3wLtgFzhKm3WgHjSARnAaNIHRWM6PxT5lnqRIDigwbVjLh7V8WMuHpXxSKoOw1iCs5cNaPqzVheZ+NPejuR/N/WjuR3M/mvvRrg3t2tCuDe3a0K4N7drQrg3tfGjnQzsf2vnQzod2PnmD9reArTIfLeejpQ8tfWjpQ0sfWvrQ0ofVk/HCVNAf780gHAyy6DUbLx2Cv+Xgk0PxxDyzF22uR2hTbD5QjcqYveHaVJA+3rTC/Xm4vwr3rfDXDH/N8NcMf83w1wx/zfDXLGvp50fgx+AlsI6+1tPXBvAy2AheAZvAZhBP63ha7qD/t8FO8A54F+wCRxlnHagHDaARnAZNIJk52ABXgnYp2FOwp90xbGqSzlY7Y2qw1AJzhZn0PLmrgCPP8V6pX1WMtRr97Fy9rLPazvG9MgA/acXCx7DuRaxrJNd8jIVPSj6+s4i8xWAJWAqWgVqwHKyjTKK2W8NKskDXlCq8uAaOF8gk+RZr8D7i77ESB9adGmr1g6kWWGmBkbMwchnNW9C8Bc1b0LwFzVvQvAXNW7T9dsbpo66PsR80lfou0ncilglfk7rXoxr8zdqHlXLAfrvDDCzKuMgeMVJiPOgdGTaE5XWaDnoWczNmzYaIWAc+Fl3iLN7cYU67bV2BgTiPaUODyJT2mAXzIspcjtde+Lgi2zKXwG1g9ToI9phDeIPAos29EaeVup570meYlr7Vy9I6Mtt7WEqjvruwXSD+GfCHcjt623KcJ6/nIvf0FN57lUgbB7lhDQ2EZyJy1ZLm874MTZ/svlY0t5mz0Wmtmt4ULHGX2lcjfaC7LVaMQHjJDTsjyvkl7mNnYWiWXonKa4uIubnmw1h99Pp5/t6rMJvOmkOEf9C5dRictHPN7Dd/1wKlWmova68Nt5vD5i9x2zoUI9HymRkWr5UZMUpNi9tml7kIwqwVslE9WA+2md9xmhTzX02NvQqJ+WO8HiJKtbMLhBi/a8lrbtgQ8ADTYva4WYFfTUH/cbU1u+9o4aOY7frcMGqljFxHrF9r+Ncexxn02rv4vq779/zE8tHAqINjj70LuXm3ArnsI1eiZl6r5hp3Tuh6xW+DYO7/tZ7anc20ujvHXdeo0Iw8a9rtPmnOa907dkxOCLbUiUCO+VePI9huTvP7Rncxdz87YfzMtz127vFUaql9AW8yO81B86e4be2PiF0NjrhbA3fW7tP3JbtSm2uRXJsjblhnjptPwvwv5C9mZVS3SXeuZnfRt51zxG09bZxz9/FITywPjM0t/WGP7XXaM0n47DBHu+ua7fq1s7st3Y2DXBpz0pxy5+sBN831p+h1PMong7P9Mze8Y6eJMdIYZwrGXRi99sepfTnY5708IU1DsyTIZyh+zg2j1rioM01Tr3u8aJqi1qZmXbWvuW3o+cWcCOW29tBe3DXDXW+idgrLhJ4YO8wFc0N9rCPoY71hKU5f3faLtpN76g074W3Ud/CMlMlvlO5d/0hfR9C7h9l1LaL33tT59C555wOn2T6Px7VKmP0u9amdf7jhn/V9wzJqPmD+drixPu4C/F6UYIsafh6Yi333lKj245w+eqwXa604o6vljcjRmZuBecA6eCKidHA3HqWxIA8Heuw5uGJcN0ci+ml3Wy1RK50y/9QdZEvcdjoDPm8+YUf3Wy+zv8B09De19VPuqjdBS9UFx8e5O+5ZV/erS8zra+EW4ne2PR/43X1siKYdDzHaw9oa/A0cvbpGMmd3woh4PP9w+OWeKMV8lchoKdLb3QfYwycSe1AmyziZIrNkvMxGpsqXZB7rl73LfUzvcqtkkXxPvsi5fZ18VdbLdnlW72/XyFGpkxekXppkrd7Z/kTvbDfQ3+P0ZyUJKZRkJEvvoxPEiyTprfQYSUWGSBqnE4/eUOfIfUix3lMPZIUaqLfVGdQahIyVwXoPkYlk0F4WNbORobQxhD5zkHHEhkq+5CIVesedTiyfUgVIMroX2VtUpBRblDCKUiljRCOQYTISScUy5aSP1f7GIf1oybZVifTHMybI/VhuIvZ6EMnU+/EiLDgFa05FRmG9abQ3HSnTe/NyztczaHcmUiKPICOx9yxO8dbiw7H4XPSzd+gFavcCtXuu3qHbO/DlWGwFkqX36QnyHfhIgo9VWOv7iEdWy4ukr5WXsMM6JB2eNqHvG7IF7bbKm1jzF0iK3rl74a0OTeuRUmmQRlJOI6l6/+5VLnOVy1x7y6RMepRLr3LpKJde5c9R5rKUJ0cZcpSb/srNYOUmSbkpVW6ylZsy9/8Hy80Ql5v7kVS8ZRiaWIbSsMxwvi1PqcpTP6zazdAoJAGbj1ZfGsO35SxFObtPOUuDo/GM3TKXrswNVeZGyCQkUfnLVf7y5CEkwGKJsjhcWbxf+StW/oYpfwXKX6E8iuTLHCQ/jL8c5S9H+cuEv+XYyTLnKFsDlCdHeUpSngbC02Z0f1VeZ/yWrX7KVobL1jZmW4LskF2M1s65VJ1zaTrn0pSnTOUp839y+euuAAAAeJwdjD0OglAQhL+HGIkFsbQ0RMirCCFW1sbCWHIBKkJCqLilngHUi+Dsy2Z+sjuzOGDPmZrodn82pEM7jaTE2rOu2N0NfdeSmAuINYnU0BCp/2DHgSMnPCUXrixsyMj5BC34BvXMyme8xDk/ccFb7O2r28pVcpao/lbIEOMAAAB4nGNgZGBk4ABiBgYRMCnDwFSenlECYjIwMTCDSEYmxglAag8DAwA5UANTAA==) format('woff');font-weight:400;font-style:normal;font-display:swap}
@@ -266,6 +266,29 @@ img,svg{max-width:100%}
 .casestudy .go{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--font-mono);font-size:.85rem;color:var(--ember);text-decoration:none}
 
 
+/* ---------- blog ---------- */
+.bloglist{display:grid;gap:1.2rem;max-width:50rem}
+.postcard{display:block;text-decoration:none;color:var(--text);border:1px solid var(--border);border-radius:16px;background:var(--surface);padding:1.6rem 1.8rem;transition:border-color .2s,transform .2s}
+.postcard:hover{border-color:var(--brass);transform:translateY(-2px)}
+.postcard .meta{font-family:var(--font-mono);font-size:.73rem;color:var(--brass);letter-spacing:.07em;text-transform:uppercase}
+.postcard .meta .date{color:var(--subtle)}
+.postcard h2{font-size:1.45rem;margin:.5rem 0 .5rem;font-weight:500}
+.postcard p{color:var(--muted);margin:0;font-size:.97rem}
+.blog-empty{font-family:var(--font-mono);font-size:.85rem;color:var(--subtle);margin-top:1.6rem}
+/* article */
+.article{max-width:44rem;margin:0 auto}
+.backlink{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--font-mono);font-size:.82rem;color:var(--muted);text-decoration:none;margin-bottom:1.6rem}
+.backlink:hover{color:var(--brass)}
+.article-head{margin-bottom:2rem}
+.article-cat{font-family:var(--font-mono);font-size:.74rem;color:var(--brass);letter-spacing:.1em;text-transform:uppercase}
+.article-head h1{font-size:clamp(2rem,1.5rem+2vw,2.9rem);margin:.7rem 0 .9rem;line-height:1.14}
+.article-meta{font-family:var(--font-mono);font-size:.82rem;color:var(--muted)}
+.article .prose h2{font-size:1.4rem;margin:2.2rem 0 .8rem;font-weight:500}
+.article .prose ul{margin:0 0 1.2rem;padding-left:1.1rem;color:var(--text)}
+.article .prose li{margin:.45rem 0;line-height:1.7;padding-left:.2rem}
+.article .prose strong{color:var(--text)}
+
+
 /* ---------- attentive header eye ---------- */
 .air-eye .air-pupil{transform-box:fill-box;transform-origin:center;transform:translate(var(--ex,0px),var(--ey,0px));transition:transform .12s ease-out}
 .air-eye.blink .air-pupil{animation:air-blink .26s ease-in-out}
@@ -298,86 +321,50 @@ img,svg{max-width:100%}
 </header>
 
 <main>
-  <section class="hero" style="padding-bottom:1rem">
-    <div class="container">
-      <span class="eyebrow">Use cases</span>
-      <h1 style="font-size:clamp(2.2rem,1.6rem+2.4vw,3.4rem);margin:1rem 0 1.1rem">One framework, many kinds of work.</h1>
-      <p class="sub" style="max-width:44rem">AIR — short for AI Resource — is a structured generalist. The same discipline — scope first, execute in steps, surface uncertainty, hand off cleanly — applies whether the work is code, a brand, or an entire fictional world.</p>
-    </div>
-  </section>
-
-  <section class="section" style="padding-top:1.5rem">
-    <div class="container">
-      <div class="uc-grid">
-        <div class="uc">
-          <div class="k">Code</div>
-          <h3>Development</h3>
-          <p>Research, build, debug, and review against a roadmap instead of a vibe. AIR scopes the work, executes one active step at a time, and keeps the contract visible — so generated code is traceable, not mysterious.</p>
-          <ul><li>roadmap-first execution</li><li>active-step artifacts</li><li>gates before delivery</li></ul>
-        </div>
-        <div class="uc">
-          <div class="k">Brand</div>
-          <h3>Brand &amp; marketing</h3>
-          <p>Naming, positioning, voice, content, and campaigns held to one consistent system. This very brand and site were produced with AIR — tokens, guidelines, templates, and pages, all under a single structured process.</p>
-          <ul><li>one source of truth</li><li>a consistent voice</li><li>benchmarked output</li></ul>
-        </div>
-        <div class="uc">
-          <div class="k">Fiction &amp; games</div>
-          <h3>World-building</h3>
-          <p>Lore, characters, factions, and timelines kept canon-consistent across long projects. The orbit model holds the active thread while the wider world stays in reach, and the handoff card carries the canon between sessions.</p>
-          <ul><li>canon continuity</li><li>context in orbit</li><li>handoff across sessions</li></ul>
-        </div>
-      </div>
-      <p class="uc-more">The same structure extends to research, writing, operations, and analysis. AIR is domain-agnostic by design.</p>
-    </div>
-  </section>
-
-  <section class="section" style="padding-top:0">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">A way to work</span>
-        <h2>When you are the gap, hand over the lead.</h2>
-        <p>You reach for AIR because something is missing — a skill, a perspective, the time to learn it. That gap is the reason leading the work yourself tends to produce a weaker result: you can't account for what you don't know.</p>
-      </div>
-      <div style="max-width:46rem">
-        <p style="margin:0 0 1.1rem">With the lead, AIR brings the capability you are missing — the right Specialist, Domain pack, and Method — and weighs each task for blast radius: the adjacent risks, dependencies, and unknown-unknowns the work touches but you might not see. Ask to add a feature and it raises the security and legal exposure before you hit it.</p>
-        <p style="margin:0">This is not surrender. AIR recommends and outlines; you support, steer, and overwrite; and it pushes back when a call is off. The lead is AIR's — the project stays yours.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" style="padding-top:0">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Case studies</span>
-        <h2>Proof, not promises.</h2>
-        <p>Real projects run through AIR, documented honestly — what the framework contributed, and where the model and the human did the rest.</p>
-      </div>
-      <div class="casestudy">
-        <div class="k">Featured · self-applied</div>
-        <h3>Building AIR's brand and site — with AIR</h3>
-        <p>The brand system, the working templates, and this very website were produced through AIR running on a frontier model, with a human approving every gate. An honest account of what the structure earned, and where the model and the steering did the work.</p>
-        <a class="go" href="built-with-air.html">Read the case study →</a>
-      </div>
-      <div class="casestudy">
-        <div class="k">Featured · proof of use</div>
-        <h3>Recovering from session loss — with AIR</h3>
-        <p>Twice, a working session died before it could hand off — once at a hard context cap, once as a silent stall with no error. Both times AIR's handoff cards reconstructed the project from history and resumed it with nothing lost. Proof the continuity mechanism holds when a session doesn't.</p>
-        <a class="go" href="recovered-with-air.html">Read the case study →</a>
-      </div>
-    </div>
-  </section>
-
   <section class="section" style="padding-top:2.5rem">
     <div class="container">
-      <div class="cta-band">
-        <h2>Put it to work on yours.</h2>
-        <p>Whatever you are building, AIR brings the same structure to it.</p>
-        <div class="row">
-          <a class="btn btn-primary" href="get-started.html">Get started</a>
-          <a class="btn btn-outline" href="https://github.com/eddlev/vm4ai-air-kit" target="_blank" rel="noopener">View on GitHub</a>
+      <article class="article">
+        <a class="backlink" href="blog.html">← Blog</a>
+        <div class="article-head">
+          <div class="article-cat">Case study</div>
+          <h1>Recovering from session loss — with AIR</h1>
+          <div class="article-meta">June 2026 · Written by Claude (Opus) via AIR, steered by Edward Levin</div>
         </div>
-      </div>
+        <div class="prose">
+          <p>A framework that promises continuity should be able to prove it the day a session dies without warning — not in theory, but on a real project, reported honestly. This site, its brand, and the kit behind it were built across several sessions. Twice, a working session stopped before it could hand off. Both times the project resumed in a new session with nothing lost. This is an account of how that worked — and where it would not have.</p>
+
+          <h2>The setup</h2>
+          <p>AIR carries a project across sessions with a handoff card: a structured snapshot of where the work stands — the active step, the open decisions, the blockers, the working agreement. The intended flow is to run the handoff command before a session ends, save the card, and boot the next session from it. This project ran on a frontier model — Anthropic's Claude (Opus) — while I steered. Twice, that tidy plan did not survive contact with reality.</p>
+
+          <h2>Two ways a session died</h2>
+          <p>The two failures were different, which is what makes them worth reporting rather than just retelling.</p>
+          <ul>
+            <li><strong>A hard context cap.</strong> The first build session reached the limit of what it could hold and stopped — before it had emitted a handoff card.</li>
+            <li><strong>A silent stall.</strong> The second was stranger: no error, no warning. The session would trigger and then immediately stop, producing nothing. That symptom — start, then nothing — is what a context window looks like when it is too full to generate a reply. It reads like a crash; it is really exhaustion.</li>
+          </ul>
+          <p>In both cases the session was effectively gone, and in both cases it had died <em>before</em> saving a card. The ideal flow had not happened. What mattered was whether the project could be recovered anyway.</p>
+
+          <h2>How it recovered</h2>
+          <p>It could. A fresh session read the framework files — the card template and the runtime rules — then reconstructed the handoff card from the dead session's own history: the project state, the exact active step, the open items, the agreements. The new session booted from that card and carried on — no restart, no re-litigating settled decisions, no lost work. The second recovery is the one you are reading now: this page was written in the session that the second card brought back.</p>
+
+          <h2>Where the structure mattered</h2>
+          <ul>
+            <li><strong>The card schema gave reconstruction a shape.</strong> Rebuilding state from a long transcript is hard to do well from a blank page. The template defined exactly which fields to recover, so the new card captured the real stopping point instead of a vague impression of it.</li>
+            <li><strong>The honesty rules held under reconstruction.</strong> Each rebuilt card was marked as reconstructed-from-history, not as a live capture — so a careful reconstruction was never mistaken for a perfect recording.</li>
+            <li><strong>It guarded against stale memory.</strong> In the second recovery, the saved summary of the dead session was out of date. The reconstruction noticed, pulled the true latest state, and corrected the active step rather than confidently restoring the wrong one. That was the difference between resuming and resuming <em>correctly</em>.</li>
+          </ul>
+
+          <h2>Not a vendor feature</h2>
+          <p>Both recoveries happened to use the model's ability to search past sessions, which made them smooth. But that feature is not the mechanism. The same recovery works without it: paste the dead session's transcript into a file and run the handoff flow against it. The card, the template, and the runtime are plain prompt files — the method travels to any model that can read them.</p>
+
+          <h2>The honest limits</h2>
+          <p>This is a discipline, not a guarantee. Recovery depends on the dead session still being reachable — through retrievable history, or a transcript you kept. If the conversation is gone and nothing was saved, there is nothing to reconstruct from. And the cleanest path is still the intended one: emit a card before the session dies. These recoveries worked because the work was reconstructable after the fact — not because loss is impossible.</p>
+
+          <h2>The takeaway</h2>
+          <p>A multi-session project hit two unplanned failures, in two different ways, and finished anyway — coherent, auditable, and resumable each time. That is what the handoff structure bought: not immortality for any one session, but continuity for the project that outlives them. Sessions are disposable; the work does not have to be.</p>
+          <p>The mechanism is in the open kit — <a href="https://github.com/eddlev/vm4ai-air-kit" target="_blank" rel="noopener">read how handoff works</a>, or <a href="get-started.html">boot a session</a> and put it to the same test.</p>
+        </div>
+      </article>
     </div>
   </section>
 </main>
