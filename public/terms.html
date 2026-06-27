@@ -38,21 +38,21 @@
   --bg:#1A1613; --surface:#221C18; --surface-2:#2A231D;
   --text:#ECE4D8; --muted:#9A8F80; --subtle:#6E655B;
   --border:rgba(236,228,216,.12); --border-strong:rgba(236,228,216,.22);
-  --on-ember:#1A1613;
+  --on-ember:#1A1613; --ember-ink:#FF5A1F; --card-shadow:none; --card-shadow-hover:none; --rule:#332F2B;
   --maxw:1140px;
   color-scheme:dark;
 }
 @media (prefers-color-scheme:light){
   :root:not([data-theme="dark"]){
     --bg:#F5F4F2; --surface:#FFFFFF; --surface-2:#FAFAF8;
-    --text:#1A1613; --muted:#6E665C; --subtle:#8A8278;
+    --text:#1A1613; --muted:#6E665C; --subtle:#8A8278; --brass:#7A600F; --ember-ink:#B23A0A; --rule:#DBD9D7; --card-shadow:0 1px 2px rgba(26,22,19,.05),0 8px 20px rgba(26,22,19,.06); --card-shadow-hover:0 4px 9px rgba(26,22,19,.08),0 18px 40px rgba(26,22,19,.10);
     --border:rgba(26,22,19,.12); --border-strong:rgba(26,22,19,.20);
     color-scheme:light;
   }
 }
 :root[data-theme="light"]{
   --bg:#F5F4F2; --surface:#FFFFFF; --surface-2:#FAFAF8;
-  --text:#1A1613; --muted:#6E665C; --subtle:#8A8278;
+  --text:#1A1613; --muted:#6E665C; --subtle:#8A8278; --brass:#7A600F; --ember-ink:#B23A0A; --rule:#DBD9D7; --card-shadow:0 1px 2px rgba(26,22,19,.05),0 8px 20px rgba(26,22,19,.06); --card-shadow-hover:0 4px 9px rgba(26,22,19,.08),0 18px 40px rgba(26,22,19,.10);
   --border:rgba(26,22,19,.12); --border-strong:rgba(26,22,19,.20);
   color-scheme:light;
 }
@@ -67,7 +67,7 @@ body{margin:0;background-color:var(--bg);
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   transition:background-color .4s ease,color .4s ease}
 .container{max-width:var(--maxw);margin:0 auto;padding:0 clamp(1.2rem,4vw,2rem)}
-a{color:var(--ember);text-underline-offset:3px}
+a{color:var(--ember-ink);text-underline-offset:3px}
 h1,h2,h3,h4{font-family:var(--font-display);margin:0;letter-spacing:-.02em;line-height:1.1}
 p{margin:0 0 1rem}
 img,svg{max-width:100%}
@@ -124,7 +124,7 @@ img,svg{max-width:100%}
 .hero{padding:clamp(3rem,6vw,5.5rem) 0 clamp(2.5rem,5vw,4rem)}
 .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,5vw,4rem);align-items:center}
 .hero h1{font-size:clamp(2.6rem,1.8rem+3.4vw,4.4rem);margin:1rem 0 1.2rem;font-weight:700}
-.hero h1 .em{color:var(--ember)}
+.hero h1 .em{color:var(--ember-ink)}
 .hero .sub{font-size:clamp(1.05rem,1rem+.4vw,1.3rem);color:var(--muted);max-width:34rem;margin:0 0 2rem}
 .hero-cta{display:flex;flex-wrap:wrap;gap:.8rem}
 .hero-visual{display:flex;justify-content:center}
@@ -164,7 +164,7 @@ img,svg{max-width:100%}
 .card h3{font-size:1.3rem;margin:.6rem 0 .5rem;font-weight:500}
 .card p{color:var(--muted);font-size:.95rem;margin:0}
 .card .go{display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem;font-family:var(--font-mono);
-  font-size:.82rem;color:var(--ember)}
+  font-size:.82rem;color:var(--ember-ink)}
 
 /* ---------- callout ---------- */
 .callout{border:1px solid var(--brass);border-radius:18px;padding:1.8rem 2rem;
@@ -242,7 +242,7 @@ img,svg{max-width:100%}
 .gstep .gn{font-family:var(--font-mono);font-size:1.05rem;color:var(--brass);font-weight:500}
 .gstep h3{font-size:1.2rem;margin:0 0 .45rem;font-weight:500}
 .gstep p{margin:0;color:var(--muted)}
-.gstep p a{color:var(--ember);text-decoration:none}.gstep p a:hover{text-decoration:underline}
+.gstep p a{color:var(--ember-ink);text-decoration:none}.gstep p a:hover{text-decoration:underline}
 .gstep code{font-family:var(--font-mono);font-size:.86em;background:var(--surface-2);padding:.08rem .35rem;border-radius:5px;color:var(--text)}
 .need{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.4rem}
 .need span{font-family:var(--font-mono);font-size:.82rem;color:var(--muted);border:1px solid var(--border-strong);border-radius:9px;padding:.4rem .8rem}
@@ -251,7 +251,7 @@ img,svg{max-width:100%}
 /* ---------- use cases ---------- */
 .uc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
 @media (max-width:840px){.uc-grid{grid-template-columns:1fr}}
-.uc{border:1px solid var(--border);border-radius:16px;background:var(--surface);padding:1.6rem}
+.uc{border:1px solid var(--border);border-radius:16px;background:var(--surface);padding:1.6rem;box-shadow:var(--card-shadow)}
 .uc .k{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brass)}
 .uc h3{font-size:1.3rem;margin:.5rem 0 .6rem;font-weight:500}
 .uc>p{color:var(--muted);margin:0 0 1.1rem;font-size:.95rem}
@@ -259,17 +259,17 @@ img,svg{max-width:100%}
 .uc li{font-family:var(--font-mono);font-size:.8rem;color:var(--muted);padding-left:1rem;position:relative}
 .uc li::before{content:"";position:absolute;left:0;top:.5em;width:5px;height:5px;background:var(--brass);border-radius:1px}
 .uc-more{font-family:var(--font-mono);font-size:.85rem;color:var(--muted);margin-top:1.4rem}
-.casestudy{border:1px solid var(--brass);border-radius:18px;background:color-mix(in srgb,var(--brass) 6%,var(--surface));padding:1.8rem 2rem;max-width:56rem}
+.casestudy{border:1px solid var(--brass);border-radius:18px;background:color-mix(in srgb,var(--brass) 6%,var(--surface));padding:1.8rem 2rem;max-width:56rem;box-shadow:var(--card-shadow)}
 .casestudy .k{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brass)}
 .casestudy h3{font-size:1.4rem;margin:.5rem 0 .7rem;font-weight:500}
 .casestudy p{color:var(--muted);margin:0 0 1.1rem}
-.casestudy .go{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--font-mono);font-size:.85rem;color:var(--ember);text-decoration:none}
+.casestudy .go{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--font-mono);font-size:.85rem;color:var(--ember-ink);text-decoration:none}
 
 
 /* ---------- blog ---------- */
 .bloglist{display:grid;gap:1.2rem;max-width:50rem}
 .postcard{display:block;text-decoration:none;color:var(--text);border:1px solid var(--border);border-radius:16px;background:var(--surface);padding:1.6rem 1.8rem;transition:border-color .2s,transform .2s}
-.postcard:hover{border-color:var(--brass);transform:translateY(-2px)}
+.postcard:hover{border-color:var(--brass);transform:translateY(-2px);box-shadow:var(--card-shadow-hover)}
 .postcard .meta{font-family:var(--font-mono);font-size:.73rem;color:var(--brass);letter-spacing:.07em;text-transform:uppercase}
 .postcard .meta .date{color:var(--subtle)}
 .postcard h2{font-size:1.45rem;margin:.5rem 0 .5rem;font-weight:500}
@@ -293,12 +293,12 @@ img,svg{max-width:100%}
 .showcase{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
 @media (max-width:760px){.showcase{grid-template-columns:1fr}}
 .show-card{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:16px;background:var(--surface);padding:1.6rem 1.8rem;text-decoration:none;color:var(--text);transition:border-color .2s,transform .2s}
-.show-card:hover{border-color:var(--brass);transform:translateY(-2px)}
+.show-card:hover{border-color:var(--brass);transform:translateY(-2px);box-shadow:var(--card-shadow-hover)}
 .show-card .stamp{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--font-mono);font-size:.68rem;color:var(--brass);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.9rem}
 .show-card .stamp svg{width:15px;height:15px}
 .show-card h3{font-size:1.3rem;margin:0 0 .5rem;font-weight:500}
 .show-card p{color:var(--muted);margin:0 0 1.1rem;font-size:.95rem;flex:1}
-.show-card .go{font-family:var(--font-mono);font-size:.82rem;color:var(--ember)}
+.show-card .go{font-family:var(--font-mono);font-size:.82rem;color:var(--ember-ink)}
 .show-card.submit{border-style:dashed}
 .show-card.submit .go{color:var(--brass)}
 
@@ -321,7 +321,7 @@ img,svg{max-width:100%}
 .nf-wrap h1{font-size:clamp(1.7rem,1.3rem+1.8vw,2.6rem);margin:.8rem 0 .9rem;line-height:1.15}
 .nf-wrap>p{color:var(--muted);max-width:31rem;margin:0 auto 1.8rem}
 .air-object{display:inline-block;text-align:left;font-family:var(--font-mono);font-size:.85rem;line-height:1.7;background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.4rem;margin:0 0 2rem;color:var(--muted)}
-.air-object .k{color:var(--brass)}.air-object .s{color:var(--text)}.air-object .e{color:var(--ember)}
+.air-object .k{color:var(--brass)}.air-object .s{color:var(--text)}.air-object .e{color:var(--ember-ink)}
 
 
 /* ---------- attentive header eye ---------- */
@@ -395,9 +395,26 @@ img,svg{max-width:100%}
         <a class="brand" href="index.html"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="9.5" y="9.5" width="45" height="45" rx="13" stroke-width="5"/><circle cx="32" cy="32" r="8.5"/></svg> AIR <span class="by">by VM4AI</span></a>
         <p>An overlay for AI chatbots that turns your session into a structured, auditable environment. VM4AI is the concept; AIR is the framework built on it.</p>
       </div>
-      <div class="foot-col"><h4>Product</h4><a href="how-it-works.html">How it works</a><a href="get-started.html">Get started</a><a href="use-cases.html">Use cases</a><a href="blog.html">Blog</a></div>
-      <div class="foot-col"><h4>More</h4><a href="about.html">About</a><a href="services.html">Services</a><a href="https://github.com/eddlev/air-brand" target="_blank" rel="noopener">Brand kit</a></div>
-      <div class="foot-col"><h4>Connect</h4><a href="https://github.com/eddlev/vm4ai-air-kit" target="_blank" rel="noopener">GitHub</a><a href="https://github.com/sponsors/eddlev" target="_blank" rel="noopener">Sponsor</a><a href="https://github.com/eddlev/vm4ai-air-kit/discussions" target="_blank" rel="noopener">Support</a></div>
+      <div class="foot-col">
+        <h4>Product</h4>
+        <a href="how-it-works.html">How it works</a>
+        <a href="get-started.html">Get started</a>
+        <a href="use-cases.html">Use cases</a>
+        <a href="blog.html">Blog</a>
+        <a href="glossary.html">Glossary</a>
+      </div>
+      <div class="foot-col">
+        <h4>More</h4>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="https://github.com/eddlev/air-brand" target="_blank" rel="noopener">Brand kit</a>
+      </div>
+      <div class="foot-col">
+        <h4>Connect</h4>
+        <a href="https://github.com/eddlev/vm4ai-air-kit" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/sponsors/eddlev" target="_blank" rel="noopener">Sponsor</a>
+        <a href="https://github.com/eddlev/vm4ai-air-kit/discussions" target="_blank" rel="noopener">Support</a>
+      </div>
     </div>
     <div class="foot-bottom">
       <span>© 2026 VM4AI · Apache-2.0 (code) · <a class="legal" href="privacy.html">Privacy</a> · <a class="legal" href="terms.html">Terms</a></span>

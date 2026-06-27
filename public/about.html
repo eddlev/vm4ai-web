@@ -38,21 +38,21 @@
   --bg:#1A1613; --surface:#221C18; --surface-2:#2A231D;
   --text:#ECE4D8; --muted:#9A8F80; --subtle:#6E655B;
   --border:rgba(236,228,216,.12); --border-strong:rgba(236,228,216,.22);
-  --on-ember:#1A1613;
+  --on-ember:#1A1613; --card-shadow:none; --ember-ink:#FF5A1F; --card-shadow-hover:none; --rule:#332F2B;
   --maxw:1140px;
   color-scheme:dark;
 }
 @media (prefers-color-scheme:light){
   :root:not([data-theme="dark"]){
     --bg:#F5F4F2; --surface:#FFFFFF; --surface-2:#FAFAF8;
-    --text:#1A1613; --muted:#6E665C; --subtle:#8A8278;
+    --text:#1A1613; --muted:#6E665C; --subtle:#8A8278; --brass:#7A600F; --card-shadow:0 1px 2px rgba(26,22,19,.05),0 8px 20px rgba(26,22,19,.06); --ember-ink:#B23A0A; --rule:#DBD9D7; --card-shadow-hover:0 4px 9px rgba(26,22,19,.08),0 18px 40px rgba(26,22,19,.10);
     --border:rgba(26,22,19,.12); --border-strong:rgba(26,22,19,.20);
     color-scheme:light;
   }
 }
 :root[data-theme="light"]{
   --bg:#F5F4F2; --surface:#FFFFFF; --surface-2:#FAFAF8;
-  --text:#1A1613; --muted:#6E665C; --subtle:#8A8278;
+  --text:#1A1613; --muted:#6E665C; --subtle:#8A8278; --brass:#7A600F; --card-shadow:0 1px 2px rgba(26,22,19,.05),0 8px 20px rgba(26,22,19,.06); --ember-ink:#B23A0A; --rule:#DBD9D7; --card-shadow-hover:0 4px 9px rgba(26,22,19,.08),0 18px 40px rgba(26,22,19,.10);
   --border:rgba(26,22,19,.12); --border-strong:rgba(26,22,19,.20);
   color-scheme:light;
 }
@@ -67,7 +67,7 @@ body{margin:0;background-color:var(--bg);
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   transition:background-color .4s ease,color .4s ease}
 .container{max-width:var(--maxw);margin:0 auto;padding:0 clamp(1.2rem,4vw,2rem)}
-a{color:var(--ember);text-underline-offset:3px}
+a{color:var(--ember-ink);text-underline-offset:3px}
 h1,h2,h3,h4{font-family:var(--font-display);margin:0;letter-spacing:-.02em;line-height:1.1}
 p{margin:0 0 1rem}
 img,svg{max-width:100%}
@@ -117,14 +117,14 @@ img,svg{max-width:100%}
 /* ---------- sections ---------- */
 .section{padding:clamp(3.5rem,7vw,6rem) 0}
 .section-head{max-width:46rem;margin-bottom:2.5rem}
-.section-head h2{font-size:clamp(1.8rem,1.3rem+1.8vw,2.5rem);margin:.7rem 0 .8rem}
+.section-head h2{font-size:clamp(1.5rem,1.2rem+1vw,1.9rem);margin:.7rem 0 .8rem}
 .section-head p{color:var(--muted);font-size:1.1rem;margin:0}
 
 /* ---------- hero ---------- */
 .hero{padding:clamp(3rem,6vw,5.5rem) 0 clamp(2.5rem,5vw,4rem)}
 .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,5vw,4rem);align-items:center}
 .hero h1{font-size:clamp(2.6rem,1.8rem+3.4vw,4.4rem);margin:1rem 0 1.2rem;font-weight:700}
-.hero h1 .em{color:var(--ember)}
+.hero h1 .em{color:var(--ember-ink)}
 .hero .sub{font-size:clamp(1.05rem,1rem+.4vw,1.3rem);color:var(--muted);max-width:34rem;margin:0 0 2rem}
 .hero-cta{display:flex;flex-wrap:wrap;gap:.8rem}
 .hero-visual{display:flex;justify-content:center}
@@ -164,7 +164,7 @@ img,svg{max-width:100%}
 .card h3{font-size:1.3rem;margin:.6rem 0 .5rem;font-weight:500}
 .card p{color:var(--muted);font-size:.95rem;margin:0}
 .card .go{display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem;font-family:var(--font-mono);
-  font-size:.82rem;color:var(--ember)}
+  font-size:.82rem;color:var(--ember-ink)}
 
 /* ---------- callout ---------- */
 .callout{border:1px solid var(--brass);border-radius:18px;padding:1.8rem 2rem;
@@ -222,15 +222,16 @@ img,svg{max-width:100%}
 .about-intro .role{font-family:var(--font-mono);color:var(--brass);font-size:.9rem;letter-spacing:.03em}
 .about-intro .lead{color:var(--muted);margin:1rem 0 1.3rem;max-width:34rem}
 .sociallinks{display:flex;flex-wrap:wrap;gap:.6rem}
-.sociallinks a{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--font-mono);font-size:.85rem;color:var(--muted);text-decoration:none;border:1px solid var(--border-strong);border-radius:9px;padding:.45rem .8rem;transition:color .2s,border-color .2s}
+.sociallinks a{display:inline-flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;border:1px solid var(--border-strong);border-radius:9px;padding:.5rem;transition:color .2s,border-color .2s}
 .sociallinks a:hover{color:var(--brass);border-color:var(--brass)}
-.sociallinks svg{width:16px;height:16px;fill:currentColor}
+.sociallinks svg{width:18px;height:18px;fill:currentColor}
 @media (max-width:600px){.about-intro{grid-template-columns:1fr;justify-items:start}}
 .prose{max-width:42rem}
 .prose p{font-size:1.07rem;line-height:1.75;color:var(--text);margin:0 0 1.2rem}
 .prose .lead-line{font-size:1.2rem;font-weight:500;color:var(--text)}
-.principles{display:grid;gap:1.4rem}
-.principle{border-top:1px solid var(--border);padding-top:1.1rem}
+.principles{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+@media(max-width:640px){.principles{grid-template-columns:1fr}}
+.principle{border:1px solid var(--border);border-radius:14px;padding:1.3rem 1.4rem;background:var(--surface);box-shadow:var(--card-shadow)}
 .principle .pk{font-family:var(--font-mono);font-size:.76rem;color:var(--brass);text-transform:uppercase;letter-spacing:.08em}
 .principle h4{margin:.4rem 0 .35rem;font-size:1.1rem;font-weight:500}
 .principle p{margin:0;color:var(--muted)}
@@ -278,10 +279,10 @@ img,svg{max-width:100%}
           <div class="role">Creator of VM4AI AIR</div>
           <p class="lead">I build tools that bring structure and honesty to work done with AI. AIR is the main one. Based in Denmark.</p>
           <div class="sociallinks">
-            <a href="mailto:contact@vm4ai.com" title="contact@vm4ai.com" data-copy="contact@vm4ai.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg> <span class="cp-label">Email</span></a>
-            <a href="https://www.linkedin.com/in/edward-levin-/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg> LinkedIn</a>
-            <a href="https://x.com/edd_lev" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.46l8.6-9.83L0 1.15h7.6l5.24 6.93 6.06-6.93zm-1.29 19.5h2.04L6.49 3.24H4.3L17.61 20.65z"/></svg> X</a>
-            <a href="https://github.com/eddlev" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg> GitHub</a>
+            <a href="mailto:contact@vm4ai.com" title="contact@vm4ai.com" aria-label="Email" data-copy="contact@vm4ai.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+            <a href="https://www.linkedin.com/in/edward-levin-/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+            <a href="https://x.com/edd_lev" target="_blank" rel="noopener" aria-label="X" title="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.46l8.6-9.83L0 1.15h7.6l5.24 6.93 6.06-6.93zm-1.29 19.5h2.04L6.49 3.24H4.3L17.61 20.65z"/></svg></a>
+            <a href="https://github.com/eddlev" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg></a>
           </div>
         </div>
       </div>
@@ -297,7 +298,7 @@ img,svg{max-width:100%}
         <p>I approached trust through transparency. The AIR objects that print into the chat — structured JSON blocks — show exactly how AIR is executing every task, out in the open, so none of its reasoning stays hidden.</p>
         <p>Continuity comes from the handoff card: a JSON block that captures where the project stands and what the next step should be. Because JSON travels everywhere, that card carries a project not just into a new session but onto an entirely different platform, so the work continues seamlessly even as the AI landscape keeps shifting.</p>
         <p>That same portability frees AIR from any single model or platform. You boot a new session wherever you like and carry on from the card. The one honest caveat is that the output is always shaped by whichever model happens to be hosting it.</p>
-        <p>This is only the surface. I would suggest reading more about the <a href="how-it-works.html">methods and concepts</a> behind AIR's workflow — or simply <a href="get-started.html">booting a session</a> and seeing it for yourself.</p>
+        <p>This is only the surface. Read more about the <a href="how-it-works.html">methods and concepts</a> behind AIR's workflow, or just <a href="get-started.html">boot a session</a> and see it for yourself.</p>
       </div>
     </div>
   </section>
@@ -311,9 +312,9 @@ img,svg{max-width:100%}
       </div>
       <div class="principles">
         <div class="principle"><div class="pk">Transparency</div><h4>Show the work</h4><p>Every task is shown in the open as AIR objects — structured JSON you can inspect.</p></div>
-        <div class="principle"><div class="pk">Prompt-compiled</div><h4>Structure, not a guarantee</h4><p>AIR adds discipline and surfaces uncertainty. It claims no backend validation and doesn't promise correctness.</p></div>
-        <div class="principle"><div class="pk">Fail-closed</div><h4>Stop when unsure</h4><p>When something is unresolved, AIR stops and flags it rather than guessing past it.</p></div>
-        <div class="principle"><div class="pk">Cooperative</div><h4>A teammate, not an agent</h4><p>AIR is not autonomous and not built for hands-off automation. You and AIR divide the work; it asks when unsure; and you can hand it the lead while keeping the power to steer or overwrite. The output is the product of cooperation, not a hands-off dump.</p></div>
+        <div class="principle"><div class="pk">Candor</div><h4>Honest about its limits</h4><p>AIR is prompt-based — no backend validation, no guarantee of correctness. It says so up front, so your expectations stay accurate.</p></div>
+        <div class="principle"><div class="pk">Restraint</div><h4>Won't guess</h4><p>When AIR is unsure, it won't invent an answer. It stops, flags the gap, and follows its protocol instead of guessing.</p></div>
+        <div class="principle"><div class="pk">Cooperative</div><h4>A teammate, not an agent</h4><p>AIR is not autonomous, and not built for hands-off automation. It works with you, not for you — you keep the judgment and the final say.</p></div>
       </div>
     </div>
   </section>
@@ -345,6 +346,7 @@ img,svg{max-width:100%}
         <a href="get-started.html">Get started</a>
         <a href="use-cases.html">Use cases</a>
         <a href="blog.html">Blog</a>
+        <a href="glossary.html">Glossary</a>
       </div>
       <div class="foot-col">
         <h4>More</h4>

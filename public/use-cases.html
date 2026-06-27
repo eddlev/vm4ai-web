@@ -38,21 +38,21 @@
   --bg:#1A1613; --surface:#221C18; --surface-2:#2A231D;
   --text:#ECE4D8; --muted:#9A8F80; --subtle:#6E655B;
   --border:rgba(236,228,216,.12); --border-strong:rgba(236,228,216,.22);
-  --on-ember:#1A1613;
+  --on-ember:#1A1613; --ember-ink:#FF5A1F; --card-shadow:none; --card-shadow-hover:none; --rule:#332F2B;
   --maxw:1140px;
   color-scheme:dark;
 }
 @media (prefers-color-scheme:light){
   :root:not([data-theme="dark"]){
     --bg:#F5F4F2; --surface:#FFFFFF; --surface-2:#FAFAF8;
-    --text:#1A1613; --muted:#6E665C; --subtle:#8A8278;
+    --text:#1A1613; --muted:#6E665C; --subtle:#8A8278; --brass:#7A600F; --ember-ink:#B23A0A; --rule:#DBD9D7; --card-shadow:0 1px 2px rgba(26,22,19,.05),0 8px 20px rgba(26,22,19,.06); --card-shadow-hover:0 4px 9px rgba(26,22,19,.08),0 18px 40px rgba(26,22,19,.10);
     --border:rgba(26,22,19,.12); --border-strong:rgba(26,22,19,.20);
     color-scheme:light;
   }
 }
 :root[data-theme="light"]{
   --bg:#F5F4F2; --surface:#FFFFFF; --surface-2:#FAFAF8;
-  --text:#1A1613; --muted:#6E665C; --subtle:#8A8278;
+  --text:#1A1613; --muted:#6E665C; --subtle:#8A8278; --brass:#7A600F; --ember-ink:#B23A0A; --rule:#DBD9D7; --card-shadow:0 1px 2px rgba(26,22,19,.05),0 8px 20px rgba(26,22,19,.06); --card-shadow-hover:0 4px 9px rgba(26,22,19,.08),0 18px 40px rgba(26,22,19,.10);
   --border:rgba(26,22,19,.12); --border-strong:rgba(26,22,19,.20);
   color-scheme:light;
 }
@@ -67,7 +67,7 @@ body{margin:0;background-color:var(--bg);
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   transition:background-color .4s ease,color .4s ease}
 .container{max-width:var(--maxw);margin:0 auto;padding:0 clamp(1.2rem,4vw,2rem)}
-a{color:var(--ember);text-underline-offset:3px}
+a{color:var(--ember-ink);text-underline-offset:3px}
 h1,h2,h3,h4{font-family:var(--font-display);margin:0;letter-spacing:-.02em;line-height:1.1}
 p{margin:0 0 1rem}
 img,svg{max-width:100%}
@@ -249,9 +249,9 @@ img,svg{max-width:100%}
 
 
 /* ---------- use cases ---------- */
-.uc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.uc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
 @media (max-width:840px){.uc-grid{grid-template-columns:1fr}}
-.uc{border:1px solid var(--border);border-radius:16px;background:var(--surface);padding:1.6rem}
+.uc{border:1px solid var(--border);border-radius:16px;background:var(--surface);padding:1.6rem;box-shadow:var(--card-shadow)}
 .uc .k{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brass)}
 .uc h3{font-size:1.3rem;margin:.5rem 0 .6rem;font-weight:500}
 .uc>p{color:var(--muted);margin:0 0 1.1rem;font-size:.95rem}
@@ -259,11 +259,12 @@ img,svg{max-width:100%}
 .uc li{font-family:var(--font-mono);font-size:.8rem;color:var(--muted);padding-left:1rem;position:relative}
 .uc li::before{content:"";position:absolute;left:0;top:.5em;width:5px;height:5px;background:var(--brass);border-radius:1px}
 .uc-more{font-family:var(--font-mono);font-size:.85rem;color:var(--muted);margin-top:1.4rem}
-.casestudy{border:1px solid var(--brass);border-radius:18px;background:color-mix(in srgb,var(--brass) 6%,var(--surface));padding:1.8rem 2rem;max-width:56rem}
+.casestudy{border:1px solid var(--brass);border-radius:18px;background:color-mix(in srgb,var(--brass) 6%,var(--surface));padding:1.8rem 2rem;max-width:56rem;box-shadow:var(--card-shadow)}
 .casestudy .k{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brass)}
 .casestudy h3{font-size:1.4rem;margin:.5rem 0 .7rem;font-weight:500}
 .casestudy p{color:var(--muted);margin:0 0 1.1rem}
-.casestudy .go{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--font-mono);font-size:.85rem;color:var(--ember);text-decoration:none}
+.casestudy .go{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--font-mono);font-size:.85rem;color:var(--ember-ink);text-decoration:none}
+.casestudy + .casestudy{margin-top:1.2rem}
 
 
 /* ---------- attentive header eye ---------- */
@@ -302,7 +303,7 @@ img,svg{max-width:100%}
     <div class="container">
       <span class="eyebrow">Use cases</span>
       <h1 style="font-size:clamp(2.2rem,1.6rem+2.4vw,3.4rem);margin:1rem 0 1.1rem">One framework, many kinds of work.</h1>
-      <p class="sub" style="max-width:44rem">AIR — short for AI Resource — is a structured generalist. The same discipline — scope first, execute in steps, surface uncertainty, hand off cleanly — applies whether the work is code, a brand, or an entire fictional world.</p>
+      <p class="sub" style="max-width:44rem">AIR — short for AI Resource — is a structured generalist. The same discipline — scope first, execute in steps, surface uncertainty, hand off cleanly — holds whether you're writing code, running research, drafting content, or building a brand.</p>
     </div>
   </section>
 
@@ -316,19 +317,25 @@ img,svg{max-width:100%}
           <ul><li>roadmap-first execution</li><li>active-step artifacts</li><li>gates before delivery</li></ul>
         </div>
         <div class="uc">
+          <div class="k">Research</div>
+          <h3>Research &amp; analysis</h3>
+          <p>Gather, synthesize, and pressure-test against the question instead of a hunch. AIR scopes what is being asked, works through it in steps, and surfaces what stays uncertain — so the findings trace back to where they came from.</p>
+          <ul><li>scoped questions</li><li>sourced findings</li><li>uncertainty surfaced</li></ul>
+        </div>
+        <div class="uc">
+          <div class="k">Writing</div>
+          <h3>Writing &amp; content</h3>
+          <p>Drafts, docs, and long-form held to one voice and structure instead of restarting each time. AIR keeps the brief and the standard in view, executes a section at a time, and benchmarks before it calls a piece done.</p>
+          <ul><li>one consistent voice</li><li>section by section</li><li>benchmarked output</li></ul>
+        </div>
+        <div class="uc">
           <div class="k">Brand</div>
           <h3>Brand &amp; marketing</h3>
           <p>Naming, positioning, voice, content, and campaigns held to one consistent system. This very brand and site were produced with AIR — tokens, guidelines, templates, and pages, all under a single structured process.</p>
           <ul><li>one source of truth</li><li>a consistent voice</li><li>benchmarked output</li></ul>
         </div>
-        <div class="uc">
-          <div class="k">Fiction &amp; games</div>
-          <h3>World-building</h3>
-          <p>Lore, characters, factions, and timelines kept canon-consistent across long projects. The orbit model holds the active thread while the wider world stays in reach, and the handoff card carries the canon between sessions.</p>
-          <ul><li>canon continuity</li><li>context in orbit</li><li>handoff across sessions</li></ul>
-        </div>
       </div>
-      <p class="uc-more">The same structure extends to research, writing, operations, and analysis. AIR is domain-agnostic by design.</p>
+      <p class="uc-more">The same structure extends to strategy, operations, and execution. AIR is domain-agnostic by design.</p>
     </div>
   </section>
 
@@ -336,11 +343,11 @@ img,svg{max-width:100%}
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">A way to work</span>
-        <h2>When you are the gap, hand over the lead.</h2>
-        <p>You reach for AIR because something is missing — a skill, a perspective, the time to learn it. That gap is the reason leading the work yourself tends to produce a weaker result: you can't account for what you don't know.</p>
+        <h2>On the hard parts, hand over the lead.</h2>
+        <p>You reach for AIR because something is missing — a skill, a perspective, the time to learn it. That same gap is why leading the work yourself is harder: you can't account for what you don't know.</p>
       </div>
       <div style="max-width:46rem">
-        <p style="margin:0 0 1.1rem">With the lead, AIR brings the capability you are missing — the right Specialist, Domain pack, and Method — and weighs each task for blast radius: the adjacent risks, dependencies, and unknown-unknowns the work touches but you might not see. Ask to add a feature and it raises the security and legal exposure before you hit it.</p>
+        <p style="margin:0 0 1.1rem">With the lead, AIR brings the capability you're missing, and weighs each task for its blast radius — the adjacent risks, dependencies, and blind spots the work touches but you might not see. For example: ask it to add a feature, and it flags the security and legal exposure before you hit it.</p>
         <p style="margin:0">This is not surrender. AIR recommends and outlines; you support, steer, and overwrite; and it pushes back when a call is off. The lead is AIR's — the project stays yours.</p>
       </div>
     </div>
@@ -364,6 +371,12 @@ img,svg{max-width:100%}
         <h3>Recovering from session loss — with AIR</h3>
         <p>Twice, a working session died before it could hand off — once at a hard context cap, once as a silent stall with no error. Both times AIR's handoff cards reconstructed the project from history and resumed it with nothing lost. Proof the continuity mechanism holds when a session doesn't.</p>
         <a class="go" href="recovered-with-air.html">Read the case study →</a>
+      </div>
+      <div class="casestudy">
+        <div class="k">Method · proof</div>
+        <h3>Telling a real boot from a roleplay</h3>
+        <p>Hand the AIR files to a model and it can do one of two things: actually boot the framework, or just describe it convincingly. The difference is visible — a real boot prints structured AIR objects; a roleplay only talks about them. How to spot the tell, and why it is the point.</p>
+        <a class="go" href="real-boot-vs-roleplay.html">Read the case study →</a>
       </div>
     </div>
   </section>
@@ -395,6 +408,7 @@ img,svg{max-width:100%}
         <a href="get-started.html">Get started</a>
         <a href="use-cases.html">Use cases</a>
         <a href="blog.html">Blog</a>
+        <a href="glossary.html">Glossary</a>
       </div>
       <div class="foot-col">
         <h4>More</h4>

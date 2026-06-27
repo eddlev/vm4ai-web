@@ -1,0 +1,17 @@
+# vm4ai-web — enforce consistent LF line endings on every platform.
+# Text files are stored and checked out with LF, so HTML/CSS/JS/JSON/XML
+# never churn between CRLF and LF regardless of editor or operating system.
+
+* text=auto eol=lf
+
+# Binary assets — never normalized or diffed as text.
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.svg   text eol=lf
+*.ico   binary
+*.woff  binary
+*.woff2 binary
+*.pdf   binary

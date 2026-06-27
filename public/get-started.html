@@ -38,21 +38,21 @@
   --bg:#1A1613; --surface:#221C18; --surface-2:#2A231D;
   --text:#ECE4D8; --muted:#9A8F80; --subtle:#6E655B;
   --border:rgba(236,228,216,.12); --border-strong:rgba(236,228,216,.22);
-  --on-ember:#1A1613;
+  --on-ember:#1A1613; --ember-ink:#FF5A1F; --card-shadow:none; --card-shadow-hover:none; --rule:#332F2B;
   --maxw:1140px;
   color-scheme:dark;
 }
 @media (prefers-color-scheme:light){
   :root:not([data-theme="dark"]){
     --bg:#F5F4F2; --surface:#FFFFFF; --surface-2:#FAFAF8;
-    --text:#1A1613; --muted:#6E665C; --subtle:#8A8278;
+    --text:#1A1613; --muted:#6E665C; --subtle:#8A8278; --brass:#7A600F; --ember-ink:#B23A0A; --rule:#DBD9D7; --card-shadow:0 1px 2px rgba(26,22,19,.05),0 8px 20px rgba(26,22,19,.06); --card-shadow-hover:0 4px 9px rgba(26,22,19,.08),0 18px 40px rgba(26,22,19,.10);
     --border:rgba(26,22,19,.12); --border-strong:rgba(26,22,19,.20);
     color-scheme:light;
   }
 }
 :root[data-theme="light"]{
   --bg:#F5F4F2; --surface:#FFFFFF; --surface-2:#FAFAF8;
-  --text:#1A1613; --muted:#6E665C; --subtle:#8A8278;
+  --text:#1A1613; --muted:#6E665C; --subtle:#8A8278; --brass:#7A600F; --ember-ink:#B23A0A; --rule:#DBD9D7; --card-shadow:0 1px 2px rgba(26,22,19,.05),0 8px 20px rgba(26,22,19,.06); --card-shadow-hover:0 4px 9px rgba(26,22,19,.08),0 18px 40px rgba(26,22,19,.10);
   --border:rgba(26,22,19,.12); --border-strong:rgba(26,22,19,.20);
   color-scheme:light;
 }
@@ -67,7 +67,7 @@ body{margin:0;background-color:var(--bg);
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   transition:background-color .4s ease,color .4s ease}
 .container{max-width:var(--maxw);margin:0 auto;padding:0 clamp(1.2rem,4vw,2rem)}
-a{color:var(--ember);text-underline-offset:3px}
+a{color:var(--ember-ink);text-underline-offset:3px}
 h1,h2,h3,h4{font-family:var(--font-display);margin:0;letter-spacing:-.02em;line-height:1.1}
 p{margin:0 0 1rem}
 img,svg{max-width:100%}
@@ -168,9 +168,10 @@ img,svg{max-width:100%}
 
 /* ---------- callout ---------- */
 .callout{border:1px solid var(--brass);border-radius:18px;padding:1.8rem 2rem;
-  background:color-mix(in srgb,var(--brass) 7%,var(--surface))}
+  background:color-mix(in srgb,var(--brass) 7%,var(--surface));box-shadow:var(--card-shadow)}
 .callout .label{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brass);margin-bottom:.7rem}
 .callout p{margin:0;font-size:1.05rem}
+.callout code{font-family:var(--font-mono);font-size:.86em;background:var(--surface-2);padding:.08rem .35rem;border-radius:5px;color:var(--text)}
 
 /* ---------- cta band ---------- */
 .cta-band{border:1px solid var(--border);border-radius:22px;background:var(--surface);
@@ -242,7 +243,7 @@ img,svg{max-width:100%}
 .gstep .gn{font-family:var(--font-mono);font-size:1.05rem;color:var(--brass);font-weight:500}
 .gstep h3{font-size:1.2rem;margin:0 0 .45rem;font-weight:500}
 .gstep p{margin:0;color:var(--muted)}
-.gstep p a{color:var(--ember);text-decoration:none}.gstep p a:hover{text-decoration:underline}
+.gstep p a{color:var(--ember-ink);text-decoration:none}.gstep p a:hover{text-decoration:underline}
 .gstep code{font-family:var(--font-mono);font-size:.86em;background:var(--surface-2);padding:.08rem .35rem;border-radius:5px;color:var(--text)}
 .need{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.4rem}
 .need span{font-family:var(--font-mono);font-size:.82rem;color:var(--muted);border:1px solid var(--border-strong);border-radius:9px;padding:.4rem .8rem}
@@ -307,6 +308,15 @@ img,svg{max-width:100%}
   <section class="section" style="padding-top:0">
     <div class="container">
       <div class="callout">
+        <div class="label">Is it actually running?</div>
+        <p>A real boot prints a formal <code>AIR_SESSION</code> object into the chat — structured JSON, not prose. If your model only <em>describes</em> AIR without emitting the object, it is role-playing, not running; re-boot or try another model. Behavior varies by model — some boot cleanly, some role-play, some refuse the files — so if yours refuses or role-plays, <a href="https://github.com/eddlev/vm4ai-air-kit/discussions" target="_blank" rel="noopener">tell us in Discussions</a>. More on the tell: <a href="real-boot-vs-roleplay.html">real boot vs roleplay</a>, or <a href="showcase.html">see a full session</a>. The <a href="glossary.html">glossary</a> defines <code>AIR_SESSION</code> and the other objects.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="callout">
         <div class="label">Good to know</div>
         <p>The full reference — boot files, methods, and the concepts behind each step — lives in the repository. This page is the short path; the repo is the manual.</p>
       </div>
@@ -340,6 +350,7 @@ img,svg{max-width:100%}
         <a href="get-started.html">Get started</a>
         <a href="use-cases.html">Use cases</a>
         <a href="blog.html">Blog</a>
+        <a href="glossary.html">Glossary</a>
       </div>
       <div class="foot-col">
         <h4>More</h4>

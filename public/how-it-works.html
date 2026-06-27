@@ -38,21 +38,21 @@
   --bg:#1A1613; --surface:#221C18; --surface-2:#2A231D;
   --text:#ECE4D8; --muted:#9A8F80; --subtle:#6E655B;
   --border:rgba(236,228,216,.12); --border-strong:rgba(236,228,216,.22);
-  --on-ember:#1A1613;
+  --on-ember:#1A1613; --ember-ink:#FF5A1F; --card-shadow:none; --card-shadow-hover:none; --rule:#332F2B;
   --maxw:1140px;
   color-scheme:dark;
 }
 @media (prefers-color-scheme:light){
   :root:not([data-theme="dark"]){
     --bg:#F5F4F2; --surface:#FFFFFF; --surface-2:#FAFAF8;
-    --text:#1A1613; --muted:#6E665C; --subtle:#8A8278;
+    --text:#1A1613; --muted:#6E665C; --subtle:#8A8278; --brass:#7A600F; --ember-ink:#B23A0A; --rule:#DBD9D7; --card-shadow:0 1px 2px rgba(26,22,19,.05),0 8px 20px rgba(26,22,19,.06); --card-shadow-hover:0 4px 9px rgba(26,22,19,.08),0 18px 40px rgba(26,22,19,.10);
     --border:rgba(26,22,19,.12); --border-strong:rgba(26,22,19,.20);
     color-scheme:light;
   }
 }
 :root[data-theme="light"]{
   --bg:#F5F4F2; --surface:#FFFFFF; --surface-2:#FAFAF8;
-  --text:#1A1613; --muted:#6E665C; --subtle:#8A8278;
+  --text:#1A1613; --muted:#6E665C; --subtle:#8A8278; --brass:#7A600F; --ember-ink:#B23A0A; --rule:#DBD9D7; --card-shadow:0 1px 2px rgba(26,22,19,.05),0 8px 20px rgba(26,22,19,.06); --card-shadow-hover:0 4px 9px rgba(26,22,19,.08),0 18px 40px rgba(26,22,19,.10);
   --border:rgba(26,22,19,.12); --border-strong:rgba(26,22,19,.20);
   color-scheme:light;
 }
@@ -67,7 +67,7 @@ body{margin:0;background-color:var(--bg);
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   transition:background-color .4s ease,color .4s ease}
 .container{max-width:var(--maxw);margin:0 auto;padding:0 clamp(1.2rem,4vw,2rem)}
-a{color:var(--ember);text-underline-offset:3px}
+a{color:var(--ember-ink);text-underline-offset:3px}
 h1,h2,h3,h4{font-family:var(--font-display);margin:0;letter-spacing:-.02em;line-height:1.1}
 p{margin:0 0 1rem}
 img,svg{max-width:100%}
@@ -196,6 +196,18 @@ img,svg{max-width:100%}
 /* ---------- diagrams ---------- */
 .diagram{border:1px solid var(--border);border-radius:16px;background:var(--surface);padding:1.4rem;margin:0}
 .diagram svg{width:100%;height:auto;display:block}
+.codeblock{margin:1.5rem 0;border:1px solid var(--border-strong);border-radius:12px;background:var(--surface-2);overflow:hidden;max-width:46rem}
+.codeblock .cb-label{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--brass);padding:.85rem 1.2rem .25rem;margin:0}
+.codeblock pre{margin:0;padding:.4rem 1.2rem 1.1rem;font-family:var(--font-mono);font-size:.8rem;line-height:1.6;color:var(--text);white-space:pre;overflow-x:auto}
+.amrs{display:flex;flex-direction:column;gap:.5rem;max-width:46rem;margin:1.6rem 0 0}
+.amrs-rung{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;border:1px solid var(--border);border-left:3px solid var(--border-strong);border-radius:12px;background:var(--surface);padding:.85rem 1.1rem;box-shadow:var(--card-shadow)}
+.amrs-rung.top{border-left-color:var(--brass)}
+.amrs-rung.floor{border-left-color:var(--ember-ink)}
+.amrs-n{font-family:var(--font-mono);font-size:.78rem;color:var(--brass);white-space:nowrap;padding-top:.15rem}
+.amrs-b strong{display:block;font-weight:500;color:var(--text);font-size:.95rem}
+.amrs-b span{display:block;color:var(--muted);font-size:.85rem;margin-top:.15rem;line-height:1.5}
+.amrs-here{display:inline-block;font-family:var(--font-mono);font-size:.68rem;color:var(--ember-ink);margin-top:.35rem}
+.amrs-foot{color:var(--muted);max-width:44rem;margin:1.1rem 0 0;font-size:.92rem}
 .d-frame{fill:none;stroke:var(--brass)}
 .d-fill{fill:var(--brass)}
 .d-ember{fill:var(--ember)}
@@ -251,6 +263,7 @@ img,svg{max-width:100%}
       <span class="eyebrow">How it works</span>
       <h1 style="font-size:clamp(2.2rem,1.6rem+2.4vw,3.4rem);margin:1rem 0 1.1rem">The model behind AIR.</h1>
       <p class="sub" style="max-width:42rem">AIR — short for AI Resource — turns a chatbot session into a structured, auditable environment, with a teammate's discipline rather than an agent's autonomy. Here is the machinery, from the first question to the final handoff.</p>
+      <p style="font-family:var(--font-mono);font-size:.84rem;margin:.5rem 0 0"><a href="glossary.html">New to the vocabulary? See the glossary →</a></p>
     </div>
   </section>
 
@@ -300,7 +313,7 @@ img,svg{max-width:100%}
         <div class="step-text">
           <div class="num">06</div>
           <h3>Continue across sessions</h3>
-          <p>Each session ends with a strict-JSON handoff card. The next session boots from it — so a project survives context limits and resumes exactly where it left off.</p>
+          <p>Each session ends with a strict-JSON handoff card. The next session boots from it — so a project survives context limits and resumes exactly where it left off. Because that card is a complete, portable snapshot of your project, treat it like sensitive data — <a href="https://github.com/eddlev/vm4ai-air-kit/discussions/2" target="_blank" rel="noopener">see the threat model</a>.</p>
         </div>
         <div class="diagram"><svg viewBox="0 0 720 300" role="img"><rect class="d-surface" x="40" y="30" width="210" height="58" rx="10" stroke-width="1.5"/><text class="d-txt" x="145.0" y="50.0" text-anchor="middle" dominant-baseline="central" font-size="14">New project</text><text class="d-txt sm" x="145.0" y="69.0" text-anchor="middle" dominant-baseline="central" font-size="10.5">boot bundle · 3 files</text><rect class="d-surface" x="40" y="132" width="210" height="58" rx="10" stroke-width="1.5"/><text class="d-txt" x="145.0" y="152.0" text-anchor="middle" dominant-baseline="central" font-size="14">Continue project</text><text class="d-txt sm" x="145.0" y="171.0" text-anchor="middle" dominant-baseline="central" font-size="10.5">card + core runtime</text><rect x="300" y="82" width="180" height="64" rx="10" fill="color-mix(in srgb,var(--ember) 16%,var(--surface-2))" stroke="var(--ember)" stroke-width="2"/><text class="d-txt" x="390.0" y="105.0" text-anchor="middle" dominant-baseline="central" font-size="14">AIR session</text><text class="d-txt sm" x="390.0" y="124.0" text-anchor="middle" dominant-baseline="central" font-size="11">active project</text><rect class="d-frame" x="525" y="84" width="160" height="60" rx="10" stroke-width="2"/><text class="d-txt" x="605.0" y="105.0" text-anchor="middle" dominant-baseline="central" font-size="13">Handoff card</text><text class="d-txt sm" x="605.0" y="124.0" text-anchor="middle" dominant-baseline="central" font-size="10.5">strict JSON</text><polyline points="250,59 298,102" fill="none" stroke="var(--muted)" stroke-width="2"/><path d="M288.0 99.7 L298.0 102.0 L294.6 92.3 Z" fill="var(--muted)"/><polyline points="250,161 298,126" fill="none" stroke="var(--muted)" stroke-width="2"/><path d="M293.7 135.3 L298.0 126.0 L287.8 127.3 Z" fill="var(--muted)"/><polyline points="480,114 523,114" fill="none" stroke="var(--muted)" stroke-width="2"/><path d="M514.0 119.0 L523.0 114.0 L514.0 109.0 Z" fill="var(--muted)"/><polyline points="605,144 605,258 145,258 145,190" fill="none" stroke="var(--muted)" stroke-width="2"/><path d="M150.0 199.0 L145.0 190.0 L140.0 199.0 Z" fill="var(--muted)"/><text class="d-txt sm" x="375" y="248" text-anchor="middle" dominant-baseline="central" font-size="11">next session</text></svg></div>
       </div>
@@ -312,6 +325,53 @@ img,svg{max-width:100%}
         </div>
         <div class="diagram"><svg viewBox="0 0 720 520" role="img"><text class="d-txt" x="180" y="22" text-anchor="middle" dominant-baseline="central" font-size="15">Vibe coding</text><text class="d-txt" x="540" y="22" text-anchor="middle" dominant-baseline="central" font-size="15">AIR execution</text><rect class="d-surface" x="60" y="44" width="240" height="48" rx="10" stroke-width="1.5"/><text class="d-txt" x="180.0" y="68.0" text-anchor="middle" dominant-baseline="central" font-size="14">Request</text><rect class="d-surface" x="60" y="110" width="240" height="48" rx="10" stroke-width="1.5"/><text class="d-txt" x="180.0" y="134.0" text-anchor="middle" dominant-baseline="central" font-size="14">Generate output</text><rect class="d-surface" x="60" y="176" width="240" height="48" rx="10" stroke-width="1.5"/><text class="d-txt" x="180.0" y="200.0" text-anchor="middle" dominant-baseline="central" font-size="14">Clean up the slop</text><rect class="d-surface" x="60" y="242" width="240" height="54" rx="10" stroke-width="1.5"/><text class="d-txt" x="180.0" y="260.0" text-anchor="middle" dominant-baseline="central" font-size="14">Ship</text><text class="d-txt sm" x="180.0" y="279.0" text-anchor="middle" dominant-baseline="central" font-size="10">review often skipped</text><polyline points="180,92 180,108" fill="none" stroke="var(--muted)" stroke-width="2"/><path d="M175.0 99.0 L180.0 108.0 L185.0 99.0 Z" fill="var(--muted)"/><polyline points="180,158 180,174" fill="none" stroke="var(--muted)" stroke-width="2"/><path d="M175.0 165.0 L180.0 174.0 L185.0 165.0 Z" fill="var(--muted)"/><polyline points="180,224 180,240" fill="none" stroke="var(--muted)" stroke-width="2"/><path d="M175.0 231.0 L180.0 240.0 L185.0 231.0 Z" fill="var(--muted)"/><rect class="d-frame" x="420" y="44" width="240" height="46" rx="10" stroke-width="2"/><text class="d-txt" x="540.0" y="67.0" text-anchor="middle" dominant-baseline="central" font-size="14">Request</text><rect class="d-frame" x="420" y="104" width="240" height="52" rx="10" stroke-width="2"/><text class="d-txt" x="540.0" y="121.0" text-anchor="middle" dominant-baseline="central" font-size="14">Bind contract</text><text class="d-txt sm" x="540.0" y="140.0" text-anchor="middle" dominant-baseline="central" font-size="10">task-operation scope</text><polyline points="540,90 540,102" fill="none" stroke="var(--muted)" stroke-width="2"/><path d="M535.0 93.0 L540.0 102.0 L545.0 93.0 Z" fill="var(--muted)"/><rect class="d-frame" x="420" y="170" width="240" height="52" rx="10" stroke-width="2"/><text class="d-txt" x="540.0" y="187.0" text-anchor="middle" dominant-baseline="central" font-size="14">Surface blockers</text><text class="d-txt sm" x="540.0" y="206.0" text-anchor="middle" dominant-baseline="central" font-size="10">missing vectors · readiness</text><polyline points="540,156 540,168" fill="none" stroke="var(--muted)" stroke-width="2"/><path d="M535.0 159.0 L540.0 168.0 L545.0 159.0 Z" fill="var(--muted)"/><rect class="d-frame" x="420" y="236" width="240" height="52" rx="10" stroke-width="2"/><text class="d-txt" x="540.0" y="253.0" text-anchor="middle" dominant-baseline="central" font-size="14">Infer benchmark</text><text class="d-txt sm" x="540.0" y="272.0" text-anchor="middle" dominant-baseline="central" font-size="10">task-fitted standard</text><polyline points="540,222 540,234" fill="none" stroke="var(--muted)" stroke-width="2"/><path d="M535.0 225.0 L540.0 234.0 L545.0 225.0 Z" fill="var(--muted)"/><rect class="d-frame" x="420" y="302" width="240" height="52" rx="10" stroke-width="2"/><text class="d-txt" x="540.0" y="319.0" text-anchor="middle" dominant-baseline="central" font-size="14">Generate</text><text class="d-txt sm" x="540.0" y="338.0" text-anchor="middle" dominant-baseline="central" font-size="10">under the contract</text><polyline points="540,288 540,300" fill="none" stroke="var(--muted)" stroke-width="2"/><path d="M535.0 291.0 L540.0 300.0 L545.0 291.0 Z" fill="var(--muted)"/><rect class="d-frame" x="420" y="368" width="240" height="52" rx="10" stroke-width="2"/><text class="d-txt" x="540.0" y="385.0" text-anchor="middle" dominant-baseline="central" font-size="14">Decision posture</text><text class="d-txt sm" x="540.0" y="404.0" text-anchor="middle" dominant-baseline="central" font-size="10">approve · review · reject</text><polyline points="540,354 540,366" fill="none" stroke="var(--muted)" stroke-width="2"/><path d="M535.0 357.0 L540.0 366.0 L545.0 357.0 Z" fill="var(--muted)"/><rect x="420" y="434" width="240" height="52" rx="10" fill="color-mix(in srgb,var(--ember) 16%,var(--surface-2))" stroke="var(--ember)" stroke-width="2"/><text class="d-txt" x="540.0" y="451.0" text-anchor="middle" dominant-baseline="central" font-size="14">Deliver</text><text class="d-txt sm" x="540.0" y="470.0" text-anchor="middle" dominant-baseline="central" font-size="10">only when state allows</text><polyline points="540,420 540,432" fill="none" stroke="var(--muted)" stroke-width="2"/><path d="M535.0 423.0 L540.0 432.0 L545.0 423.0 Z" fill="var(--muted)"/></svg></div>
       </div>
+    </div>
+  </section>
+
+  <section class="section" id="amrs" style="padding-top:0">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Readiness</span>
+        <h2>How mature is your project?</h2>
+        <p class="sub" style="max-width:45rem">AIR treats your project's maturity as something it tracks, not something it claims. The AIR Maturity Readiness Scale (AMRS) climbs from problem-framing to production-approved, and each stage gates what AIR is allowed to say — its own version of the familiar NASA-style Technology Readiness Levels (TRLs). You cannot get a "production-ready" claim out of AIR until the work has earned it.</p>
+      </div>
+      <div class="amrs">
+        <div class="amrs-rung top"><div class="amrs-n">AMRS-6</div><div class="amrs-b"><strong>Production approved</strong><span>Evidence-complete, no critical blockers, decision trace recorded. The only stage that may claim "production-ready."</span></div></div>
+        <div class="amrs-rung"><div class="amrs-n">AMRS-5</div><div class="amrs-b"><strong>Production candidate</strong><span>Packaging, deployment planning, security checks, rollback — acceptance criteria made explicit.</span></div></div>
+        <div class="amrs-rung"><div class="amrs-n">AMRS-4</div><div class="amrs-b"><strong>Integrated system</strong><span>Subsystems join under contract; integration assumptions and unresolved blockers stay visible.</span></div></div>
+        <div class="amrs-rung"><div class="amrs-n">AMRS-3</div><div class="amrs-b"><strong>Controlled prototype</strong><span>Narrow, controlled implementation with explicit degraded mode and missing coverage. No production-ready claim.</span></div></div>
+        <div class="amrs-rung"><div class="amrs-n">AMRS-2</div><div class="amrs-b"><strong>Executable design</strong><span>Interfaces, invariants, and review / test / security planning. No implementation-complete claim.</span></div></div>
+        <div class="amrs-rung"><div class="amrs-n">AMRS-1</div><div class="amrs-b"><strong>Concept shape</strong><span>Architecture, vectors, dependencies. No code, deployment, or acceptance claims.</span></div></div>
+        <div class="amrs-rung floor"><div class="amrs-n">AMRS-0</div><div class="amrs-b"><strong>Problem framing</strong><span>Objective, constraints, and blockers surfaced. Production and implementation claims blocked.</span><span class="amrs-here">&larr; the showcase session stops here, deliberately</span></div></div>
+      </div>
+      <p class="amrs-foot">AIR fails closed if you ask for something above the current stage, and it never promotes silently. That is the mechanism behind "won't oversell a sketch" — the ruler will not let it.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Evidence</span>
+        <h2>What a real boot emits</h2>
+        <p class="sub" style="max-width:45rem">None of this is narrated into being — it is emitted as formal objects you can inspect. The first thing a real session prints:</p>
+      </div>
+      <div class="codeblock">
+        <div class="cb-label">A real boot emits this</div>
+        <pre>{
+  "AIR_SESSION": {
+    "session_state": "BOOT_ONBOARDING",
+    "runtime_origin": "PROMPT_COMPILED",
+    "backend_validation_claimed": false,
+    "current_onboarding_question": "Q1",
+    "decision_state": "AWAITING_Q1_SELECTION",
+    "air_object_visibility": {
+      "boot_objects_required": true,
+      "boot_objects_emitted": true
+    }
+  }
+}</pre>
+      </div>
+      <p style="max-width:45rem">A model performing AIR writes <em>about</em> these objects; a model running AIR <em>emits</em> them. <a href="showcase.html">See a full session &rarr;</a> — a real project from boot to handoff, every object — or learn <a href="real-boot-vs-roleplay.html">how to tell a real boot from a roleplay</a>.</p>
     </div>
   </section>
 
@@ -342,6 +402,7 @@ img,svg{max-width:100%}
         <a href="get-started.html">Get started</a>
         <a href="use-cases.html">Use cases</a>
         <a href="blog.html">Blog</a>
+        <a href="glossary.html">Glossary</a>
       </div>
       <div class="foot-col">
         <h4>More</h4>
