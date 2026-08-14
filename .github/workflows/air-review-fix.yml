@@ -1,0 +1,64 @@
+name: Apply AIR architecture review fix
+
+on:
+  push:
+    branches:
+      - agent/clarify-air-architecture
+    paths:
+      - .github/workflows/air-review-fix.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out review branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/clarify-air-architecture
+          fetch-depth: 0
+
+      - name: Apply review fixes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('public/how-it-works.html')
+          text = path.read_text(encoding='utf-8')
+
+          replacements = [
+            (
+              '<div class="diagram">\n        <svg viewBox="0 0 900 330" role="img" aria-label="AIR prompt-runtime architecture">',
+              '<div class="diagram" style="overflow-x:auto">\n        <svg viewBox="0 0 900 330" role="img" aria-label="AIR prompt-runtime architecture" style="min-width:720px">',
+              'mobile diagram readability'
+            ),
+            (
+              "AIR objects expose AIR's declared state and the controls applied to the delivered work.",
+              "AIR objects expose AIR's declared state and the controls bound to the delivered work.",
+              'assurance wording'
+            )
+          ]
+
+          for old, new, label in replacements:
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'{label}: expected exactly 1 match, found {count}')
+              text = text.replace(old, new, 1)
+
+          path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Validate and commit review fixes
+        run: |
+          git diff --check
+          test "$(git diff --name-only | wc -l)" -eq 1
+          test "$(git diff --name-only)" = "public/how-it-works.html"
+          grep -Fq 'style="min-width:720px"' public/how-it-works.html
+          grep -Fq "controls bound to the delivered work" public/how-it-works.html
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/how-it-works.html
+          git commit -m "Improve architecture diagram mobile readability [air-reviewed]"
+          git push origin HEAD:agent/clarify-air-architecture
