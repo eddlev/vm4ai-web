@@ -274,8 +274,8 @@ img,svg{max-width:100%}
         <h2>Where AIR actually sits.</h2>
         <p>AIR does not wait for the model to generate a raw answer and then rewrite it. In the prompt-based version, AIR is loaded into the model's context before inference begins.</p>
       </div>
-      <div class="diagram">
-        <svg viewBox="0 0 900 330" role="img" aria-label="AIR prompt-runtime architecture">
+      <div class="diagram" style="overflow-x:auto">
+        <svg viewBox="0 0 900 330" role="img" aria-label="AIR prompt-runtime architecture" style="min-width:720px">
           <rect class="d-surface" x="30" y="118" width="135" height="62" rx="10" stroke-width="1.5"/>
           <text class="d-txt" x="97.5" y="143" text-anchor="middle" font-size="14">User</text>
           <text class="d-txt sm" x="97.5" y="162" text-anchor="middle" font-size="10.5">request</text>
@@ -321,7 +321,7 @@ img,svg{max-width:100%}
         <div class="card">
           <div class="k">What AIR does not claim</div>
           <h3>No hidden-model telemetry</h3>
-          <p>These controls are not measurements of chain-of-thought, neural activations or latent-space geometry. AIR objects expose AIR's declared state and the controls applied to the delivered work. Claims that something happened outside the prompt runtime require source, tool, operator or backend evidence.</p>
+          <p>These controls are not measurements of chain-of-thought, neural activations or latent-space geometry. AIR objects expose AIR's declared state and the controls bound to the delivered work. Claims that something happened outside the prompt runtime require source, tool, operator or backend evidence.</p>
         </div>
         <div class="card">
           <div class="k">Assurance boundary</div>
