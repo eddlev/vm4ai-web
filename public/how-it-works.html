@@ -267,6 +267,76 @@ img,svg{max-width:100%}
     </div>
   </section>
 
+  <section class="section" id="architecture" style="padding-top:2rem">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Architecture</span>
+        <h2>Where AIR actually sits.</h2>
+        <p>AIR does not wait for the model to generate a raw answer and then rewrite it. In the prompt-based version, AIR is loaded into the model's context before inference begins.</p>
+      </div>
+      <div class="diagram">
+        <svg viewBox="0 0 900 330" role="img" aria-label="AIR prompt-runtime architecture">
+          <rect class="d-surface" x="30" y="118" width="135" height="62" rx="10" stroke-width="1.5"/>
+          <text class="d-txt" x="97.5" y="143" text-anchor="middle" font-size="14">User</text>
+          <text class="d-txt sm" x="97.5" y="162" text-anchor="middle" font-size="10.5">request</text>
+
+          <rect class="d-frame" x="215" y="96" width="180" height="106" rx="12" stroke-width="2"/>
+          <text class="d-txt" x="305" y="126" text-anchor="middle" font-size="14">Host application</text>
+          <text class="d-txt sm" x="305" y="148" text-anchor="middle" font-size="10.5">ChatGPT · Claude · Gemini</text>
+          <text class="d-txt sm" x="305" y="169" text-anchor="middle" font-size="10.5">assembles context</text>
+
+          <rect class="d-surface" x="445" y="34" width="205" height="230" rx="12" stroke-width="1.5"/>
+          <text class="d-txt" x="547.5" y="65" text-anchor="middle" font-size="14">Model input context</text>
+          <text class="d-txt sm" x="547.5" y="93" text-anchor="middle" font-size="10.5">AIR runtime</text>
+          <text class="d-txt sm" x="547.5" y="116" text-anchor="middle" font-size="10.5">project state + active artifact</text>
+          <text class="d-txt sm" x="547.5" y="139" text-anchor="middle" font-size="10.5">conversation</text>
+          <text class="d-txt sm" x="547.5" y="162" text-anchor="middle" font-size="10.5">sources + tool results</text>
+          <text class="d-txt sm" x="547.5" y="185" text-anchor="middle" font-size="10.5">current user request</text>
+          <line x1="472" y1="207" x2="623" y2="207" stroke="var(--border-strong)" stroke-width="1"/>
+          <text class="d-txt sm" x="547.5" y="232" text-anchor="middle" font-size="10.5">AIR is already here</text>
+
+          <rect x="700" y="96" width="170" height="106" rx="12" fill="color-mix(in srgb,var(--ember) 12%,var(--surface-2))" stroke="var(--ember)" stroke-width="2"/>
+          <text class="d-txt" x="785" y="126" text-anchor="middle" font-size="14">Host model</text>
+          <text class="d-txt sm" x="785" y="149" text-anchor="middle" font-size="10.5">interprets the combined</text>
+          <text class="d-txt sm" x="785" y="168" text-anchor="middle" font-size="10.5">context and generates</text>
+
+          <polyline points="165,149 213,149" class="d-arrow" stroke-width="2"/>
+          <path d="M204 144 L213 149 L204 154 Z" class="d-fill"/>
+          <polyline points="395,149 443,149" class="d-arrow" stroke-width="2"/>
+          <path d="M434 144 L443 149 L434 154 Z" class="d-fill"/>
+          <polyline points="650,149 698,149" class="d-arrow" stroke-width="2"/>
+          <path d="M689 144 L698 149 L689 154 Z" class="d-fill"/>
+
+          <text class="d-txt sm" x="785" y="246" text-anchor="middle" font-size="10.5">response / tool proposal</text>
+          <polyline points="785,204 785,226 305,226 305,204" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="5 5"/>
+          <text class="d-txt sm" x="545" y="250" text-anchor="middle" font-size="10">tool results return through the host</text>
+        </svg>
+      </div>
+      <div class="cards" style="margin-top:1.2rem">
+        <div class="card">
+          <div class="k">What AIR controls</div>
+          <h3>The working contract</h3>
+          <p>AIR narrows scope, binds the active task, defines allowed and forbidden actions, establishes evidence and approval requirements, and sets review and closure conditions. Adaptive controls such as selected vectors, the synthetic benchmark, geometry and lambda pressure describe how AIR is asking the host model to approach the task.</p>
+        </div>
+        <div class="card">
+          <div class="k">What AIR does not claim</div>
+          <h3>No hidden-model telemetry</h3>
+          <p>These controls are not measurements of chain-of-thought, neural activations or latent-space geometry. AIR objects expose AIR's declared state and the controls applied to the delivered work. Claims that something happened outside the prompt runtime require source, tool, operator or backend evidence.</p>
+        </div>
+        <div class="card">
+          <div class="k">Assurance boundary</div>
+          <h3>Behavioral control, not deterministic enforcement</h3>
+          <p>The host model still interprets the contract, so prompt AIR can materially shape behavior without guaranteeing perfect application. A host adapter, gateway or backend can strengthen the same contract by independently running tests, validating permissions, intercepting tool calls, capturing receipts and rejecting forbidden actions.</p>
+        </div>
+        <div class="card">
+          <div class="k">The important distinction</div>
+          <h3>AIR shapes generation before it happens</h3>
+          <p>The model does not first produce a separate raw answer for AIR to post-process. AIR is part of the context used during inference, so the delivered response is generated under the AIR contract from the start.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section" style="padding-top:1rem">
     <div class="container">
       <div class="step">
@@ -313,7 +383,7 @@ img,svg{max-width:100%}
         <div class="step-text">
           <div class="num">06</div>
           <h3>Continue across sessions</h3>
-          <p>Each session ends with a strict-JSON handoff card. The next session boots from it — so a project survives context limits and resumes exactly where it left off. Because that card is a complete, portable snapshot of your project, treat it like sensitive data — <a href="https://github.com/eddlev/vm4ai-air-kit/discussions/2" target="_blank" rel="noopener">see the threat model</a>.</p>
+          <p>Each session can produce a strict-JSON Handoff Card that carries the recorded project state into another session or compatible model. The receiving AIR runtime validates the card, restores the active task and working contract, and continues without requiring the whole conversation to be retaught. The host model still interprets that contract, so portability preserves project state — not byte-for-byte identical inference. Because the card is a portable snapshot of your project, treat it like sensitive data — <a href="https://github.com/eddlev/vm4ai-air-kit/discussions/2" target="_blank" rel="noopener">see the threat model</a>.</p>
         </div>
         <div class="diagram"><svg viewBox="0 0 720 300" role="img"><rect class="d-surface" x="40" y="30" width="210" height="58" rx="10" stroke-width="1.5"/><text class="d-txt" x="145.0" y="50.0" text-anchor="middle" dominant-baseline="central" font-size="14">New project</text><text class="d-txt sm" x="145.0" y="69.0" text-anchor="middle" dominant-baseline="central" font-size="10.5">boot bundle · 3 files</text><rect class="d-surface" x="40" y="132" width="210" height="58" rx="10" stroke-width="1.5"/><text class="d-txt" x="145.0" y="152.0" text-anchor="middle" dominant-baseline="central" font-size="14">Continue project</text><text class="d-txt sm" x="145.0" y="171.0" text-anchor="middle" dominant-baseline="central" font-size="10.5">card + core runtime</text><rect x="300" y="82" width="180" height="64" rx="10" fill="color-mix(in srgb,var(--ember) 16%,var(--surface-2))" stroke="var(--ember)" stroke-width="2"/><text class="d-txt" x="390.0" y="105.0" text-anchor="middle" dominant-baseline="central" font-size="14">AIR session</text><text class="d-txt sm" x="390.0" y="124.0" text-anchor="middle" dominant-baseline="central" font-size="11">active project</text><rect class="d-frame" x="525" y="84" width="160" height="60" rx="10" stroke-width="2"/><text class="d-txt" x="605.0" y="105.0" text-anchor="middle" dominant-baseline="central" font-size="13">Handoff card</text><text class="d-txt sm" x="605.0" y="124.0" text-anchor="middle" dominant-baseline="central" font-size="10.5">strict JSON</text><polyline points="250,59 298,102" fill="none" stroke="var(--muted)" stroke-width="2"/><path d="M288.0 99.7 L298.0 102.0 L294.6 92.3 Z" fill="var(--muted)"/><polyline points="250,161 298,126" fill="none" stroke="var(--muted)" stroke-width="2"/><path d="M293.7 135.3 L298.0 126.0 L287.8 127.3 Z" fill="var(--muted)"/><polyline points="480,114 523,114" fill="none" stroke="var(--muted)" stroke-width="2"/><path d="M514.0 119.0 L523.0 114.0 L514.0 109.0 Z" fill="var(--muted)"/><polyline points="605,144 605,258 145,258 145,190" fill="none" stroke="var(--muted)" stroke-width="2"/><path d="M150.0 199.0 L145.0 190.0 L140.0 199.0 Z" fill="var(--muted)"/><text class="d-txt sm" x="375" y="248" text-anchor="middle" dominant-baseline="central" font-size="11">next session</text></svg></div>
       </div>
@@ -353,7 +423,7 @@ img,svg{max-width:100%}
       <div class="section-head">
         <span class="eyebrow">Evidence</span>
         <h2>What a real boot emits</h2>
-        <p class="sub" style="max-width:45rem">None of this is narrated into being — it is emitted as formal objects you can inspect. The first thing a real session prints:</p>
+        <p class="sub" style="max-width:45rem">AIR objects are inspectable governance records. They record what AIR selected, required, allowed, blocked, assumed and delivered for the current work. Contract fields describe AIR's declared state; claims about the external world require the corresponding source, tool, operator or backend evidence. The first thing a real session prints:</p>
       </div>
       <div class="codeblock">
         <div class="cb-label">A real boot emits this</div>
@@ -371,7 +441,7 @@ img,svg{max-width:100%}
   }
 }</pre>
       </div>
-      <p style="max-width:45rem">A model performing AIR writes <em>about</em> these objects; a model running AIR <em>emits</em> them. <a href="showcase.html">See a full session &rarr;</a> — a real project from boot to handoff, every object — or learn <a href="real-boot-vs-roleplay.html">how to tell a real boot from a roleplay</a>.</p>
+      <p style="max-width:45rem">These objects make AIR's declared runtime state visible; they do not reveal hidden chain-of-thought or independently prove that an external action occurred. Source-dependent and execution-dependent claims require their own evidence. <a href="showcase.html">See a full session &rarr;</a> — a real project from boot to handoff, every object — or learn <a href="real-boot-vs-roleplay.html">how to tell a real boot from a roleplay</a>.</p>
     </div>
   </section>
 
