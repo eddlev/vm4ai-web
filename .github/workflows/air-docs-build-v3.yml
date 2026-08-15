@@ -1,0 +1,65 @@
+name: Build AIR documentation v3
+
+on:
+  push:
+    branches:
+      - agent/air-documentation-v0.4
+    paths:
+      - '.github/workflows/air-docs-build-v3.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply documentation build
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('.github/tmp/air_docs_build.py')
+          s=p.read_text()
+          s=s.replace("'AIR defaults to <code>ALL_OBJECTS</code>'", "'defaults to <code>ALL_OBJECTS</code>'")
+          s=s.replace("'every fifth counted user message'", "'Every fifth counted user message'")
+          s=s.replace("target = href.split('#', 1)[0].split('?', 1)[0]", "target = href.split('#', 1)[0].split('?', 1)[0].lstrip('/')")
+          p.write_text(s)
+          PY
+          python .github/tmp/air_docs_build.py
+      - name: Validate documentation
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f public/air-docs.html
+          grep -Fq 'Core 2.4.2' public/air-docs.html
+          grep -Fq 'AIR_ALIGNMENT_CHECK' public/air-docs.html
+          grep -Fq 'Every fifth counted user message' public/air-docs.html
+          grep -Fq 'https://vm4ai.com/air-docs.html' public/sitemap.xml
+          ! grep -Fq '<code>air help</code>' public/glossary.html
+          ! grep -Fq 'This is the default. Required records cannot be turned off.' public/glossary.html
+      - name: Remove temporary tooling and guard scope
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/tmp/air_docs_build.py
+          rm -f .github/workflows/air-docs-build.yml .github/workflows/air-docs-build-v2.yml .github/workflows/air-docs-build-v3.yml
+          rmdir .github/tmp 2>/dev/null || true
+          git add -A
+          bad=$(git diff --cached --name-only 85306492873b4d5300479c72a23cfe977fdf274b -- ':!public/**' || true)
+          if [ -n "$bad" ]; then echo "$bad"; exit 1; fi
+          git diff --cached --name-only | grep -Fq 'public/air-docs.html'
+          git diff --cached --name-only | grep -Fq 'public/glossary.html'
+          git diff --cached --name-only | grep -Fq 'public/sitemap.xml'
+      - name: Commit focused site changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'AIR website automation'
+          git config user.email 'actions@users.noreply.github.com'
+          git commit -m 'Add AIR 2.4 documentation reference'
+          git push origin HEAD:agent/air-documentation-v0.4
