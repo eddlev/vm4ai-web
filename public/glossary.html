@@ -285,6 +285,7 @@ img,svg{max-width:100%}
     </a>
     <nav class="nav" id="nav" aria-label="Primary">
       <a href="how-it-works.html">How it works</a>
+      <a href="air-docs.html">Docs</a>
       <a href="get-started.html">Get started</a>
       <a href="use-cases.html">Use cases</a>
       <a href="about.html">About</a>
@@ -303,7 +304,7 @@ img,svg{max-width:100%}
     <div class="container">
       <span class="eyebrow">Reference</span>
       <h1 style="font-size:clamp(2.2rem,1.6rem+2.4vw,3.4rem);margin:1rem 0 1.1rem">Glossary &amp; commands</h1>
-      <p class="sub" style="max-width:44rem">Plain-language definitions for the words AIR uses, and the CLI-style commands you can type to steer a session. Inside a live session, <code>air help</code> is always the source of truth — this is the at-a-glance version.</p>
+      <p class="sub" style="max-width:44rem">Plain-language definitions for the words AIR uses, plus the four canonical system modifiers. For status, blockers, scope, evidence, readiness, validation, and Handoff, you can simply ask AIR in ordinary language.</p>
     </div>
   </section>
 
@@ -352,7 +353,7 @@ img,svg{max-width:100%}
           <div class="row"><dt><code>PROMPT_COMPILED</code></dt><dd>AIR's runtime origin when it's running purely from the uploaded prompt files, with no backend. The rules are real, but enforced by the model following them — not by external software.</dd></div>
           <div class="row"><dt><code>backend_validation_claimed: false</code></dt><dd>A standing honesty flag. When AIR is prompt-compiled it must never claim its output was validated by a backend system. It states what it is — and what it isn't.</dd></div>
           <div class="row"><dt>AIR load integrity</dt><dd>A fresh boot is valid only when the required foundation files pass load checks and required surfaced records appear at their trigger points. Those records expose declared AIR state; they are not hidden-model telemetry or independent proof of external execution. <a href="real-boot-vs-roleplay.html">How to check →</a></dd></div>
-          <div class="row"><dt>The AIR object plane</dt><dd>The set of formal JSON objects AIR emits to show its state and decisions — for example <code>AIR_SESSION</code> (where things stand), <code>AIR_GATE</code> (a checkpoint), <code>AIR_ARTIFACT</code> (a unit of work), <code>AIR_PROJECT_EXECUTION_MAP</code> (the plan), and <code>AIR_HANDOFF_CARD</code> (continuation state). Visible structure, not just talk.</dd></div>
+          <div class="row"><dt>The AIR object plane</dt><dd>The formal records AIR emits to show state and decisions — including <code>AIR_SESSION</code>, <code>AIR_GATE</code>, <code>AIR_ARTIFACT</code>, <code>AIR_PROJECT_EXECUTION_MAP</code>, the periodic anti-drift <code>AIR_ALIGNMENT_CHECK</code>, validation/action records, and <code>AIR_HANDOFF_CARD</code>. Visible governance state, not hidden-model telemetry.</dd></div>
         </dl>
       </div>
 
@@ -379,8 +380,8 @@ img,svg{max-width:100%}
       <h2 class="grp-head">System modifiers</h2>
       <p class="grp-intro">AIR v2 keeps the CLI-like surface intentionally small. There are four canonical modifiers. Everything else — status, blockers, scope, benchmark, evidence, risks, sources, readiness, approval, patching, validation, task switching, queue review, and handoff — can be requested in ordinary language.</p>
       <div class="defgroup"><h3>Object visibility</h3><dl class="deflist cmds">
-        <div class="row"><dt><code>air -o on</code></dt><dd>Show every AIR object that is actually generated. It does not invent extra objects.</dd></div>
-        <div class="row"><dt><code>air -o -min</code></dt><dd>Show only objects required by Core law or a material trigger. This is the default. Required records cannot be turned off.</dd></div>
+        <div class="row"><dt><code>air -o on</code></dt><dd>Use full object visibility: every AIR object that is actually generated is shown. AIR v2 already defaults to <code>ALL_OBJECTS</code>; this modifier can explicitly restore full visibility after compact mode.</dd></div>
+        <div class="row"><dt><code>air -o -min</code></dt><dd>Explicitly select compact visibility. Optional repetition may be suppressed, but required records — including periodic <code>AIR_ALIGNMENT_CHECK</code> and its <code>AIR_VALIDATION_REPORT</code> — cannot be turned off.</dd></div>
       </dl></div>
       <div class="defgroup"><h3>Test-evidence delivery</h3><dl class="deflist cmds">
         <div class="row"><dt><code>air -t on</code></dt><dd>For subsequent test/evaluation runs, request the fuller reviewable evidence package when available.</dd></div>
@@ -415,6 +416,7 @@ img,svg{max-width:100%}
       <div class="foot-col">
         <h4>Product</h4>
         <a href="how-it-works.html">How it works</a>
+        <a href="air-docs.html">Documentation</a>
         <a href="get-started.html">Get started</a>
         <a href="use-cases.html">Use cases</a>
         <a href="blog.html">Blog</a>
