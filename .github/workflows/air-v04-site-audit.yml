@@ -1,0 +1,38 @@
+name: AIR v0.4 site consistency audit
+on:
+  push:
+    branches: [agent/air-v0.4-site-alignment]
+    paths: [.github/workflows/air-v04-site-audit.yml]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Find stale AIR public claims
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          terms=[
+            '130k','200k','boot bundle · 3 files','boot bundle · 7 files','AIR boot active.',
+            'resumes exactly where it left off','resume exactly where it left off','nothing lost',
+            'inspect how AIR is thinking','what AIR is thinking','prints reasoning','real boot',
+            'air status','air object off','air object on','air immersive','air lanes','air handoff',
+            'Voice, identity, or relationships','Emotional safety and familiar continuity',
+            'the contract','proof','prove','Article 50','article 50'
+          ]
+          for p in sorted(Path('public').glob('*.html')):
+              lines=p.read_text(encoding='utf-8').splitlines()
+              hits=[]
+              for i,line in enumerate(lines,1):
+                  low=line.lower()
+                  if any(t.lower() in low for t in terms): hits.append((i,line.strip()))
+              if hits:
+                  print(f'\n### {p}')
+                  for i,line in hits:
+                      print(f'{i}: {line[:700]}')
+          for name in ['public/showcase-handoff-card.json','public/showcase-session.md']:
+              print(f'\nEXISTS {name}: {Path(name).exists()}')
+          PY
