@@ -1,0 +1,75 @@
+name: Build AIR documentation
+
+on:
+  push:
+    branches:
+      - agent/air-documentation-v0.4
+    paths:
+      - '.github/tmp/air_docs_build.py'
+      - '.github/workflows/air-docs-build.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply bounded AIR documentation build
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Correct one temporary validator phrase before execution; the page states
+          # "AIR v2 already defaults to ALL_OBJECTS", which is the intended contract.
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('.github/tmp/air_docs_build.py')
+          s = p.read_text()
+          s = s.replace("'AIR defaults to <code>ALL_OBJECTS</code>'", "'defaults to <code>ALL_OBJECTS</code>'")
+          p.write_text(s)
+          PY
+          python .github/tmp/air_docs_build.py
+
+      - name: Validate bounded static-site scope
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f public/air-docs.html
+          grep -Fq 'Core 2.4.2' public/air-docs.html
+          grep -Fq 'AIR_ALIGNMENT_CHECK' public/air-docs.html
+          grep -Fq 'every fifth counted user message' public/air-docs.html
+          grep -Fq 'https://vm4ai.com/air-docs.html' public/sitemap.xml
+          ! grep -Fq '<code>air help</code>' public/glossary.html
+          ! grep -Fq 'This is the default. Required records cannot be turned off.' public/glossary.html
+
+      - name: Remove temporary tooling and guard final diff
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/tmp/air_docs_build.py .github/workflows/air-docs-build.yml
+          rmdir .github/tmp 2>/dev/null || true
+          git diff --name-status 85306492873b4d5300479c72a23cfe977fdf274b...HEAD > /tmp/committed-before.txt || true
+          # Include working-tree changes, then ensure the eventual net surface is public/ only.
+          git add -A
+          bad=$(git diff --cached --name-only 85306492873b4d5300479c72a23cfe977fdf274b -- ':!public/**' || true)
+          if [ -n "$bad" ]; then
+            echo 'Unexpected non-public net paths:'
+            echo "$bad"
+            exit 1
+          fi
+          git diff --cached --name-only | grep -Fq 'public/air-docs.html'
+          git diff --cached --name-only | grep -Fq 'public/glossary.html'
+          git diff --cached --name-only | grep -Fq 'public/sitemap.xml'
+
+      - name: Commit focused documentation surface
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'AIR website automation'
+          git config user.email 'actions@users.noreply.github.com'
+          git commit -m 'Add AIR 2.4 documentation reference'
+          git push origin HEAD:agent/air-documentation-v0.4
