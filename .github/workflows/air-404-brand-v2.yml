@@ -1,0 +1,52 @@
+name: AIR 404 Brand v2 redesign
+
+on:
+  push:
+    branches:
+      - air-404-brand-v2
+    paths:
+      - .github/workflows/air-404-brand-v2.yml
+
+permissions:
+  contents: write
+
+jobs:
+  redesign-404:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          ref: air-404-brand-v2
+          fetch-depth: 0
+
+      - name: Apply and verify 404 redesign
+        run: python .github/air_404_brand_v2.py
+
+      - name: Verify bounded diff
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          changed="$(git diff --name-only)"
+          if [ "$changed" != "public/404.html" ]; then
+            echo "Unexpected changed paths:"
+            printf '%s\n' "$changed"
+            exit 1
+          fi
+
+      - name: Remove one-shot execution files
+        run: |
+          rm .github/air_404_brand_v2.py
+          rm .github/workflows/air-404-brand-v2.yml
+
+      - name: Commit redesigned 404
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "EddLev | VM4AI"
+          git config user.email "contact@vm4ai.com"
+          git add -A
+          git diff --cached --check
+          git commit -m "Design AIR Brand v2 404 page"
+          git push origin HEAD:air-404-brand-v2
