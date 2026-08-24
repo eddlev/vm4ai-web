@@ -12,7 +12,9 @@
     if(stored==='light'||stored==='dark')root.setAttribute('data-theme',stored);
   }catch(e){}
 
+  var heroGrid=document.querySelector('.hero-grid');
   var heroArt=document.querySelector('.hero-art');
+  if(heroGrid)heroGrid.style.alignItems='start';
   if(heroArt){
     heroArt.classList.add('canonical-triad');
     heroArt.style.padding='18px';
@@ -20,6 +22,12 @@
     heroArt.style.overflow='hidden';
     heroArt.innerHTML='<img data-air-triad alt="Focused. Fluid. AIR." width="566" height="260" style="display:block;width:100%;height:auto">';
   }
+
+  function alignHero(){
+    if(heroArt)heroArt.style.marginTop=window.innerWidth<=900?'0':'3rem';
+  }
+  alignHero();
+  window.addEventListener('resize',alignHero,{passive:true});
 
   function syncTriad(){
     var img=document.querySelector('[data-air-triad]');
