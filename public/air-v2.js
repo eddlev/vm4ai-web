@@ -19,6 +19,11 @@
   var stateGrid=statesSection&&statesSection.querySelector('.state-grid');
   var stateRule=statesSection&&statesSection.querySelector('.state-rule');
 
+  /* Restore standard section rhythm where old inline spacing overrides remain. */
+  var payloadGrid=document.querySelector('.payload');
+  var payloadSection=payloadGrid&&payloadGrid.closest('section.section');
+  if(payloadSection)payloadSection.style.removeProperty('padding-top');
+
   if(heroGrid){
     var heroCopy=heroGrid.firstElementChild;
     if(heroCopy){
