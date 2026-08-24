@@ -12,22 +12,68 @@
     if(stored==='light'||stored==='dark')root.setAttribute('data-theme',stored);
   }catch(e){}
 
+  /* Homepage hero: one centered brand stack, then the fixed-ratio three-state visual, then CTA. */
   var heroGrid=document.querySelector('.hero-grid');
   var heroArt=document.querySelector('.hero-art');
-  if(heroGrid)heroGrid.style.alignItems='start';
-  if(heroArt){
-    heroArt.classList.add('canonical-triad');
-    heroArt.style.padding='18px';
-    heroArt.style.display='block';
-    heroArt.style.overflow='hidden';
-    heroArt.innerHTML='<img data-air-triad alt="Focused. Fluid. AIR." width="566" height="260" style="display:block;width:100%;height:auto">';
+  if(heroGrid){
+    var heroCopy=heroGrid.firstElementChild;
+    if(heroCopy){
+      heroGrid.classList.add('hero-stack-layout');
+      heroCopy.classList.add('hero-lockup');
+
+      var eyebrow=heroCopy.querySelector('.eyebrow');
+      if(eyebrow)eyebrow.remove();
+
+      var heroTitle=heroCopy.querySelector('h1');
+      var signature=heroCopy.querySelector('.signature');
+      var cta=heroCopy.querySelector('.hero-cta');
+      var note=heroCopy.querySelector('.hero-note');
+
+      var brandLockup=document.createElement('div');
+      brandLockup.className='hero-brand-lockup';
+      brandLockup.innerHTML='<svg class="mark hero-brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="9.5" y="9.5" width="45" height="45" rx="13" stroke-width="5"/><circle cx="32" cy="32" r="8.5"/></svg><div class="hero-air-word">AIR</div>';
+      heroCopy.insertBefore(brandLockup,heroCopy.firstChild);
+
+      if(signature&&heroTitle){
+        brandLockup.after(signature);
+        signature.after(heroTitle);
+        heroTitle.classList.add('hero-promise-title');
+      }
+
+      if((cta||note)&&heroArt){
+        var actions=document.createElement('div');
+        actions.className='hero-actions-after-visual';
+        if(cta)actions.appendChild(cta);
+        if(note)actions.appendChild(note);
+        heroArt.after(actions);
+      }
+    }
   }
 
-  function alignHero(){
-    if(heroArt)heroArt.style.marginTop=window.innerWidth<=900?'0':'3rem';
+  var heroStyle=document.createElement('style');
+  heroStyle.textContent='\
+.hero .hero-grid.hero-stack-layout{display:flex!important;flex-direction:column;align-items:center!important;gap:0;text-align:center}\
+.hero .hero-lockup{width:min(100%,820px);display:flex;flex-direction:column;align-items:center}\
+.hero .hero-brand-lockup{display:flex;flex-direction:column;align-items:center;margin:0 0 1.15rem}\
+.hero .hero-brand-mark{width:86px;height:86px;margin:0 0 .85rem}\
+.hero .hero-air-word{font-size:clamp(4rem,8vw,6.5rem);font-weight:700;line-height:.9;letter-spacing:-.055em;color:var(--text)}\
+.hero .hero-lockup .signature{font-size:clamp(1.65rem,3vw,2.35rem);font-weight:500;color:var(--brass);margin:.4rem 0 .7rem}\
+.hero .hero-lockup .hero-promise-title{font-size:clamp(1.35rem,2.2vw,1.85rem);font-weight:400;line-height:1.25;letter-spacing:-.02em;margin:0 0 .9rem;color:var(--text)}\
+.hero .hero-lockup .sub{max-width:760px;margin:0;color:var(--muted);font-size:clamp(1rem,1.45vw,1.17rem)}\
+.hero .hero-art.canonical-triad{width:min(100%,980px)!important;margin:2.25rem auto 0!important;padding:20px!important}\
+.hero .hero-art.canonical-triad img{display:block;width:100%!important;height:auto!important}\
+.hero .hero-actions-after-visual{display:flex;flex-direction:column;align-items:center;margin-top:1.35rem}\
+.hero .hero-actions-after-visual .hero-cta{justify-content:center}\
+.hero .hero-actions-after-visual .hero-note{text-align:center;margin:.9rem 0 0}\
+@media(max-width:700px){.hero .hero-brand-mark{width:72px;height:72px}.hero .hero-art.canonical-triad{padding:12px!important;margin-top:1.6rem!important}.hero .hero-actions-after-visual{margin-top:1rem}}';
+  document.head.appendChild(heroStyle);
+
+  if(heroArt){
+    heroArt.classList.add('canonical-triad');
+    heroArt.style.display='block';
+    heroArt.style.overflow='hidden';
+    heroArt.innerHTML='<img data-air-triad alt="Focused. Fluid. AIR." width="566" height="260">';
   }
-  alignHero();
-  window.addEventListener('resize',alignHero,{passive:true});
 
   function syncTriad(){
     var img=document.querySelector('[data-air-triad]');
@@ -108,7 +154,6 @@
         window.addEventListener('blur',centre);
       }
 
-      /* Click blink: direct radius change avoids SVG transform inconsistencies. */
       var blinkTimer=0;
       document.addEventListener('click',function(){
         clearTimeout(blinkTimer);
