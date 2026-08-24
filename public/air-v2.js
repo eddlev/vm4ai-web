@@ -109,11 +109,11 @@
 .hero .hero-state-grid-v4 .state-card .sub{font-size:.95rem;margin:.3rem 0 1.15rem}\
 .hero .hero-state-grid-v4 .state-visual{min-height:205px;padding:16px;overflow:hidden}\
 .hero .hero-state-grid-v4 .state-caption{font-size:.95rem;margin-top:14px}\
-.hero .hero-state-grid-v4 .state-card:nth-child(3) .air-large{width:100%;gap:7px;justify-content:center;padding:0 2px}\
-.hero .hero-state-grid-v4 .state-card:nth-child(3) .air-project{width:56px;height:56px;flex:0 0 56px;border-radius:12px}\
-.hero .hero-state-grid-v4 .state-card:nth-child(3) .air-project .state-mark{width:30px;height:30px;border-width:3px;border-radius:9px}\
-.hero .hero-state-grid-v4 .state-card:nth-child(3) .air-project .state-mark:after{width:8px;height:8px}\
-.hero .hero-state-grid-v4 .state-card:nth-child(3) .arrow{font-size:.82rem;line-height:1;flex:0 0 auto}\
+.hero .hero-state-grid-v4 .state-card:nth-child(3) .air-large{width:100%;gap:6px;justify-content:center;padding:0 8px}\
+.hero .hero-state-grid-v4 .state-card:nth-child(3) .air-project{width:48px;height:48px;flex:0 0 48px;border-radius:11px}\
+.hero .hero-state-grid-v4 .state-card:nth-child(3) .air-project .state-mark{width:26px;height:26px;border-width:3px;border-radius:8px}\
+.hero .hero-state-grid-v4 .state-card:nth-child(3) .air-project .state-mark:after{width:7px;height:7px}\
+.hero .hero-state-grid-v4 .state-card:nth-child(3) .arrow{font-size:.78rem;line-height:1;flex:0 0 auto}\
 .hero .hero-state-rule-v4{width:min(100%,1080px);margin:16px auto 0;padding:14px 18px;font-size:1rem}\
 .hero .hero-actions-v4{display:flex;flex-direction:column;align-items:center;margin-top:1.25rem}\
 .hero .hero-actions-v4 .hero-cta{justify-content:center}\
