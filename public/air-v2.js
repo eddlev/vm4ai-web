@@ -39,6 +39,10 @@
       var cta=heroCopy.querySelector('.hero-cta');
       var note=heroCopy.querySelector('.hero-note');
 
+      if(title)title.textContent='AI work, carried forward.';
+      if(sub)sub.textContent='Carry projects across sessions and platforms without rebuilding the work every time.';
+      if(signature)signature.textContent='FOCUSED · FLUID · AIR';
+
       if(!heroCopy.querySelector('.hero-brand-v4')){
         var brand=document.createElement('div');
         brand.className='hero-brand-v4';
@@ -46,17 +50,17 @@
         heroCopy.insertBefore(brand,heroCopy.firstChild);
       }
 
-      /* Reading order: identity -> signature -> promise -> support. */
+      /* Reading order: identity -> promise -> support -> signature. */
       var brandNode=heroCopy.querySelector('.hero-brand-v4');
-      if(signature&&brandNode)brandNode.after(signature);
-      if(title&&signature)signature.after(title);
-      if(title)title.classList.add('hero-promise-v4');
-      if(sub&&title){
+      if(title&&brandNode)brandNode.after(title);
+      if(sub&&title)title.after(sub);
+      if(signature&&sub){
         var divider=document.createElement('span');
         divider.className='hero-divider-v5';
-        title.after(divider);
-        divider.after(sub);
+        sub.after(divider);
+        divider.after(signature);
       }
+      if(title)title.classList.add('hero-promise-v4');
 
       if(cta)cta.remove();
       if(note)note.remove();
@@ -87,16 +91,16 @@
   heroStyle.textContent='\
 .hero{padding:clamp(3rem,5vw,4.5rem) 0 clamp(3.25rem,5vw,4.75rem)!important}\
 .hero .hero-grid.hero-stack-v4{display:flex!important;flex-direction:column;align-items:center!important;gap:0;text-align:center}\
-.hero .hero-lockup-v4{width:min(100%,780px);display:flex;flex-direction:column;align-items:center}\
-.hero .hero-brand-v4{display:flex;flex-direction:column;align-items:center;margin:0 0 .65rem}\
+.hero .hero-lockup-v4{width:min(100%,820px);display:flex;flex-direction:column;align-items:center}\
+.hero .hero-brand-v4{display:flex;flex-direction:column;align-items:center;margin:0 0 1.05rem}\
 .hero .hero-brand-mark-v4{width:68px;height:68px;margin:0 0 .48rem}\
 .hero .hero-air-v4{font-size:clamp(3.8rem,6.2vw,5.25rem);font-weight:700;line-height:.88;letter-spacing:-.055em;color:var(--text)}\
 .hero .hero-resource-v5{margin-top:.48rem;font:400 .67rem \'JetBrains Mono\',ui-monospace,monospace;letter-spacing:.18em;color:var(--subtle)}\
-.hero .hero-lockup-v4 .signature{font-size:clamp(1.55rem,2.5vw,2rem);font-weight:500;color:var(--brass);margin:.6rem 0 .42rem}\
-.hero .hero-lockup-v4 .hero-promise-v4{font-size:clamp(1.2rem,1.85vw,1.5rem);font-weight:400;line-height:1.25;letter-spacing:-.02em;margin:0;color:var(--text)}\
+.hero .hero-lockup-v4 .hero-promise-v4{max-width:780px;font-size:clamp(2.65rem,5.2vw,4.65rem);font-weight:700;line-height:.98;letter-spacing:-.045em;margin:.1rem 0 .9rem;color:var(--text)}\
+.hero .hero-lockup-v4 .sub{max-width:690px;margin:0;color:var(--muted);font-size:clamp(1rem,1.3vw,1.14rem);line-height:1.55}\
 .hero .hero-divider-v5{display:block;width:78px;height:1px;background:var(--border2);margin:1rem auto .9rem}\
-.hero .hero-lockup-v4 .sub{max-width:650px;margin:0;color:var(--muted);font-size:clamp(.95rem,1.15vw,1.04rem);line-height:1.55}\
-.hero .hero-state-grid-v4{width:min(100%,1080px);margin:2rem auto 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;text-align:left}\
+.hero .hero-lockup-v4 .signature{font-size:clamp(1.05rem,1.55vw,1.25rem);font-weight:600;letter-spacing:.055em;color:var(--brass);margin:0}\
+.hero .hero-state-grid-v4{width:min(100%,1080px);margin:1.65rem auto 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;text-align:left}\
 .hero .hero-state-grid-v4 .state-card{min-height:365px;padding:24px;border-radius:18px}\
 .hero .hero-state-grid-v4 .state-card h3{font-size:1.5rem}\
 .hero .hero-state-grid-v4 .state-card .sub{font-size:.95rem;margin:.3rem 0 1.15rem}\
@@ -115,7 +119,7 @@
 .air-eye.blink .air-pupil{animation:air-blink .26s ease-in-out}\
 @keyframes air-blink{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.08)}}\
 @media(max-width:900px){.hero .hero-state-grid-v4{grid-template-columns:1fr;max-width:680px}.hero .hero-state-grid-v4 .state-card{min-height:auto}.hero .hero-state-grid-v4 .state-visual{min-height:220px}}\
-@media(max-width:600px){.hero{padding-top:2.25rem!important}.hero .hero-brand-mark-v4{width:60px;height:60px}.hero .hero-state-grid-v4{margin-top:1.5rem;gap:12px}.hero .hero-state-grid-v4 .state-card{padding:18px}.hero .hero-state-rule-v4{font-size:.9rem}}';
+@media(max-width:600px){.hero{padding-top:2.25rem!important}.hero .hero-brand-mark-v4{width:60px;height:60px}.hero .hero-lockup-v4 .hero-promise-v4{font-size:clamp(2.25rem,10vw,3.15rem)}.hero .hero-lockup-v4 .signature{font-size:.98rem;letter-spacing:.04em}.hero .hero-state-grid-v4{margin-top:1.35rem;gap:12px}.hero .hero-state-grid-v4 .state-card{padding:18px}.hero .hero-state-rule-v4{font-size:.9rem}}';
   document.head.appendChild(heroStyle);
 
   document.addEventListener('click',function(e){
