@@ -1,0 +1,44 @@
+name: One-shot remove 404 recovery dot
+
+on:
+  push:
+    branches:
+      - air-404-remove-recovery-dot
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: air-404-remove-recovery-dot
+
+      - name: Remove decorative recovery dot
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('public/404.html')
+          text = path.read_text(encoding='utf-8')
+          old = '.nf-signal::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ember)}\n'
+          count = text.count(old)
+          if count != 1:
+              raise SystemExit(f'Expected exactly one recovery-dot rule, found {count}')
+          text = text.replace(old, '')
+          if '.nf-signal::before' in text:
+              raise SystemExit('Recovery-dot pseudo-element still present')
+          path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Remove one-shot workflow and commit
+        shell: bash
+        run: |
+          rm .github/workflows/air-404-dot-once.yml
+          git config user.name "EddLev | VM4AI"
+          git config user.email "contact@vm4ai.com"
+          git add public/404.html .github/workflows/air-404-dot-once.yml
+          git commit -m "Remove 404 recovery status dot"
+          git push origin HEAD:air-404-remove-recovery-dot
