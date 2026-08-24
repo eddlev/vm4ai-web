@@ -1,0 +1,41 @@
+name: AIR site UX follow-up
+
+on:
+  push:
+    branches:
+      - site-ux-followup
+    paths:
+      - .github/workflows/site-ux-followup.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: site-ux-followup
+          fetch-depth: 0
+      - name: Preserve landing baseline
+        run: git show 9e7a20bd57442ec8155a6ef13f1fdbe825076a4c:public/index.html > /tmp/index-baseline
+      - name: Apply bounded UX follow-up
+        run: python3 .github/site_ux_followup.py
+      - name: Verify scope and landing page
+        run: |
+          cmp public/index.html /tmp/index-baseline
+          test "$(git diff --name-only | sort)" = "$(printf '%s\n' public/about.html public/air-docs.html public/how-it-works.html public/use-cases.html | sort)"
+          test "$(grep -o 'class=\"diagram\"' public/how-it-works.html | wc -l)" -ge 7
+          grep -q 'id="neurodivergent-delivery"' public/how-it-works.html
+          grep -q 'id="neurodivergent"' public/air-docs.html
+          grep -q 'id="onboarding-patterns"' public/use-cases.html
+          grep -q 'id="air-today"' public/about.html
+          git diff --check
+      - name: Commit candidate pages
+        run: |
+          git config user.name "AIR site UX follow-up"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/about.html public/air-docs.html public/how-it-works.html public/use-cases.html
+          git commit -m "Add AIR interaction guidance and restore diagram resilience"
+          git push origin HEAD:site-ux-followup
