@@ -12,7 +12,7 @@
     if(stored==='light'||stored==='dark')root.setAttribute('data-theme',stored);
   }catch(e){}
 
-  /* Homepage hero: compact centered lockup + the real three-state cards directly underneath. */
+  /* Homepage hero: compact brand lockup + the real three-state cards directly underneath. */
   var heroGrid=document.querySelector('.hero-grid');
   var heroArt=document.querySelector('.hero-art');
   var statesSection=document.querySelector('section.states');
@@ -30,25 +30,31 @@
 
       var title=heroCopy.querySelector('h1');
       var signature=heroCopy.querySelector('.signature');
+      var sub=heroCopy.querySelector('.sub');
       var cta=heroCopy.querySelector('.hero-cta');
       var note=heroCopy.querySelector('.hero-note');
 
       if(!heroCopy.querySelector('.hero-brand-v4')){
         var brand=document.createElement('div');
         brand.className='hero-brand-v4';
-        brand.innerHTML='<svg class="mark hero-brand-mark-v4" viewBox="0 0 64 64" aria-hidden="true"><rect x="9.5" y="9.5" width="45" height="45" rx="13" stroke-width="5"/><circle cx="32" cy="32" r="8.5"/></svg><div class="hero-air-v4">AIR</div>';
+        brand.innerHTML='<svg class="mark hero-brand-mark-v4" viewBox="0 0 64 64" aria-hidden="true"><rect x="9.5" y="9.5" width="45" height="45" rx="13" stroke-width="5"/><circle cx="32" cy="32" r="8.5"/></svg><div class="hero-air-v4">AIR</div><div class="hero-resource-v5">AI RESOURCE</div>';
         heroCopy.insertBefore(brand,heroCopy.firstChild);
       }
 
-      /* Desired reading order: AIR -> Focused. Fluid. AIR. -> promise -> support. */
+      /* Reading order: identity -> signature -> promise -> support. */
       var brandNode=heroCopy.querySelector('.hero-brand-v4');
       if(signature&&brandNode)brandNode.after(signature);
       if(title&&signature)signature.after(title);
       if(title)title.classList.add('hero-promise-v4');
+      if(sub&&title){
+        var divider=document.createElement('span');
+        divider.className='hero-divider-v5';
+        title.after(divider);
+        divider.after(sub);
+      }
 
       if(cta)cta.remove();
       if(note)note.remove();
-
       if(heroArt)heroArt.remove();
 
       if(stateGrid){
@@ -77,24 +83,34 @@
 .hero{padding:clamp(3rem,5vw,4.5rem) 0 clamp(3.25rem,5vw,4.75rem)!important}\
 .hero .hero-grid.hero-stack-v4{display:flex!important;flex-direction:column;align-items:center!important;gap:0;text-align:center}\
 .hero .hero-lockup-v4{width:min(100%,780px);display:flex;flex-direction:column;align-items:center}\
-.hero .hero-brand-v4{display:flex;flex-direction:column;align-items:center;margin:0 0 .75rem}\
-.hero .hero-brand-mark-v4{width:72px;height:72px;margin:0 0 .55rem}\
-.hero .hero-air-v4{font-size:clamp(3.7rem,6.5vw,5.5rem);font-weight:700;line-height:.9;letter-spacing:-.055em;color:var(--text)}\
-.hero .hero-lockup-v4 .signature{font-size:clamp(1.55rem,2.5vw,2rem);font-weight:500;color:var(--brass);margin:.55rem 0 .45rem}\
-.hero .hero-lockup-v4 .hero-promise-v4{font-size:clamp(1.25rem,1.9vw,1.55rem);font-weight:400;line-height:1.25;letter-spacing:-.02em;margin:0 0 .75rem;color:var(--text)}\
-.hero .hero-lockup-v4 .sub{max-width:720px;margin:0;color:var(--muted);font-size:clamp(.98rem,1.25vw,1.08rem)}\
-.hero .hero-state-grid-v4{width:min(100%,1080px);margin:2.1rem auto 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;text-align:left}\
+.hero .hero-brand-v4{display:flex;flex-direction:column;align-items:center;margin:0 0 .65rem}\
+.hero .hero-brand-mark-v4{width:68px;height:68px;margin:0 0 .48rem}\
+.hero .hero-air-v4{font-size:clamp(3.8rem,6.2vw,5.25rem);font-weight:700;line-height:.88;letter-spacing:-.055em;color:var(--text)}\
+.hero .hero-resource-v5{margin-top:.48rem;font:400 .67rem \'JetBrains Mono\',ui-monospace,monospace;letter-spacing:.18em;color:var(--subtle)}\
+.hero .hero-lockup-v4 .signature{font-size:clamp(1.55rem,2.5vw,2rem);font-weight:500;color:var(--brass);margin:.6rem 0 .42rem}\
+.hero .hero-lockup-v4 .hero-promise-v4{font-size:clamp(1.2rem,1.85vw,1.5rem);font-weight:400;line-height:1.25;letter-spacing:-.02em;margin:0;color:var(--text)}\
+.hero .hero-divider-v5{display:block;width:78px;height:1px;background:var(--border2);margin:1rem auto .9rem}\
+.hero .hero-lockup-v4 .sub{max-width:650px;margin:0;color:var(--muted);font-size:clamp(.95rem,1.15vw,1.04rem);line-height:1.55}\
+.hero .hero-state-grid-v4{width:min(100%,1080px);margin:2rem auto 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;text-align:left}\
 .hero .hero-state-grid-v4 .state-card{min-height:365px;padding:24px;border-radius:18px}\
 .hero .hero-state-grid-v4 .state-card h3{font-size:1.5rem}\
 .hero .hero-state-grid-v4 .state-card .sub{font-size:.95rem;margin:.3rem 0 1.15rem}\
-.hero .hero-state-grid-v4 .state-visual{min-height:205px;padding:16px}\
+.hero .hero-state-grid-v4 .state-visual{min-height:205px;padding:16px;overflow:hidden}\
 .hero .hero-state-grid-v4 .state-caption{font-size:.95rem;margin-top:14px}\
+.hero .hero-state-grid-v4 .state-card:nth-child(3) .air-large{width:100%;gap:7px;justify-content:center;padding:0 2px}\
+.hero .hero-state-grid-v4 .state-card:nth-child(3) .air-project{width:56px;height:56px;flex:0 0 56px;border-radius:12px}\
+.hero .hero-state-grid-v4 .state-card:nth-child(3) .air-project .state-mark{width:30px;height:30px;border-width:3px;border-radius:9px}\
+.hero .hero-state-grid-v4 .state-card:nth-child(3) .air-project .state-mark:after{width:8px;height:8px}\
+.hero .hero-state-grid-v4 .state-card:nth-child(3) .arrow{font-size:.82rem;line-height:1;flex:0 0 auto}\
 .hero .hero-state-rule-v4{width:min(100%,1080px);margin:16px auto 0;padding:14px 18px;font-size:1rem}\
 .hero .hero-actions-v4{display:flex;flex-direction:column;align-items:center;margin-top:1.25rem}\
 .hero .hero-actions-v4 .hero-cta{justify-content:center}\
 .hero .hero-actions-v4 .hero-note{text-align:center;margin:.8rem 0 0}\
+.air-eye .air-pupil{transform-box:fill-box;transform-origin:center}\
+.air-eye.blink .air-pupil{animation:air-blink .26s ease-in-out}\
+@keyframes air-blink{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.08)}}\
 @media(max-width:900px){.hero .hero-state-grid-v4{grid-template-columns:1fr;max-width:680px}.hero .hero-state-grid-v4 .state-card{min-height:auto}.hero .hero-state-grid-v4 .state-visual{min-height:220px}}\
-@media(max-width:600px){.hero{padding-top:2.25rem!important}.hero .hero-brand-mark-v4{width:62px;height:62px}.hero .hero-state-grid-v4{margin-top:1.5rem;gap:12px}.hero .hero-state-grid-v4 .state-card{padding:18px}.hero .hero-state-rule-v4{font-size:.9rem}}';
+@media(max-width:600px){.hero{padding-top:2.25rem!important}.hero .hero-brand-mark-v4{width:60px;height:60px}.hero .hero-state-grid-v4{margin-top:1.5rem;gap:12px}.hero .hero-state-grid-v4 .state-card{padding:18px}.hero .hero-state-rule-v4{font-size:.9rem}}';
   document.head.appendChild(heroStyle);
 
   document.addEventListener('click',function(e){
@@ -116,7 +132,7 @@
     if(a.getAttribute('href')===here)a.classList.add('active');
   });
 
-  /* AIR attentive mark: direct SVG coordinate tracking for reliable movement. */
+  /* AIR attentive header mark: reliable coordinate tracking + How-it-works blink. */
   var eye=document.querySelector('.site-header .brand .mark');
   if(eye){
     eye.classList.add('air-eye');
@@ -125,7 +141,6 @@
       pupil.classList.add('air-pupil');
       var baseX=parseFloat(pupil.getAttribute('cx'))||32;
       var baseY=parseFloat(pupil.getAttribute('cy'))||32;
-      var baseR=parseFloat(pupil.getAttribute('r'))||8.5;
       var currentX=baseX,currentY=baseY,targetX=baseX,targetY=baseY;
       var raf=0;
       var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -157,8 +172,14 @@
         window.addEventListener('blur',centre);
       }
 
-      var blinkTimer=0;
-      document.addEventListener('click',function(){clearTimeout(blinkTimer);pupil.setAttribute('r',(baseR*.28).toFixed(2));blinkTimer=setTimeout(function(){pupil.setAttribute('r',baseR.toFixed(2));},120);});
+      if(!reduce){
+        document.addEventListener('click',function(){
+          eye.classList.remove('blink');
+          void eye.offsetWidth;
+          eye.classList.add('blink');
+        });
+        eye.addEventListener('animationend',function(){eye.classList.remove('blink');});
+      }
     }
   }
 })();
