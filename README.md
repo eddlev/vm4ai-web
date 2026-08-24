@@ -15,7 +15,7 @@
 
 The source for **[vm4ai.com](https://vm4ai.com)**, the public site for **AIR**, the prompt-based framework from VM4AI.
 
-The deployable site lives in [`public/`](public/) and has no build step. The homepage is the Brand v2 implementation: outcome-first positioning, the Focused / Fluid / AIR visual grammar, light/dark parity, structured continuity messaging, and explicit prompt-layer trust boundaries.
+The deployable site lives in [`public/`](public/) and has no build step. The landing page carries the Brand v2 positioning and visual system. The secondary pages are aligned to the current AIR **2.4.3** runtime semantics, including current onboarding, sole Orbit 0 artifact authority, capability packages, evidence/action boundaries, active-state reconciliation, alignment checks, and Handoff schema 2.2.0.
 
 ---
 
@@ -25,21 +25,41 @@ The deployable site lives in [`public/`](public/) and has no build step. The hom
 - **Signature:** Focused. Fluid. AIR.
 - **Focused:** one active task at a time.
 - **Fluid:** continue without reconstructing the project.
-- **AIR:** the project persists across sessions and compatible platforms.
+- **AIR:** the project persists across sessions and platforms, subject to host compatibility.
 
 The canonical brand rules and authored diagrams live in **[eddlev/air-brand](https://github.com/eddlev/air-brand)**.
+
+## Runtime source of truth
+
+Website explanations are derived from **[eddlev/vm4ai-air-kit](https://github.com/eddlev/vm4ai-air-kit)**. The repository runtime/contracts remain authoritative if website copy ever drifts.
+
+Current public reference line:
+
+- Core Runtime `2.4.3`
+- Control Surface `2.4.3`
+- Default Starter `2.4.3`
+- Governance Supplement `2.2.0`
+- Handoff schema `2.2.0`
+- Floor registry `2.1.0`
 
 ## Structure
 
 ```text
 vm4ai-web/
 ├─ public/
-│  ├─ index.html           Brand v2 homepage
-│  ├─ air-v2.css           homepage visual system + responsive/light-dark rules
-│  ├─ air-v2.js            theme persistence + mobile navigation
-│  ├─ how-it-works.html · get-started.html · use-cases.html · services.html
-│  ├─ about.html · blog.html
+│  ├─ index.html           Brand v2 landing page
+│  ├─ air-v2.css           shared Brand v2 base visual system
+│  ├─ air-v2.js            landing-page behavior
+│  ├─ air-pages.css        shared secondary-page layout/reference styles
+│  ├─ air-site.js          shared secondary-page theme/nav/attentive-mark behavior
+│  ├─ how-it-works.html    current conceptual runtime model
+│  ├─ air-docs.html        AIR 2.4.3 human-readable technical reference
+│  ├─ get-started.html     current boot → bind → work → Handoff path
+│  ├─ glossary.html        current terminology and canonical modifiers
+│  ├─ use-cases.html · about.html · services.html · blog.html
 │  ├─ built-with-air.html · recovered-with-air.html · real-boot-vs-roleplay.html
+│  ├─ from-morphic-to-air.html · showcase.html · made-with-air.html
+│  ├─ showcase-session.md · showcase-handoff-card.json   historical evidence artifacts
 │  ├─ privacy.html · terms.html · 404.html
 │  ├─ og-image.png · favicon.* · apple-touch-icon.png · icon-192/512.png
 │  ├─ site.webmanifest · robots.txt · sitemap.xml
@@ -49,11 +69,15 @@ vm4ai-web/
 └─ README.md
 ```
 
-## Runtime/privacy posture
+## Site behavior
+
+The small AIR mark in the navigation is the interactive/attentive website expression: the ember tracks the pointer and uses the restrained AIR blink. Secondary pages share that implementation through `air-site.js`; the large canonical/hero marks stay static.
 
 The site is static and ships no analytics or tracking. `public/_headers` keeps the runtime locked to the site origin (`default-src 'self'`) with no third-party script, connection, or font origin enabled.
 
-The Brand v2 homepage currently uses the local/system font fallback stack under that CSP. The remaining legacy pages retain their existing embedded font treatment. Moving the canonical WOFF files into the site bundle is a separate asset migration; it should not be solved by loosening the CSP to a third-party font origin.
+## Historical material
+
+Some case-study evidence was captured on earlier AIR builds. Historical pages are labeled as such rather than silently rewritten to look like AIR 2.4.3. Retired concepts such as AMRS may still appear inside the preserved historical source artifacts, but they are not presented as current runtime semantics.
 
 ## Local preview
 
@@ -79,13 +103,13 @@ The site deploys via Cloudflare Pages Git integration:
 
 ## Related repositories
 
-- **[vm4ai-air-kit](https://github.com/eddlev/vm4ai-air-kit)** — AIR framework/runtime package.
-- **[air-brand](https://github.com/eddlev/air-brand)** — canonical AIR brand system, tokens, logos, fonts, and diagrams.
+- **[vm4ai-air-kit](https://github.com/eddlev/vm4ai-air-kit)** — operative AIR framework/runtime package.
+- **[air-brand](https://github.com/eddlev/air-brand)** — canonical AIR brand system, tokens, logos, and authored diagrams.
 
 ## License
 
 This site's own code and content are © Edward Levin (VM4AI) — all rights reserved. The included font licenses are SIL Open Font License 1.1.
 
-The AIR framework is licensed **Apache-2.0**. The **AIR** and **VM4AI** names and the dot-in-frame mark are reserved; see the brand usage terms in `air-brand`.
+The AIR framework code is licensed **Apache-2.0**. The **AIR** and **VM4AI** names and the dot-in-frame mark are reserved; see the brand usage terms in `air-brand`.
 
 — [vm4ai.com](https://vm4ai.com)
