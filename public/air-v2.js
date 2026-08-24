@@ -56,33 +56,65 @@
     if(a.getAttribute('href')===here)a.classList.add('active');
   });
 
-  /* attentive header mark: ember follows pointer and blinks on click */
+  /* AIR attentive mark: move the ember by real SVG coordinates, not CSS transforms. */
   var eye=document.querySelector('.site-header .brand .mark');
   if(eye){
     eye.classList.add('air-eye');
     var pupil=eye.querySelector('circle');
-    if(pupil)pupil.classList.add('air-pupil');
+    if(pupil){
+      pupil.classList.add('air-pupil');
 
-    var style=document.createElement('style');
-    style.textContent='.air-eye .air-pupil{transform-box:fill-box;transform-origin:center;transform:translate(var(--ex,0px),var(--ey,0px));transition:transform .12s ease-out}.air-eye.blink .air-pupil{animation:air-blink .26s ease-in-out}@keyframes air-blink{0%,100%{transform:translate(var(--ex,0px),var(--ey,0px)) scaleY(1)}50%{transform:translate(var(--ex,0px),var(--ey,0px)) scaleY(.08)}}';
-    document.head.appendChild(style);
+      var baseX=parseFloat(pupil.getAttribute('cx'))||32;
+      var baseY=parseFloat(pupil.getAttribute('cy'))||32;
+      var baseR=parseFloat(pupil.getAttribute('r'))||8.5;
+      var currentX=baseX,currentY=baseY,targetX=baseX,targetY=baseY;
+      var raf=0;
+      var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(!reduce){
-      window.addEventListener('mousemove',function(e){
-        var r=eye.getBoundingClientRect();
-        var dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);
-        var a=Math.atan2(dy,dx),d=Math.min(Math.sqrt(dx*dx+dy*dy)/60,1),mag=3.5;
-        eye.style.setProperty('--ex',(Math.cos(a)*mag*d).toFixed(2)+'px');
-        eye.style.setProperty('--ey',(Math.sin(a)*mag*d).toFixed(2)+'px');
-      },{passive:true});
+      function paint(){
+        currentX+=(targetX-currentX)*0.28;
+        currentY+=(targetY-currentY)*0.28;
+        pupil.setAttribute('cx',currentX.toFixed(2));
+        pupil.setAttribute('cy',currentY.toFixed(2));
+        if(Math.abs(targetX-currentX)>0.03||Math.abs(targetY-currentY)>0.03){
+          raf=requestAnimationFrame(paint);
+        }else{
+          currentX=targetX;currentY=targetY;
+          pupil.setAttribute('cx',currentX.toFixed(2));
+          pupil.setAttribute('cy',currentY.toFixed(2));
+          raf=0;
+        }
+      }
+
+      function wake(){if(!raf)raf=requestAnimationFrame(paint);}
+      function centre(){targetX=baseX;targetY=baseY;wake();}
+
+      if(!reduce){
+        window.addEventListener('pointermove',function(e){
+          if(e.pointerType&&e.pointerType!=='mouse')return;
+          var r=eye.getBoundingClientRect();
+          if(!r.width||!r.height)return;
+          var dx=e.clientX-(r.left+r.width/2);
+          var dy=e.clientY-(r.top+r.height/2);
+          var distance=Math.sqrt(dx*dx+dy*dy);
+          if(distance<0.001){centre();return;}
+          var strength=Math.min(distance/110,1);
+          var travel=8.5*strength;
+          targetX=baseX+(dx/distance)*travel;
+          targetY=baseY+(dy/distance)*travel;
+          wake();
+        },{passive:true});
+        window.addEventListener('mouseout',function(e){if(!e.relatedTarget)centre();});
+        window.addEventListener('blur',centre);
+      }
+
+      /* Click blink: direct radius change avoids SVG transform inconsistencies. */
+      var blinkTimer=0;
+      document.addEventListener('click',function(){
+        clearTimeout(blinkTimer);
+        pupil.setAttribute('r',(baseR*0.28).toFixed(2));
+        blinkTimer=setTimeout(function(){pupil.setAttribute('r',baseR.toFixed(2));},120);
+      });
     }
-
-    document.addEventListener('click',function(){
-      eye.classList.remove('blink');
-      void eye.offsetWidth;
-      eye.classList.add('blink');
-    });
-    eye.addEventListener('animationend',function(){eye.classList.remove('blink');});
   }
 })();
