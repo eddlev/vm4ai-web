@@ -259,6 +259,15 @@ img,svg{max-width:100%}
 .uc li{font-family:var(--font-mono);font-size:.8rem;color:var(--muted);padding-left:1rem;position:relative}
 .uc li::before{content:"";position:absolute;left:0;top:.5em;width:5px;height:5px;background:var(--brass);border-radius:1px}
 .uc-more{font-family:var(--font-mono);font-size:.85rem;color:var(--muted);margin-top:1.4rem}
+.onboard-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1.4rem}
+@media(max-width:840px){.onboard-grid{grid-template-columns:1fr}}
+.onboard-card{border:1px solid var(--border);border-radius:16px;background:var(--surface);padding:1.4rem;box-shadow:var(--card-shadow)}
+.onboard-card .k{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brass)}
+.onboard-card h3{font-size:1.2rem;margin:.45rem 0 .55rem;font-weight:500}
+.onboard-card .qline{font-family:var(--font-mono);font-size:.78rem;color:var(--text);border:1px solid var(--border-strong);border-radius:9px;padding:.55rem .7rem;margin:.7rem 0 1rem}
+.onboard-card details{border-top:1px solid var(--border);padding:.75rem 0 0;margin-top:.75rem}
+.onboard-card summary{cursor:pointer;font-family:var(--font-mono);font-size:.78rem;color:var(--brass)}
+.onboard-card details p{color:var(--muted);font-size:.9rem;line-height:1.55;margin:.65rem 0 0}
 .casestudy{border:1px solid var(--brass);border-radius:18px;background:color-mix(in srgb,var(--brass) 6%,var(--surface));padding:1.8rem 2rem;max-width:56rem;box-shadow:var(--card-shadow)}
 .casestudy .k{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brass)}
 .casestudy h3{font-size:1.4rem;margin:.5rem 0 .7rem;font-weight:500}
@@ -351,6 +360,26 @@ img,svg{max-width:100%}
         <p style="margin:0 0 1.1rem">AIR can weigh each task for its blast radius — the adjacent risks, dependencies, and blind spots the work touches but you might not see. Ask it to add a feature, for example, and the working frame can surface security, legal, evidence, or integration pressure before the change is treated as ready.</p>
         <p style="margin:0">This is still cooperative work. AIR can recommend, challenge, generate, and execute within the current bound task and approvals; you steer, approve, correct, and make the decisions that remain yours. The capability can move closer to the gap without the authority moving with it.</p>
       </div>
+    </div>
+  </section>
+
+  <section class="section" id="onboarding-patterns" style="padding-top:0">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Onboarding patterns</span>
+        <h2>Good starting choices for different kinds of work.</h2>
+        <p>These are best-practice starting points, not automatic AIR selections. Q1 is about project state, not domain: use A for a new project, B to import existing non-AIR work, C for a Handoff continuation, or D for orientation. The cards below assume a new project.</p>
+      </div>
+      <div class="callout"><div class="label">Reading the choices</div><p>Q2 sets checking rigor. Q3 sets ambiguity handling. Q4 sets continuity. If you want neurodivergent delivery, choose Q4=D and use Q4D to preserve the matching base continuity style. AIR still asks the questions; these recommendations do not bypass onboarding.</p></div>
+      <div class="onboard-grid">
+        <div class="onboard-card"><div class="k">Code</div><h3>Development</h3><div class="qline">Q1 A* · Q2 C · Q3 A · Q4 A</div><p>Strict checks, early ambiguity resolution, structure + logic.</p><details><summary>Q5 example</summary><p>Refactor authentication to add passkeys while preserving the password flow. Node/TypeScript; no API break; tests and security review required. Sources: repository, current auth contract and WebAuthn specification.</p></details><details><summary>Q6 working-contract example</summary><p>AIR may inspect and propose edits. Deliver unified diffs first; do not mutate main without my approval. I run tests locally and return the logs. Stop on security, type or test failures. Ask before dependency or schema changes, challenge architecture assumptions, and explain non-obvious decisions.</p></details></div>
+        <div class="onboard-card"><div class="k">Research</div><h3>Evidence-heavy research</h3><div class="qline">Q1 A* · Q2 C · Q3 A · Q4 A</div><p>Strict evidence handling, resolve material ambiguity early, preserve structure + logic.</p><details><summary>Q5 example</summary><p>Compare EU AI Act Article 50 obligations relevant to deployers of generative AI. Use EU primary sources first; distinguish law, guidance and interpretation. Deliver a cited memo with unresolved questions.</p></details><details><summary>Q6 working-contract example</summary><p>AIR finds, organizes and synthesizes sources. Cite every material claim and label source-supported fact, inference and unknowns separately. I approve changes to scope or thesis. Do not fill source gaps with plausible prose; surface them.</p></details></div>
+        <div class="onboard-card"><div class="k">Writing</div><h3>Writing &amp; content</h3><div class="qline">Q1 A* · Q2 B · Q3 B · Q4 B</div><p>Balanced review, keep non-blocking ambiguity open, preserve structure + tone.</p><details><summary>Q5 example</summary><p>Draft a 1,500-word technical article for senior engineers explaining AIR Handoff. Clear, dry voice; no hype. Preserve verified claims and include one concrete continuation example.</p></details><details><summary>Q6 working-contract example</summary><p>AIR drafts section by section. I approve the outline and any major voice change. Preserve supplied facts, flag unverifiable claims, and deliver complete revised sections rather than tiny fragments. Challenge weak structure without flattening the voice.</p></details></div>
+        <div class="onboard-card"><div class="k">Creative</div><h3>Creative development</h3><div class="qline">Q1 A* · Q2 B · Q3 C · Q4 C</div><p>Balanced quality control, deliberate ambiguity can stay open, preserve narrative continuity.</p><details><summary>Q5 example</summary><p>Develop a five-song concept arc about migration without literal exposition. Dark electronic/pop; preserve recurring signal/noise imagery. Deliver concepts and lyric skeletons, not final audio.</p></details><details><summary>Q6 working-contract example</summary><p>AIR generates options, not final canon. Keep creative ambiguity unless it breaks continuity. I choose the canon. Preserve motifs and voice; do not rationalize away deliberate contradictions. Ask before changing the core premise.</p></details></div>
+        <div class="onboard-card"><div class="k">Brand</div><h3>Brand &amp; marketing</h3><div class="qline">Q1 A* · Q2 B · Q3 A · Q4 B</div><p>Balanced review, resolve positioning ambiguity early, preserve structure + tone.</p><details><summary>Q5 example</summary><p>Define the launch campaign for AIR 2.4.3. Preserve Brand v2 promise, signature, mark and palette. Audience: AI power users and small teams. Deliver messaging hierarchy, campaign concepts and an asset brief.</p></details><details><summary>Q6 working-contract example</summary><p>AIR may propose positioning, copy and assets, but public promise changes require my approval. The brand book is source truth. Deliver options with rationale and claim-risk notes. Do not change the mark, palette or core signature without approval.</p></details></div>
+        <div class="onboard-card"><div class="k">Strategy</div><h3>Strategy &amp; decisions</h3><div class="qline">Q1 A* · Q2 C · Q3 A · Q4 A</div><p>Strict decision support, resolve material uncertainty early, preserve structure + logic.</p><details><summary>Q5 example</summary><p>Choose an EU-first go-to-market path for AIR. Compare open-source adoption, services revenue and enterprise licensing under a 12-month runway. Deliver a decision memo with assumptions, risks and next experiments.</p></details><details><summary>Q6 working-contract example</summary><p>AIR builds models and tests assumptions; distinguish fact, estimate and judgment. I make irreversible business decisions. Stop when missing evidence could change the recommendation. Present the recommendation, the strongest counter-case and the triggers that should make us revise it.</p></details></div>
+      </div>
+      <p class="uc-more">* Q1=A assumes a fresh project. Use Q1=B for an existing non-AIR project and Q1=C when continuing from a Handoff Card.</p>
     </div>
   </section>
 
