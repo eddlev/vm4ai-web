@@ -20,9 +20,11 @@
   var stateRule=statesSection&&statesSection.querySelector('.state-rule');
 
   /* Restore standard section rhythm where old inline spacing overrides remain. */
-  var payloadGrid=document.querySelector('.payload');
-  var payloadSection=payloadGrid&&payloadGrid.closest('section.section');
-  if(payloadSection)payloadSection.style.removeProperty('padding-top');
+  ['.payload','.callout','.cta-band'].forEach(function(selector){
+    var block=document.querySelector(selector);
+    var section=block&&block.closest('section.section');
+    if(section)section.style.removeProperty('padding-top');
+  });
 
   if(heroGrid){
     var heroCopy=heroGrid.firstElementChild;
