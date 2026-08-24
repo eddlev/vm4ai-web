@@ -341,7 +341,7 @@ img,svg{max-width:100%}
           <p>The two failures were different, which is what makes them worth reporting rather than just retelling.</p>
           <ul>
             <li><strong>A hard context cap.</strong> The first build session reached the limit of what it could hold and stopped — before it had emitted a handoff card.</li>
-            <li><strong>A silent stall.</strong> The second was stranger: no error, no warning. The session would trigger and then immediately stop, producing nothing. That symptom — start, then nothing — is what a context window looks like when it is too full to generate a reply. It reads like a crash; it is really exhaustion.</li>
+            <li><strong>A silent stall.</strong> The second was stranger: no error, no warning. The session would trigger and then immediately stop, producing nothing. In that observed run, the behavior was consistent with an exhausted context window: the session could no longer produce a usable reply.</li>
           </ul>
           <p>In both cases the session was effectively gone, and in both cases it had died <em>before</em> saving a card. The ideal flow had not happened. What mattered was whether the project could be recovered anyway.</p>
 
@@ -356,13 +356,13 @@ img,svg{max-width:100%}
           </ul>
 
           <h2>Not a vendor feature</h2>
-          <p>Both recoveries happened to use the model's ability to search past sessions, which made them smooth. But that feature is not the mechanism. The same recovery works without it: paste the dead session's transcript into a file and run the handoff flow against it. The card, the template, and the runtime are plain prompt files — the method travels to any model that can read them.</p>
+          <p>Both recoveries happened to use the model's ability to search past sessions, which made them smooth. But past-session search is not the Handoff mechanism. Where a compatible host can ingest the AIR foundation plus an authoritative transcript or saved project evidence, that material can be used to reconstruct a Handoff candidate for validation and rebinding. The portability comes from the explicit transfer record, not from one vendor's history feature.</p>
 
           <h2>The honest limits</h2>
           <p>This is a discipline, not a guarantee. Recovery depends on the dead session still being reachable — through retrievable history, or a transcript you kept. If the conversation is gone and nothing was saved, there is nothing to reconstruct from. And the cleanest path is still the intended one: emit a card before the session dies. These recoveries worked because the work was reconstructable after the fact — not because loss is impossible.</p>
 
           <h2>The takeaway</h2>
-          <p>A multi-session project hit two unplanned failures, in two different ways, and finished anyway — coherent, auditable, and resumable each time. That is what the handoff structure bought: not immortality for any one session, but continuity for the project that outlives them. Sessions are disposable; the work does not have to be.</p>
+          <p>A multi-session project hit two unplanned failures, in two different ways, and finished anyway — coherent, reviewable, and resumable each time. That is what the handoff structure bought: not immortality for any one session, but continuity for the project that outlives them. Sessions are disposable; the work does not have to be.</p>
           <p>The mechanism is in the open kit — <a href="https://github.com/eddlev/vm4ai-air-kit" target="_blank" rel="noopener">read how handoff works</a>, or <a href="get-started.html">boot a session</a> and put it to the same test.</p>
         </div>
       </article>
@@ -375,7 +375,7 @@ img,svg{max-width:100%}
     <div class="foot-grid">
       <div class="foot-brand">
         <a class="brand" href="index.html"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="9.5" y="9.5" width="45" height="45" rx="13" stroke-width="5"/><circle cx="32" cy="32" r="8.5"/></svg> AIR <span class="by">by VM4AI</span></a>
-        <p>An overlay for AI chatbots that turns your session into a structured, auditable environment. VM4AI is the concept; AIR is the framework built on it.</p>
+        <p>AI work, carried forward. A prompt-based framework for focused work, structured continuity and compatible-platform handoff.</p>
       </div>
       <div class="foot-col">
         <h4>Product</h4>

@@ -294,11 +294,11 @@ img,svg{max-width:100%}
     <div class="container">
       <div class="prose">
         <p class="lead-line">AIR is short for AI Resource — a direct analogy to HR, Human Resources.</p>
-        <p>AIR started as a way to fill a gap that many startups and small businesses run into. A business needs a whole range of skills to research, build, market, and sell a product, and it rarely has all of them on hand. AIR — under a different name at the time — was the answer: while you are still searching for the right hire or raising the funds to bring a specialist on, AIR can stand in for those roles as a cooperative AI teammate.</p>
+        <p>AIR started as a way to fill a gap that many startups and small businesses run into. A business needs a whole range of skills to research, build, market, and sell a product, and it rarely has all of them on hand. AIR — under a different name at the time — was the answer: while you are still searching for the right hire or raising the funds to bring a specialist on, AIR can bring structured specialist capability into the work while keeping the human role, judgment, and authority distinct.</p>
         <p>To make that work, I had to solve three problems. How can a prompt-based AI teammate be trusted? How do you keep work continuous from one session to the next? And how do you make it genuinely portable, with no vendor lock-in? Prompt-based AIR answers each of them, to an extent.</p>
-        <p>I approached trust through transparency. The AIR objects that print into the chat — structured JSON blocks — show exactly how AIR is executing every task, out in the open, so none of its reasoning stays hidden.</p>
-        <p>Continuity comes from the handoff card: a JSON block that captures where the project stands and what the next step should be. Because JSON travels everywhere, that card carries a project not just into a new session but onto an entirely different platform, so the work continues seamlessly even as the AI landscape keeps shifting.</p>
-        <p>That same portability frees AIR from any single model or platform. You boot a new session wherever you like and carry on from the card. The one honest caveat is that the output is always shaped by whichever model happens to be hosting it.</p>
+        <p>I approached trust through visibility. AIR surfaces structured governance records for state, scope, assumptions, blockers, approvals, and decisions. They make the working contract inspectable; they do not expose hidden chain-of-thought or prove external actions without the evidence for those actions.</p>
+        <p>Continuity comes from the Handoff Card: structured JSON that captures explicit project state, including where the work stands and what should happen next. A receiving AIR session validates and rebinds that state, so the project can continue without reconstructing the work from the whole transcript.</p>
+        <p>That portability keeps the project from depending on one model or platform's private session state. You can carry the Handoff Card into another compatible AIR host and continue from the recorded state. The host model still shapes the output, and compatibility is something to verify rather than assume.</p>
         <p>This is only the surface. Read more about the <a href="how-it-works.html">methods and concepts</a> behind AIR's workflow, or just <a href="get-started.html">boot a session</a> and see it for yourself.</p>
       </div>
     </div>
@@ -312,9 +312,9 @@ img,svg{max-width:100%}
         <p>AIR's discipline comes from a few commitments it doesn't bend on.</p>
       </div>
       <div class="principles">
-        <div class="principle"><div class="pk">Transparency</div><h4>Show the work</h4><p>Every task is shown in the open as AIR objects — structured JSON you can inspect.</p></div>
+        <div class="principle"><div class="pk">Transparency</div><h4>Show the state</h4><p>AIR surfaces required governance records when they matter — structured JSON for the state, boundaries, gates, assumptions, and decisions you can inspect.</p></div>
         <div class="principle"><div class="pk">Candor</div><h4>Honest about its limits</h4><p>AIR is prompt-based — no backend validation, no guarantee of correctness. It says so up front, so your expectations stay accurate.</p></div>
-        <div class="principle"><div class="pk">Restraint</div><h4>Won't guess</h4><p>When AIR is unsure, it won't invent an answer. It stops, flags the gap, and follows its protocol instead of guessing.</p></div>
+        <div class="principle"><div class="pk">Restraint</div><h4>Won't turn uncertainty into fact</h4><p>When a material uncertainty would change the work, AIR keeps it unresolved, asks for the missing input or evidence, and blocks only the affected action until it is safe to continue.</p></div>
         <div class="principle"><div class="pk">Cooperative</div><h4>A teammate, not an agent</h4><p>AIR is not autonomous, and not built for hands-off automation. It works with you, not for you — you keep the judgment and the final say.</p></div>
       </div>
     </div>
@@ -339,7 +339,7 @@ img,svg{max-width:100%}
     <div class="foot-grid">
       <div class="foot-brand">
         <a class="brand" href="index.html"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="9.5" y="9.5" width="45" height="45" rx="13" stroke-width="5"/><circle cx="32" cy="32" r="8.5"/></svg> AIR <span class="by">by VM4AI</span></a>
-        <p>An overlay for AI chatbots that turns your session into a structured, auditable environment. VM4AI is the concept; AIR is the framework built on it.</p>
+        <p>AI work, carried forward. A prompt-based framework for focused work, structured continuity and compatible-platform handoff.</p>
       </div>
       <div class="foot-col">
         <h4>Product</h4>

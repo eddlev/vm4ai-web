@@ -316,7 +316,7 @@ img,svg{max-width:100%}
       <div class="defgroup">
         <h3>Core idea</h3>
         <dl class="deflist gloss">
-          <div class="row"><dt>AIR — AI Resource</dt><dd>A prompt-based framework that governs how an AI chatbot works, by direct analogy to HR. It gives a capable model a set of working rules — how to scope, check, and deliver — so it behaves like an accountable teammate rather than a free-form assistant.</dd></div>
+          <div class="row"><dt>AIR — AI Resource</dt><dd>A portable prompt-runtime framework, named by direct analogy to HR. It gives a compatible host model an explicit working contract for scope, active task, evidence, approvals, review, and continuity — a structured teammate-style frame rather than free-form chat.</dd></div>
           <div class="row"><dt>Cooperative teammate</dt><dd>AIR's stance: it works <em>with</em> you, not <em>for</em> you. It is not autonomous and not built for hands-off automation — you keep the judgment and the final say.</dd></div>
           <div class="row"><dt>Gap / gap-filler</dt><dd>The cooperative dynamic. You bring the goal and the decisions; AIR fills the gap on the parts where structure, checking, or follow-through would otherwise slip.</dd></div>
           <div class="row"><dt>Blast radius</dt><dd>How far the damage could spread if a decision or action goes wrong. AIR settles the highest-blast-radius decision first, deliberately, instead of letting it be decided by accident downstream.</dd></div>
@@ -330,10 +330,12 @@ img,svg{max-width:100%}
           <div class="row"><dt>Q1 — What are you doing today?</dt><dd>Picks the starting flow: <strong>A</strong> new project, <strong>B</strong> import an existing one, <strong>C</strong> continue from a handoff card, or <strong>D</strong> explain AIR first.</dd></div>
           <div class="row"><dt>Q2 — How strictly should AIR check your work?</dt><dd>Sets the rigor level, from light review to high scrutiny.</dd></div>
           <div class="row"><dt>Q3 — How should AIR handle the unclear?</dt><dd>Resolve ambiguity early, or leave it open until it actually blocks progress.</dd></div>
-          <div class="row"><dt>Q4 — What should AIR keep consistent?</dt><dd>What to hold steady as you work — structure and logic, structure and tone, and so on.</dd></div>
+          <div class="row"><dt>Q4 — What should AIR keep consistent?</dt><dd>Selects the continuity/delivery posture: <strong>A</strong> structure and logic, <strong>B</strong> structure and tone, <strong>C</strong> creative narrative continuity, or <strong>D</strong> the neurodivergent delivery modifier.</dd></div>
+          <div class="row"><dt>Q4D — base continuity mode</dt><dd>When Q4=D, Q4D selects the underlying A, B, or C continuity mode. Q4=D is incomplete until Q4D is resolved.</dd></div>
           <div class="row"><dt>Q5 — Describe your project</dt><dd>You state what you're building and attach any supporting sources. AIR compiles its first project frame from this.</dd></div>
-          <div class="row"><dt>Q6 — AIR &amp; user alignment</dt><dd>The working agreement: who leads, how AIR reviews, how it delivers. Project-scoped by default.</dd></div>
-          <div class="row"><dt>Orbit 0 contract</dt><dd>The active working agreement for the task at hand — what AIR is doing right now, and on what terms. AIR keeps it in view so the session doesn't drift.</dd></div>
+          <div class="row"><dt>Q6 — AIR &amp; user alignment</dt><dd>The working agreement: responsibility split, delivery form, explanation depth, challenge posture, approval boundaries, and assumptions to avoid. Project-scoped by default.</dd></div>
+          <div class="row"><dt>Q6D — delivery calibration</dt><dd>When Q4=D, Q6D keeps the ordinary Q6 agreement and adds functional presentation, side-track, focus, momentum, communication, and optional break-support preferences.</dd></div>
+          <div class="row"><dt>Orbit 0</dt><dd>The sole current executing task/artifact. Orbit 1 holds queued work with resume conditions; Orbit 2 holds deliberately deferred work. Only the bound Orbit 0 AIR_ARTIFACT supplies positive material execution authority.</dd></div>
         </dl>
       </div>
 
@@ -360,16 +362,16 @@ img,svg{max-width:100%}
       <div class="defgroup">
         <h3>Grounding layers</h3>
         <dl class="deflist gloss">
-          <div class="row"><dt>Specialist</dt><dd>A grounding profile that gives the session focused expertise for a particular kind of work, when the project needs more than the general runtime.</dd></div>
-          <div class="row"><dt>Domain Package</dt><dd>Grounding for a specific subject area — the facts, constraints, and vocabulary of a domain — layered on when the work depends on them.</dd></div>
-          <div class="row"><dt>Method Pack</dt><dd>Grounding for a specific way of working — a procedure AIR should follow — added when the task calls for it.</dd></div>
+          <div class="row"><dt>Specialist</dt><dd>A bounded non-agent capability profile for a particular kind of work. It can shape the active task only after validation, task-fit selection, required approval, and binding through the current Orbit 0 artifact.</dd></div>
+          <div class="row"><dt>Domain Package</dt><dd>A bounded domain overlay/source package for task-relevant terminology, constraints, evidence classes, and domain expectations. Availability alone does not bind it.</dd></div>
+          <div class="row"><dt>Method Pack</dt><dd>A reusable procedure with explicit execution state, gates, evidence expectations, and handoff state. It does not execute or govern independently of the bound artifact.</dd></div>
         </dl>
       </div>
 
       <div class="defgroup">
         <h3>Continuity</h3>
         <dl class="deflist gloss">
-          <div class="row"><dt>Handoff card</dt><dd>A structured snapshot of the session's state that lets you resume the work later — in the same model or a different one — from where you left off. Created when you ask AIR to make a handoff and the required handoff inputs are available. Treat it as sensitive: it can carry project detail.</dd></div>
+          <div class="row"><dt>Handoff Card</dt><dd>A structured transfer record for explicit project state. A receiving compatible AIR session validates the card and rebinds the nominated active artifact before material work continues. It carries recorded state, not hidden model state or guaranteed identical inference. Treat it as sensitive: it can carry project detail.</dd></div>
         </dl>
       </div>
     </div>
@@ -411,7 +413,7 @@ img,svg{max-width:100%}
     <div class="foot-grid">
       <div class="foot-brand">
         <a class="brand" href="index.html"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="9.5" y="9.5" width="45" height="45" rx="13" stroke-width="5"/><circle cx="32" cy="32" r="8.5"/></svg> AIR <span class="by">by VM4AI</span></a>
-        <p>An overlay for AI chatbots that turns your session into a structured, auditable environment. VM4AI is the concept; AIR is the framework built on it.</p>
+        <p>AI work, carried forward. A prompt-based framework for focused work, structured continuity and compatible-platform handoff.</p>
       </div>
       <div class="foot-col">
         <h4>Product</h4>

@@ -342,8 +342,8 @@ img,svg{max-width:100%}
     <div class="container">
       <span class="eyebrow">AIR documentation</span>
       <h1 style="font-size:clamp(2.2rem,1.6rem+2.4vw,3.4rem);margin:1rem 0 1.1rem">The AIR technical reference.</h1>
-      <p class="sub" style="max-width:48rem">Setup, runtime behavior, formal objects, modifiers, evidence, handoff, specialist packages, anti-drift checks, and implementation best practices. This is the canonical human-readable reference for the current AIR v0.4 release line.</p>
-      <div class="docs-version"><strong>Release line</strong> AIR Kit v0.4.0 candidate <span>·</span> Core 2.4.2 <span>·</span> Control 2.4.2 <span>·</span> Handoff schema 2.2.0</div>
+      <p class="sub" style="max-width:48rem">Setup, runtime behavior, formal objects, modifiers, evidence, handoff, specialist packages, anti-drift checks, and implementation best practices. This page is a human-readable guide to the current prompt set; the repository remains the operative source of truth.</p>
+      <div class="docs-version"><strong>Current prompts</strong> Core 2.4.3 <span>·</span> Control 2.4.3 <span>·</span> Governance 2.2.0 <span>·</span> Starter 2.4.3 <span>·</span> Handoff schema 2.2.0</div>
     </div>
   </section>
 
@@ -427,6 +427,7 @@ img,svg{max-width:100%}
             <li><strong>Orbit 2</strong> — deferred work that is intentionally outside the current execution surface.</li>
             <li><strong>Binding</strong> — sources, methods, profiles, packages, approvals, and instructions influence material execution only through the sole active artifact or its explicit references.</li>
             <li><strong>Fail-closed behavior</strong> — missing material evidence, ambiguity, approval, package input, or incompatible state blocks the affected action instead of being silently guessed.</li>
+            <li><strong>Readiness (AMRS)</strong> — maturity-bearing work uses the AIR Maturity Readiness Scale from AMRS-0 problem framing through AMRS-6 production approved; promotion is explicit and higher-stage claims stay blocked until earned.</li>
           </ul>
         </section>
 
@@ -446,12 +447,13 @@ img,svg{max-width:100%}
           <h2>Formal AIR objects</h2>
           <p class="lead">AIR objects expose AIR's declared control state. Structured JSON makes those records portable and machine-readable; it does not turn model-generated state into independent proof of external events.</p>
           <dl>
+            <div class="docs-object"><dt>AIR_RUNTIME_BRIDGE</dt><dd>State-transition record that compiles approved onboarding answers into the initial AIR v2 runtime state for new/import activation.</dd></div>
             <div class="docs-object"><dt>AIR_SESSION</dt><dd>Session-level runtime state, activation, load integrity, visibility authority, watchdog counters, and other current session controls.</dd></div>
-            <div class="docs-object"><dt>AIR_PRIMED_ONBOARDING</dt><dd>Fresh-boot onboarding readiness/state when that boot-stage record is generated.</dd></div>
+            <div class="docs-object"><dt>AIR_PRIMED_ONBOARDING</dt><dd>Reserved compatibility label in the current prompt set; it is not part of the routine current boot sequence described above.</dd></div>
             <div class="docs-object"><dt>AIR_PROJECT_INITIALIZATION_BRIEF</dt><dd>The compiled project framing created from onboarding and initial sources.</dd></div>
             <div class="docs-object"><dt>AIR_PROJECT_EXECUTION_MAP</dt><dd>Current project task map: Orbit 0, queued work, deferred work, and resume conditions.</dd></div>
             <div class="docs-object"><dt>AIR_ARTIFACT</dt><dd>The sole active execution record for the current material task and step.</dd></div>
-            <div class="docs-object"><dt>AIR_ACTIVE_CONTRACT</dt><dd>The explicit execution contract when surfaced separately: scope, allowed actions, constraints, and obligations.</dd></div>
+            <div class="docs-object"><dt>AIR_ACTIVE_CONTRACT</dt><dd>An artifact-input contract for candidate scope, allowed actions, constraints, evidence requirements, and rescope rules. Positive execution authority still belongs only to the bound Orbit 0 AIR_ARTIFACT.</dd></div>
             <div class="docs-object"><dt>AIR_GATE</dt><dd>A decision checkpoint such as ALLOW, REVIEW, or REJECT for a consequential transition or action.</dd></div>
             <div class="docs-object"><dt>AIR_VALIDATION_REPORT</dt><dd>Validation target, basis, checks, limitations, evidence references, and decision.</dd></div>
             <div class="docs-object"><dt>AIR_ALIGNMENT_CHECK</dt><dd>Minimal anti-drift watchdog record: whether drift was detected, the user-message cadence, and the linked validation report.</dd></div>
@@ -465,7 +467,7 @@ img,svg{max-width:100%}
 
         <section class="docs-section" id="alignment">
           <h2>Alignment watchdog</h2>
-          <p class="lead">AIR 2.4.2 adds a periodic anti-drift checkpoint alongside the existing event-triggered watchdog. The purpose is to make long-session drift visible even when no single material action happens to trigger a separate reconciliation.</p>
+          <p class="lead">AIR 2.4.3 includes a periodic anti-drift checkpoint alongside event-triggered runtime reconciliation. The purpose is to make long-session drift visible even when no single material action happens to trigger a separate reconciliation.</p>
           <div class="docs-grid">
             <div class="docs-card"><h3>Cadence</h3><p>After <code>ARTIFACT_BOUND_EXECUTION</code> begins, AIR increments a dedicated counter once per substantive user message. Every fifth counted user message triggers <code>PERIODIC_ALIGNMENT_CHECK</code>.</p></div>
             <div class="docs-card"><h3>What does not count</h3><p>Assistant replies, tool calls, connector callbacks, system/host events, hidden host events, and <code>artifact_revision</code> do not advance the cadence.</p></div>
@@ -478,7 +480,7 @@ img,svg{max-width:100%}
         <section class="docs-section" id="evidence">
           <h2>Evidence &amp; testing</h2>
           <p class="lead">AIR separates a surfaced governance record from independent evidence that something happened outside the prompt runtime.</p>
-          <h3 style="margin:1.4rem 0 .5rem">Governance record classes</h3>
+          <h3 style="margin:1.4rem 0 .5rem">Governance evidence classes</h3>
           <table class="docs-table"><thead><tr><th>Class</th><th>Meaning</th></tr></thead><tbody>
             <tr><td><code>SURFACED_OUTPUT_GOVERNANCE_RECORD</code></td><td>A visible AIR declaration/state record produced in the response.</td></tr>
             <tr><td><code>SOURCE_SUPPORTED_GOVERNANCE_RECORD</code></td><td>A record whose material claims are supported by identified supplied/retrieved sources.</td></tr>
@@ -513,7 +515,7 @@ img,svg{max-width:100%}
             <div class="docs-card"><h3>Grounding Specialist</h3><p>Supports evidence discipline, cooperative challenge, domain terminology, and bounded grounding workflows. Complete method-governed operation uses its coupled package.</p></div>
             <div class="docs-card"><h3>AI Governance Specialist</h3><p>Supports AI-governance source authority, lifecycle controls, evidence planning, claim boundaries, and conditional agentic-system governance.</p></div>
             <div class="docs-card"><h3>Capability Ecology Architect</h3><p>Supports capability decomposition, human-to-machine translation, domain capability registration, and capability-ecology design.</p></div>
-            <div class="docs-card"><h3>Specification-First Verification</h3><p>Currently remains a standalone experimental Method Pack under <code>profiles/specification first method pack/</code>. It is not represented as a full specialist package until additional components are justified and tested.</p></div>
+            <div class="docs-card"><h3>Specification-First Verification</h3><p>Current SFV is a complete non-agent specialist package at version 2.3.6: Domain Package, Method Pack, Specialist, Executor, and package manifest. It adds intent-to-specification traceability, specification adequacy, evidence classification, failure localization, and final intent reconciliation.</p></div>
           </div>
           <div class="docs-note"><strong>Attachment is not activation.</strong> Supplying a profile/package establishes availability only. It does not establish freshness, compatibility, task fit, approval, binding, execution, or evidence sufficiency.</div>
         </section>
@@ -581,7 +583,7 @@ img,svg{max-width:100%}
     <div class="foot-grid">
       <div class="foot-brand">
         <a class="brand" href="index.html"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="9.5" y="9.5" width="45" height="45" rx="13" stroke-width="5"/><circle cx="32" cy="32" r="8.5"/></svg> AIR <span class="by">by VM4AI</span></a>
-        <p>An overlay for AI chatbots that turns your session into a structured, auditable environment. VM4AI is the concept; AIR is the framework built on it.</p>
+        <p>AI work, carried forward. A prompt-based framework for focused work, structured continuity and compatible-platform handoff.</p>
       </div>
       <div class="foot-col">
         <h4>Product</h4>
