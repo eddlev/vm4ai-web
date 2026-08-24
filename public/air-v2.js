@@ -41,7 +41,7 @@
       var cta=heroCopy.querySelector('.hero-cta');
       var note=heroCopy.querySelector('.hero-note');
 
-      if(title)title.textContent='AI work, carried forward.';
+      if(title)title.innerHTML='<span>AI work</span><br><span>carried forward</span>';
       if(sub)sub.textContent='Carry projects across sessions and platforms without rebuilding the work every time.';
       if(signature)signature.textContent='FOCUSED · FLUID · AIR';
 
@@ -99,6 +99,7 @@
 .hero .hero-air-v4{font-size:clamp(3.8rem,6.2vw,5.25rem);font-weight:700;line-height:.88;letter-spacing:-.055em;color:var(--text)}\
 .hero .hero-resource-v5{margin-top:.48rem;font:400 .67rem \'JetBrains Mono\',ui-monospace,monospace;letter-spacing:.18em;color:var(--subtle)}\
 .hero .hero-lockup-v4 .hero-promise-v4{max-width:780px;font-size:clamp(2.65rem,5.2vw,4.65rem);font-weight:700;line-height:.98;letter-spacing:-.045em;margin:.1rem 0 .9rem;color:var(--text)}\
+.hero .hero-lockup-v4 .hero-promise-v4 span{white-space:nowrap}\
 .hero .hero-lockup-v4 .sub{max-width:690px;margin:0;color:var(--muted);font-size:clamp(1rem,1.3vw,1.14rem);line-height:1.55}\
 .hero .hero-divider-v5{display:block;width:78px;height:1px;background:var(--border2);margin:1rem auto .9rem}\
 .hero .hero-lockup-v4 .signature{font-size:clamp(1.05rem,1.55vw,1.25rem);font-weight:600;letter-spacing:.055em;color:var(--brass);margin:0}\
