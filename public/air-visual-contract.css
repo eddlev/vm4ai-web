@@ -1,5 +1,10 @@
-/* Cross-site visual contract. Loaded last so legacy embedded styles and modern pages share the same page-title and hero-treatment rules. */
+/* Cross-site visual contract. Loaded last so legacy embedded styles and modern pages share the same title scale and AIR canvas. */
 :root{--air-page-title-size:clamp(2.65rem,1.8rem + 3vw,4.5rem)}
+body{
+  background-color:var(--bg,#1A1613)!important;
+  background-image:radial-gradient(rgba(201,162,39,.05) 1px,transparent 1.4px)!important;
+  background-size:26px 26px!important;
+  background-attachment:fixed!important;
+}
 .page-title,.hero h1.page-title{font-size:var(--air-page-title-size)!important}
-.hero--patterned{background-color:var(--bg,#1A1613)!important;background-image:linear-gradient(var(--grid,rgba(201,162,39,.085)) 1px,transparent 1px),linear-gradient(90deg,var(--grid,rgba(201,162,39,.085)) 1px,transparent 1px)!important;background-size:28px 28px!important}
-.hero--plain{background-image:none!important}
+.hero{background-color:transparent!important;background-image:none!important}
