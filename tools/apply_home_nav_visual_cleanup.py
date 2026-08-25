@@ -10,13 +10,6 @@ MANIFEST = ROOT / "navigation.manifest.json"
 PUBLIC = ROOT / "public"
 CSS = PUBLIC / "air-v2.css"
 
-ORIENTATION = {
-    "how-it-works.html",
-    "where-air-fits.html",
-    "explore-air.html",
-    "get-started.html",
-}
-
 PRIMARY_NAV = [
     {"path": "how-it-works.html", "label": "How it works"},
     {"path": "where-air-fits.html", "label": "Where AIR fits"},
@@ -26,10 +19,6 @@ PRIMARY_NAV = [
 
 CLASS_ATTR_RE = re.compile(r'class="([^"]*)"')
 H1_RE = re.compile(r'<h1\b([^>]*)>', re.IGNORECASE)
-HERO_SECTION_RE = re.compile(
-    r'<section\b[^>]*class="[^"]*\bhero\b[^"]*"[^>]*>', re.IGNORECASE
-)
-MAIN_RE = re.compile(r'<main>.*?</main>', re.IGNORECASE | re.DOTALL)
 
 
 def update_class_attr(tag: str, add: set[str] | None = None, remove: set[str] | None = None) -> str:
@@ -73,48 +62,9 @@ def normalize_h1(text: str, path: str) -> str:
             if raw.split(":", 1)[0].strip().lower() == "font-size":
                 continue
             declarations.append(raw)
-        if declarations:
-            replacement = ' style="' + ";".join(declarations) + '"'
-        else:
-            replacement = ""
+        replacement = (' style="' + ";".join(declarations) + '"') if declarations else ""
         tag = tag[: style_match.start()] + replacement + tag[style_match.end() :]
     return text[: match.start()] + tag + text[match.end() :]
-
-
-def normalize_hero(text: str, path: str, patterned: bool) -> str:
-    matches = list(HERO_SECTION_RE.finditer(text))
-    if patterned:
-        if len(matches) != 1:
-            raise SystemExit(f"{path}: orientation page expected exactly one hero section, found {len(matches)}")
-    else:
-        if len(matches) == 0:
-            return text
-        if len(matches) > 1:
-            raise SystemExit(f"{path}: expected at most one hero section, found {len(matches)}")
-    match = matches[0]
-    tag = match.group(0)
-    add = {"hero--patterned" if patterned else "hero--plain"}
-    remove = {"hero--plain", "hero--patterned", "brand-field"}
-    tag = update_class_attr(tag, add=add, remove=remove)
-    return text[: match.start()] + tag + text[match.end() :]
-
-
-def compact_homepage_main(text: str) -> str:
-    matches = list(MAIN_RE.finditer(text))
-    if len(matches) != 1:
-        raise SystemExit(f"index.html: expected exactly one main element, found {len(matches)}")
-    marker = "Structure helps. Evidence still matters."
-    if marker in text:
-        return text
-    main = '''<main>
-<section class="hero hero--plain"><div class="container hero-grid"><div><div class="eyebrow">AIR · AI Resource</div><h1 class="page-title">AI work, carried forward.</h1><p class="sub">Continue complex projects across sessions and compatible platforms — without rebuilding the work every time.</p><div class="hero-cta"><a class="btn btn-primary" href="get-started.html">Try AIR</a><a class="btn" href="how-it-works.html">See how it works</a></div><p class="hero-note">Prompt-based framework · host-model governed · compatibility depends on the platform</p></div><div class="hero-art" aria-label="Focused, Fluid and AIR visual system"><div class="hero-art-head"><span>ONE PROJECT</span><span>THREE STATES</span></div><div class="mini-triad"><div class="mini-state"><h3>Focused</h3><div class="mini-v"><div class="task-track"><span class="task-node left"></span><span class="task-node mid"></span><span class="task-node right"></span></div></div></div><div class="mini-state"><h3>Fluid</h3><div class="mini-v"><div class="fluid-mini"><div class="fluid-box alt"><span></span></div><div class="fluid-box"><span></span></div><div class="fluid-box alt"><span></span></div></div></div></div><div class="mini-state"><h3>AIR</h3><div class="mini-v"><div class="air-mini"><div class="project-node past"><span></span></div><b class="arrow">→</b><div class="project-node middle"><span></span></div><b class="arrow">→</b><div class="project-node"><span></span></div></div></div></div></div></div></div></section>
-<section class="section"><div class="container"><div class="section-head"><div class="eyebrow">The problem</div><h2>Your project shouldn’t reset with the session.</h2><p>Long AI work creates an ugly choice: stay in an increasingly noisy session, or start fresh and spend time reconstructing work you already did.</p></div><div class="compare-grid"><div class="panel"><div class="panel-label">Without AIR</div><div class="rows"><div class="row"><span class="bullet"></span><span>Long sessions accumulate noise.</span></div><div class="row"><span class="bullet"></span><span>A fresh session means another briefing.</span></div><div class="row"><span class="bullet"></span><span>Decisions disappear into session history.</span></div><div class="row"><span class="bullet"></span><span>Changing platforms breaks continuity.</span></div></div></div><div class="panel air"><div class="panel-label">With AIR</div><div class="rows"><div class="row active"><span class="bullet"></span><span>One active task stays centered.</span></div><div class="row"><span class="bullet"></span><span>Structured handoff captures the current state.</span></div><div class="row"><span class="bullet"></span><span>A new session continues from that state.</span></div><div class="row"><span class="bullet"></span><span>The project can move to another compatible platform.</span></div></div></div></div></div></section>
-<section class="section"><div class="container"><div class="section-head"><div class="eyebrow">The AIR system</div><h2>Focused. Fluid. AIR.</h2><p>The same project viewed at three levels: the active task, the continuation point, and the project that persists across sessions and compatible platforms.</p></div><div class="state-grid"><article class="state-card"><h3>Focused</h3><p class="sub">One active task at a time.</p><div class="state-visual"><div class="focused-large"><span class="big-task left"></span><span class="big-task active"></span><span class="big-task right"></span></div></div><p class="state-caption">Focus on one task.</p></article><article class="state-card"><h3>Fluid</h3><p class="sub">Continue, don’t reconstruct.</p><div class="state-visual"><div class="fluid-large"><div class="session-option alt"><span class="state-mark"></span><span>New Session</span></div><div class="session-option"><span class="state-mark"></span><span>Current Session</span></div><div class="session-option alt"><span class="state-mark"></span><span>New Platform</span></div><span class="branch"></span><span class="branch-stem"></span></div></div><p class="state-caption">same project state continues</p></article><article class="state-card"><h3>AIR</h3><p class="sub">Stable across sessions and platforms.</p><div class="state-visual"><div class="air-large"><div class="air-project p1"><span class="state-mark"></span></div><b class="arrow">→</b><div class="air-project p2"><span class="state-mark"></span></div><b class="arrow">→</b><div class="air-project"><span class="state-mark"></span></div></div></div><p class="state-caption">same AIR project persists</p></article></div><div class="state-rule">The container can change. The work keeps its state.</div></div></section>
-<section class="section"><div class="container"><div class="section-head"><div class="eyebrow">Continuity</div><h2>Work. Handoff. Continue.</h2><p>AIR carries the explicit working state needed to continue the project instead of asking the next session to reconstruct it from a buried transcript.</p></div><div class="flow"><div class="flow-step"><div class="n">01</div><h3>Work</h3><p>Keep the active task, constraints, decisions and evidence explicit while the project moves forward.</p></div><div class="flow-step"><div class="n">02</div><h3>Handoff</h3><p>Capture the current project state when the session needs to end or the work needs to move.</p></div><div class="flow-step"><div class="n">03</div><h3>Continue</h3><p>Load that state in a new session or compatible platform and resume from the project’s recorded position.</p></div></div><div class="payload continuity-payload"><div><b>Active task</b><span>What is being worked on now.</span></div><div><b>Decisions</b><span>What has already been settled.</span></div><div><b>Constraints</b><span>What the work must respect.</span></div><div><b>Evidence</b><span>What supports the current direction.</span></div><div><b>Approvals</b><span>What the user has authorized.</span></div><div><b>Next step</b><span>Where execution resumes.</span></div></div></div></section>
-<section class="section"><div class="container"><div class="section-head"><div class="eyebrow">Trust &amp; boundaries</div><h2>Structure helps. Evidence still matters.</h2><p>AIR is prompt-based and host-model governed. It makes scope, continuity and review boundaries visible, but it does not turn prompt records into independent proof of external events.</p></div><div class="two-grid"><div class="callout"><div class="label">Keep the claim proportional</div><p>Use AIR’s visible records to inspect the working contract. Use the relevant source, tool, test, operator or backend evidence for claims about the world outside the prompt runtime.</p></div><div class="panel"><div class="rows"><div class="row active"><span class="bullet"></span><span>Prompt-based framework, not hidden backend enforcement.</span></div><div class="row"><span class="bullet"></span><span>Host capability and compatibility still matter.</span></div><div class="row"><span class="bullet"></span><span>External claims still require external evidence.</span></div></div><div style="margin-top:1.2rem"><a class="btn" href="testing-and-evidence.html">Testing &amp; Evidence</a></div></div></div></div></section>
-<section class="section"><div class="container"><div class="cta-band"><h2>Pick up the project. Not the briefing.</h2><p>Use AIR to carry structured project state into the next session or compatible platform.</p><div class="hero-cta" style="justify-content:center"><a class="btn btn-primary" href="get-started.html">Try AIR</a><a class="btn" href="explore-air.html">Explore AIR</a></div></div></div></section>
-</main>'''
-    return text[: matches[0].start()] + main + text[matches[0].end() :]
 
 
 def patch_where_air_fits(text: str) -> str:
@@ -143,6 +93,8 @@ def patch_css() -> bool:
         ".page-title{font-size:var(--air-page-title-size);max-width:52rem;margin:1rem 0 1.1rem}",
     )
     text = re.sub(r'\n?\.hero \.page-title--compact\{[^}]*\}', "", text)
+    text = re.sub(r'\n?\.hero--patterned\{[^}]*\}', "", text)
+    text = re.sub(r'\n?\.hero--plain\{[^}]*\}', "", text)
     addon_marker = "/* ---------- orientation cleanup ---------- */"
     if addon_marker not in text:
         text = text.rstrip() + '''\n\n/* ---------- orientation cleanup ---------- */
@@ -170,13 +122,11 @@ def main() -> int:
         file_path = PUBLIC / path
         text = file_path.read_text(encoding="utf-8")
         original = text
-        if path == "index.html":
-            text = compact_homepage_main(text)
         if path == "where-air-fits.html":
             text = patch_where_air_fits(text)
-        text = remove_class_token_everywhere(text, "brand-field")
+        for token in ("brand-field", "hero--patterned", "hero--plain"):
+            text = remove_class_token_everywhere(text, token)
         text = normalize_h1(text, path)
-        text = normalize_hero(text, path, patterned=path in ORIENTATION)
         if text != original:
             file_path.write_text(text, encoding="utf-8")
             changed.append(f"public/{path}")
