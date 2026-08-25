@@ -47,3 +47,5 @@ jobs:
           git add -A
           git commit -m "Redesign AMRS readiness progression"
           git push origin HEAD:air-amrs-vertical-redesign
+
+# trigger after workflow installation
