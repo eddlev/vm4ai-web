@@ -1,0 +1,61 @@
+name: Render shared chrome
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - navigation.manifest.json
+      - chrome/**
+      - tools/render_chrome.py
+      - tools/validate_navigation.py
+      - .github/workflows/render-shared-chrome.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: render-shared-chrome-main
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Render canonical header and footer
+        run: python3 tools/render_chrome.py --write
+
+      - name: Require strict navigation contract
+        run: python3 tools/validate_navigation.py --strict-chrome
+
+      - name: Verify renderer is idempotent
+        run: python3 tools/render_chrome.py --check
+
+      - name: Restrict generated diff to public HTML
+        shell: bash
+        run: |
+          set -euo pipefail
+          unexpected="$(git diff --name-only | grep -vE '^public/[^/]+\.html$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf 'Unexpected generated files:\n%s\n' "$unexpected" >&2
+            exit 1
+          fi
+
+      - name: Commit generated static HTML
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- public; then
+            echo "Shared chrome is already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/*.html
+          git commit -m "Render shared navigation chrome"
+          git push
