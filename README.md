@@ -15,7 +15,7 @@
 
 The source for **[vm4ai.com](https://vm4ai.com)**, the public site for **AIR**, the prompt-based framework from VM4AI.
 
-The deployable site lives in [`public/`](public/) and has no build step. The homepage is the Brand v2 implementation: outcome-first positioning, the Focused / Fluid / AIR visual grammar, light/dark parity, structured continuity messaging, and explicit prompt-layer trust boundaries.
+The deployable site lives in [`public/`](public/) and has no Cloudflare build step. The homepage is the Brand v2 implementation: outcome-first positioning, the Focused / Fluid / AIR visual grammar, light/dark parity, structured continuity messaging, and explicit prompt-layer trust boundaries.
 
 ---
 
@@ -33,9 +33,15 @@ The canonical brand rules and authored diagrams live in **[eddlev/air-brand](htt
 
 ```text
 vm4ai-web/
-├─ navigation.manifest.json    canonical page, journey and target-navigation contract
+├─ navigation.manifest.json    canonical page, journey and navigation contract
+├─ chrome/
+│  ├─ header.html              canonical shared header source
+│  └─ footer.html              canonical shared footer source
 ├─ tools/
+│  ├─ render_chrome.py         deterministic static chrome renderer
 │  └─ validate_navigation.py   deterministic site/link/navigation validator
+├─ .github/workflows/
+│  └─ render-shared-chrome.yml render + validate + commit generated static HTML
 ├─ public/
 │  ├─ index.html               Brand v2 homepage
 │  ├─ explore-air.html         human-facing site map
@@ -59,11 +65,11 @@ vm4ai-web/
 
 ## Navigation contract
 
-[`navigation.manifest.json`](navigation.manifest.json) is the canonical inventory for the site's public HTML pages and intended navigation model. It records:
+[`navigation.manifest.json`](navigation.manifest.json) is the canonical inventory for the site's public HTML pages and navigation model. It records:
 
 - every top-level public HTML page, including whether it belongs in `sitemap.xml`;
 - minimum inbound-link requirements for important discovery surfaces;
-- the primary-navigation and footer labels targeted by the future shared-chrome refactor;
+- the enforced primary-navigation and footer labels;
 - the visitor journeys used by **Explore AIR**: Start, Understand, Use, Trust & Evidence, and VM4AI.
 
 Run the deterministic standard-library validator from the repository root:
@@ -72,25 +78,52 @@ Run the deterministic standard-library validator from the repository root:
 python3 tools/validate_navigation.py
 ```
 
-The normal check fails on structural defects that should not ship:
+The check fails on structural defects that should not ship:
 
 - a top-level HTML page is missing from the manifest, or a manifest page is missing from `public/`;
 - `sitemap.xml` disagrees with the manifest's explicit sitemap policy;
 - an internal `href` points to a missing local target;
 - an important page falls below its configured minimum number of unique inbound source pages;
-- the manifest's own navigation or journey references point to unregistered pages.
+- the manifest's own navigation or journey references point to unregistered pages;
+- generated primary-navigation or footer chrome drifts from the manifest contract.
 
-Shared header/footer markup is still duplicated across the legacy HTML pages. Until that refactor is complete, differences between current page chrome and the manifest's target chrome are reported as warnings rather than hard failures.
-
-For the shared-chrome refactor and its final verification, use:
+`--strict-chrome` remains available as an explicit release check and is used by the generation workflow:
 
 ```bash
 python3 tools/validate_navigation.py --strict-chrome
 ```
 
-`--strict-chrome` turns primary-navigation/footer drift into an error gate. This lets the manifest become the contract for generated shared chrome without making the current legacy duplication block unrelated content work in the meantime.
+## Shared chrome
 
-The validator is a development/release check only. It does **not** add a build step or runtime dependency to the deployed site.
+Global navigation is generated, not hand-maintained page by page.
+
+The source of truth is:
+
+1. [`navigation.manifest.json`](navigation.manifest.json) for page inventory, labels and grouping;
+2. [`chrome/header.html`](chrome/header.html) for header structure;
+3. [`chrome/footer.html`](chrome/footer.html) for footer structure.
+
+Do **not** manually edit the generated `<header class="site-header">` or `<footer class="site-footer">` blocks inside `public/*.html`.
+
+To render locally:
+
+```bash
+python3 tools/render_chrome.py --write
+python3 tools/validate_navigation.py --strict-chrome
+python3 tools/render_chrome.py --check
+```
+
+The renderer fails closed unless each registered page contains exactly one site header and one site footer. It also compares a page skeleton before and after rendering and refuses the operation if anything outside those two chrome regions changes.
+
+[`.github/workflows/render-shared-chrome.yml`](.github/workflows/render-shared-chrome.yml) runs when the manifest, shared chrome sources, renderer, validator or workflow itself changes. It:
+
+1. renders canonical chrome into the static HTML files;
+2. requires strict navigation validation;
+3. verifies rendering is idempotent;
+4. rejects generated diffs outside top-level `public/*.html`;
+5. commits generated static HTML only when a change is actually required.
+
+The generated commit does not introduce a deployment runtime. Cloudflare Pages still serves the committed `public/` directory directly with no build command.
 
 ## Runtime/privacy posture
 
@@ -100,7 +133,7 @@ The Brand v2 homepage currently uses the local/system font fallback stack under 
 
 ## Local preview
 
-No toolchain required:
+No web toolchain required:
 
 ```bash
 cd public
