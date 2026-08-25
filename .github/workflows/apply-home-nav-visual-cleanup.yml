@@ -1,12 +1,6 @@
 name: Apply home nav visual cleanup
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/apply-home-nav-visual-cleanup.yml'
-      - 'tools/apply_home_nav_visual_cleanup.py'
-      - 'tools/validate_home_nav_visual_cleanup.py'
   workflow_dispatch:
 
 permissions:
