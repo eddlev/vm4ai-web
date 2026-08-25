@@ -10,6 +10,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PUBLIC = ROOT / "public"
 MANIFEST = ROOT / "navigation.manifest.json"
 CSS = PUBLIC / "air-v2.css"
+VISUAL_CONTRACT = PUBLIC / "air-visual-contract.css"
+VISUAL_CONTRACT_LINK = '<link rel="stylesheet" href="air-visual-contract.css">'
 
 EXPECTED_NAV = [
     {"path": "how-it-works.html", "label": "How it works"},
@@ -54,6 +56,8 @@ def main() -> int:
     patterned: set[str] = set()
     for path in pages:
         text = (PUBLIC / path).read_text(encoding="utf-8")
+        if VISUAL_CONTRACT_LINK + "\n</head>" not in text:
+            fail(errors, f"{path}: shared visual contract is not loaded last in the head")
         if "brand-field" in text:
             fail(errors, f"{path}: legacy brand-field texture class remains")
 
@@ -140,6 +144,16 @@ def main() -> int:
     if "--air-page-title-compact-size" in css or ".page-title--compact" in css:
         fail(errors, "air-v2.css: compact page-title variant still exists")
 
+    contract = VISUAL_CONTRACT.read_text(encoding="utf-8")
+    for marker in [
+        "--air-page-title-size:clamp(2.65rem,1.8rem + 3vw,4.5rem)",
+        ".page-title,.hero h1.page-title{font-size:var(--air-page-title-size)!important}",
+        ".hero--patterned{",
+        ".hero--plain{background-image:none!important}",
+    ]:
+        if marker not in contract:
+            fail(errors, f"air-visual-contract.css: missing {marker}")
+
     if errors:
         print("home/nav visual cleanup validation: FAIL", file=sys.stderr)
         for error in errors:
@@ -149,6 +163,7 @@ def main() -> int:
     print(f"home/nav visual cleanup validation: PASS ({len(pages)} content pages)")
     print("primary nav: How it works | Where AIR fits | Explore | Get started")
     print("patterned heroes: " + ", ".join(sorted(ORIENTATION)))
+    print("shared visual contract: loaded last on every content page")
     print("homepage sections: 6")
     return 0
 
