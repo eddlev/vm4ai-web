@@ -19,15 +19,8 @@ EXPECTED_NAV = [
     {"path": "explore-air.html", "label": "Explore"},
     {"path": "get-started.html", "label": "Get started"},
 ]
-ORIENTATION = {
-    "how-it-works.html",
-    "where-air-fits.html",
-    "explore-air.html",
-    "get-started.html",
-}
 
 H1_RE = re.compile(r'<h1\b([^>]*)>', re.IGNORECASE)
-HERO_RE = re.compile(r'<section\b[^>]*class="([^"]*\bhero\b[^"]*)"[^>]*>', re.IGNORECASE)
 MAIN_RE = re.compile(r'<main>(.*?)</main>', re.IGNORECASE | re.DOTALL)
 
 
@@ -53,13 +46,15 @@ def main() -> int:
             fail(errors, f"{required} must remain discoverable in the footer")
 
     pages = [str(entry["path"]) for entry in manifest["pages"] if str(entry["path"]) != "404.html"]
-    patterned: set[str] = set()
     for path in pages:
         text = (PUBLIC / path).read_text(encoding="utf-8")
         if VISUAL_CONTRACT_LINK + "\n</head>" not in text:
             fail(errors, f"{path}: shared visual contract is not loaded last in the head")
         if "brand-field" in text:
             fail(errors, f"{path}: legacy brand-field texture class remains")
+        for obsolete in ("hero--patterned", "hero--plain"):
+            if obsolete in text:
+                fail(errors, f"{path}: obsolete {obsolete} texture semantic remains")
 
         h1 = list(H1_RE.finditer(text))
         if len(h1) != 1:
@@ -74,27 +69,6 @@ def main() -> int:
             style = re.search(r'style="([^"]*)"', attrs)
             if style and re.search(r'(^|;)\s*font-size\s*:', style.group(1), re.IGNORECASE):
                 fail(errors, f"{path}: h1 still has an inline font-size")
-
-        hero = list(HERO_RE.finditer(text))
-        if path in ORIENTATION:
-            if len(hero) != 1:
-                fail(errors, f"{path}: orientation page expected exactly one hero section, found {len(hero)}")
-            else:
-                classes = set(hero[0].group(1).split())
-                if "hero--patterned" not in classes or "hero--plain" in classes:
-                    fail(errors, f"{path}: orientation hero is not patterned")
-                else:
-                    patterned.add(path)
-        else:
-            if len(hero) > 1:
-                fail(errors, f"{path}: expected at most one hero section, found {len(hero)}")
-            elif len(hero) == 1:
-                classes = set(hero[0].group(1).split())
-                if "hero--plain" not in classes or "hero--patterned" in classes:
-                    fail(errors, f"{path}: non-orientation hero is not plain")
-
-    if patterned != ORIENTATION:
-        fail(errors, f"patterned hero set is {sorted(patterned)}, expected {sorted(ORIENTATION)}")
 
     index = (PUBLIC / "index.html").read_text(encoding="utf-8")
     main_match = MAIN_RE.search(index)
@@ -135,24 +109,28 @@ def main() -> int:
         ".hero h1{font-size:var(--air-page-title-size)",
         ".page-title{font-size:var(--air-page-title-size)",
         ".cards--three{grid-template-columns:repeat(3,minmax(0,1fr))",
-        ".hero--patterned{",
-        ".hero--plain{",
     ]
     for marker in required_css:
         if marker not in css:
             fail(errors, f"air-v2.css: missing {marker}")
     if "--air-page-title-compact-size" in css or ".page-title--compact" in css:
         fail(errors, "air-v2.css: compact page-title variant still exists")
+    if ".hero--patterned{" in css or ".hero--plain{" in css:
+        fail(errors, "air-v2.css: obsolete hero texture variants remain")
 
     contract = VISUAL_CONTRACT.read_text(encoding="utf-8")
     for marker in [
         "--air-page-title-size:clamp(2.65rem,1.8rem + 3vw,4.5rem)",
         ".page-title,.hero h1.page-title{font-size:var(--air-page-title-size)!important}",
-        ".hero--patterned{",
-        ".hero--plain{background-image:none!important}",
+        "background-image:radial-gradient(rgba(201,162,39,.05) 1px,transparent 1.4px)!important",
+        "background-size:26px 26px!important",
+        "background-attachment:fixed!important",
+        ".hero{background-color:transparent!important;background-image:none!important}",
     ]:
         if marker not in contract:
             fail(errors, f"air-visual-contract.css: missing {marker}")
+    if ".hero--patterned" in contract or ".hero--plain" in contract:
+        fail(errors, "air-visual-contract.css: obsolete hero texture semantics remain")
 
     if errors:
         print("home/nav visual cleanup validation: FAIL", file=sys.stderr)
@@ -162,7 +140,8 @@ def main() -> int:
 
     print(f"home/nav visual cleanup validation: PASS ({len(pages)} content pages)")
     print("primary nav: How it works | Where AIR fits | Explore | Get started")
-    print("patterned heroes: " + ", ".join(sorted(ORIENTATION)))
+    print("global canvas texture: Showcase-style radial pattern")
+    print("hero texture variants: none")
     print("shared visual contract: loaded last on every content page")
     print("homepage sections: 6")
     return 0
