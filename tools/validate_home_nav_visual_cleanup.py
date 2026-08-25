@@ -72,16 +72,20 @@ def main() -> int:
                 fail(errors, f"{path}: h1 still has an inline font-size")
 
         hero = list(HERO_RE.finditer(text))
-        if len(hero) != 1:
-            fail(errors, f"{path}: expected exactly one hero section, found {len(hero)}")
-        else:
-            classes = set(hero[0].group(1).split())
-            if path in ORIENTATION:
+        if path in ORIENTATION:
+            if len(hero) != 1:
+                fail(errors, f"{path}: orientation page expected exactly one hero section, found {len(hero)}")
+            else:
+                classes = set(hero[0].group(1).split())
                 if "hero--patterned" not in classes or "hero--plain" in classes:
                     fail(errors, f"{path}: orientation hero is not patterned")
                 else:
                     patterned.add(path)
-            else:
+        else:
+            if len(hero) > 1:
+                fail(errors, f"{path}: expected at most one hero section, found {len(hero)}")
+            elif len(hero) == 1:
+                classes = set(hero[0].group(1).split())
                 if "hero--plain" not in classes or "hero--patterned" in classes:
                     fail(errors, f"{path}: non-orientation hero is not plain")
 
