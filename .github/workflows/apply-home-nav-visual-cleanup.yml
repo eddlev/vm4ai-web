@@ -18,6 +18,9 @@ jobs:
       - name: Apply approved home, nav and visual cleanup
         run: python3 tools/apply_home_nav_visual_cleanup.py
 
+      - name: Ensure shared visual contract is loaded
+        run: python3 tools/ensure_visual_contract_links.py
+
       - name: Render canonical shared navigation
         run: python3 tools/render_chrome.py --write
 
@@ -59,5 +62,5 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add navigation.manifest.json public/*.html public/air-v2.css
-          git commit -m 'Simplify home navigation and visual hierarchy'
+          git commit -m 'Apply shared visual contract across pages'
           git push
