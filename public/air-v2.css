@@ -13,8 +13,6 @@
 .hero--page .sub{max-width:45rem}
 .section--standard{padding:var(--air-section-space) 0}
 .section--compact{padding:var(--air-section-space-compact) 0}
-.hero--patterned{background-color:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px}
-.hero--plain{background-image:none}
 
 /* ---------- orientation cleanup ---------- */
 .cards--three{grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1rem,2vw,1.5rem)}
