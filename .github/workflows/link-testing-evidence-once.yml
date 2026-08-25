@@ -1,0 +1,67 @@
+name: Link Testing and Evidence once
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/link-testing-evidence-once.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Add approved Testing and Evidence link
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('public/how-it-works.html')
+          text = p.read_text(encoding='utf-8')
+
+          old = '''      <p style="max-width:45rem">These objects make AIR's declared runtime state visible; they do not reveal hidden chain-of-thought or independently prove that an external action occurred. Source-dependent and execution-dependent claims require their own evidence. <a href="showcase.html">See a full session &rarr;</a> — a real project from boot to handoff, every object — or learn <a href="real-boot-vs-roleplay.html">how AIR load integrity is checked</a>.</p>'''
+          new = '''      <p style="max-width:45rem">These objects make AIR's declared runtime state visible; they do not reveal hidden chain-of-thought or independently prove that an external action occurred. Source-dependent and execution-dependent claims require their own evidence. <a href="showcase.html">See a full session &rarr;</a> — a real project from boot to handoff, every object — or learn <a href="real-boot-vs-roleplay.html">how AIR load integrity is checked</a>. <a href="testing-and-evidence.html">See Testing &amp; Evidence &rarr;</a></p>'''
+
+          if text.count(old) != 1:
+              raise SystemExit(f'Expected Evidence paragraph exactly once; found {text.count(old)}')
+          if 'href="testing-and-evidence.html"' in text:
+              raise SystemExit('Testing & Evidence link already present; refusing duplicate')
+
+          p.write_text(text.replace(old, new, 1), encoding='utf-8')
+          PY
+
+      - name: Verify exact source change
+        run: |
+          git diff --check
+          python - <<'PY'
+          from pathlib import Path
+          t = Path('public/how-it-works.html').read_text(encoding='utf-8')
+          assert t.count('href="testing-and-evidence.html"') == 1
+          assert '<a href="testing-and-evidence.html">See Testing &amp; Evidence &rarr;</a>' in t
+          print('Testing & Evidence inbound link verification passed')
+          PY
+
+      - name: Commit only final page change
+        run: |
+          rm .github/workflows/link-testing-evidence-once.yml
+          changed="$(git status --porcelain | sed 's/^...//' | sort)"
+          expected="$(printf '%s\n%s' '.github/workflows/link-testing-evidence-once.yml' 'public/how-it-works.html' | sort)"
+          if [ "$changed" != "$expected" ]; then
+            echo "Unexpected changed paths:"
+            printf '%s\n' "$changed"
+            exit 1
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Link Testing & Evidence from How it works"
+          git push origin HEAD:main
