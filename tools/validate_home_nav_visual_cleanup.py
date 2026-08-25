@@ -40,10 +40,18 @@ def main() -> int:
     if manifest["chrome"]["primary_nav"] != EXPECTED_NAV:
         fail(errors, "primary navigation does not match the approved four-item contract")
 
-    product_paths = {str(item["path"]) for item in manifest["chrome"]["footer"]["Product"]}
+    footer = manifest["chrome"]["footer"]
+    if set(footer) != {"Legal"}:
+        fail(errors, "footer contract must be compact and contain only the Legal group")
+    else:
+        legal_paths = {str(item["path"]) for item in footer["Legal"]}
+        if legal_paths != {"privacy.html", "terms.html"}:
+            fail(errors, "compact footer Legal group must contain Privacy and Terms")
+
+    explore = (PUBLIC / "explore-air.html").read_text(encoding="utf-8")
     for required in {"air-docs.html", "use-cases.html"}:
-        if required not in product_paths:
-            fail(errors, f"{required} must remain discoverable in the footer")
+        if f'href="{required}"' not in explore:
+            fail(errors, f"{required} must remain discoverable from Explore")
 
     pages = [str(entry["path"]) for entry in manifest["pages"] if str(entry["path"]) != "404.html"]
     for path in pages:
@@ -55,6 +63,20 @@ def main() -> int:
         for obsolete in ("hero--patterned", "hero--plain"):
             if obsolete in text:
                 fail(errors, f"{path}: obsolete {obsolete} texture semantic remains")
+
+        if text.count('class="btn github-btn"') != 1:
+            fail(errors, f"{path}: canonical github-btn control missing or duplicated")
+        if "foot-grid" in text:
+            fail(errors, f"{path}: obsolete multi-column footer markup remains")
+        if text.count('class="foot-bottom"') != 1:
+            fail(errors, f"{path}: compact foot-bottom missing or duplicated")
+        for required_footer_marker in [
+            'class="legal" href="privacy.html"',
+            'class="legal" href="terms.html"',
+            'class="made" href="made-with-air.html"',
+        ]:
+            if required_footer_marker not in text:
+                fail(errors, f"{path}: compact footer missing {required_footer_marker}")
 
         h1 = list(H1_RE.finditer(text))
         if len(h1) != 1:
@@ -126,6 +148,9 @@ def main() -> int:
         "background-size:26px 26px!important",
         "background-attachment:fixed!important",
         ".hero{background-color:transparent!important;background-image:none!important}",
+        ".site-header .github-btn{",
+        ".site-footer .foot-grid{display:none!important}",
+        ".site-footer .foot-bottom{",
     ]:
         if marker not in contract:
             fail(errors, f"air-visual-contract.css: missing {marker}")
@@ -141,7 +166,9 @@ def main() -> int:
     print(f"home/nav visual cleanup validation: PASS ({len(pages)} content pages)")
     print("primary nav: How it works | Where AIR fits | Explore | Get started")
     print("global canvas texture: Showcase-style radial pattern")
-    print("hero texture variants: none")
+    print("header GitHub control: canonical landing-page button")
+    print("footer: compact Legal + Made with AIR")
+    print("deep discovery: Explore")
     print("shared visual contract: loaded last on every content page")
     print("homepage sections: 6")
     return 0
