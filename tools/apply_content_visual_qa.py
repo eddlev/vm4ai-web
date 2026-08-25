@@ -102,7 +102,7 @@ def patch_glossary() -> bool:
 
 def patch_testing() -> bool:
     path = ROOT / "public" / "testing-and-evidence.html"
-    old = '<section class="hero" style="padding-bottom:1.5rem"><div class="container"><span class="eyebrow">How it works · Testing &amp; evidence</span><h1 style="font-size:clamp(2.35rem,1.7rem+2.6vw,3.7rem);margin:1rem 0 1.1rem;max-width:48rem">Test the claim you actually want to make.</h1><p class="sub" style="max-width:45rem">AIR uses different evidence paths for different questions. A behavioral model test, a deterministic release check, human QA and external verification can all be useful — but they do not prove the same thing.</p>'
+    old = '<section class="hero" style="padding-bottom:1.5rem"><div class="container"><span class="eyebrow">How it works · Testing & evidence</span><h1 style="font-size:clamp(2.35rem,1.7rem+2.6vw,3.7rem);margin:1rem 0 1.1rem;max-width:48rem">Test the claim you actually want to make.</h1><p class="sub" style="max-width:45rem">AIR uses different evidence paths for different questions. A behavioral model test, a deterministic release check, human QA and external verification can all be useful — but they do not prove the same thing.</p>'
     new = '<section class="hero hero--page hero--plain"><div class="container"><span class="eyebrow">How it works · Testing &amp; evidence</span><h1 class="page-title">Test the claim you actually want to make.</h1><p class="sub">AIR uses different evidence paths for different questions. A behavioral model test, a deterministic release check, human QA and external verification can all be useful — but they do not prove the same thing.</p>'
     changed = replace_once(path, old, new, 'hero hero--page hero--plain')
     text = path.read_text(encoding="utf-8")
