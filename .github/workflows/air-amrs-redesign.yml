@@ -20,6 +20,19 @@ jobs:
           ref: air-amrs-vertical-redesign
           fetch-depth: 0
 
+      - name: Correct temporary verifier
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('.github/air_amrs_redesign.py')
+          s = p.read_text(encoding='utf-8')
+          old = "positions = [text.index(f'AMRS-{i}', start) for i in range(7)]"
+          new = "positions = [text.index(f'<span class=\"amrs-n\">AMRS-{i}</span>', start) for i in range(7)]"
+          if old not in s:
+              raise SystemExit('Expected verifier line not found')
+          p.write_text(s.replace(old, new, 1), encoding='utf-8')
+          PY
+
       - name: Apply approved AMRS redesign
         run: python .github/air_amrs_redesign.py
 
@@ -32,7 +45,8 @@ jobs:
           assert t.count('<details class="amrs-stage') == 7
           assert 'NASA-style Technology Readiness Levels' not in t
           assert 'amrs-rung' not in t
-          positions = [t.index(f'AMRS-{i}', t.index('id="amrs"')) for i in range(7)]
+          start = t.index('id="amrs"')
+          positions = [t.index(f'<span class="amrs-n">AMRS-{i}</span>', start) for i in range(7)]
           assert positions == sorted(positions)
           assert 'Product analogues are orientation only' in t
           assert '<details class="amrs-stage" open' not in t
@@ -47,5 +61,3 @@ jobs:
           git add -A
           git commit -m "Redesign AMRS readiness progression"
           git push origin HEAD:air-amrs-vertical-redesign
-
-# trigger after workflow installation
