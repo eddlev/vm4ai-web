@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - '.github/workflows/apply-content-visual-qa.yml'
+      - 'tools/apply_content_visual_qa.py'
+      - 'tools/validate_visual_system.py'
   workflow_dispatch:
 
 permissions:
