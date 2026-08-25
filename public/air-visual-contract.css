@@ -1,4 +1,4 @@
-/* Cross-site visual contract. Loaded last so legacy embedded styles and modern pages share the same title scale and AIR canvas. */
+/* Cross-site visual contract. Loaded last so legacy embedded styles and modern pages share the same title scale, AIR canvas, header controls and compact footer. */
 :root{--air-page-title-size:clamp(2.65rem,1.8rem + 3vw,4.5rem)}
 body{
   background-color:var(--bg,#1A1613)!important;
@@ -8,3 +8,44 @@ body{
 }
 .page-title,.hero h1.page-title{font-size:var(--air-page-title-size)!important}
 .hero{background-color:transparent!important;background-image:none!important}
+
+/* Canonical header GitHub control: matches the landing-page button. */
+.site-header .github-btn{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:.72rem 1.2rem!important;
+  font:500 .94rem 'Space Grotesk',system-ui,sans-serif!important;
+  line-height:1!important;
+  border-radius:10px!important;
+  border:1px solid var(--border2,var(--border-strong,rgba(236,228,216,.22)))!important;
+  background:transparent!important;
+  color:var(--text,#ECE4D8)!important;
+  text-decoration:none!important;
+  cursor:pointer!important;
+}
+.site-header .github-btn:hover{border-color:var(--brass,#C9A227)!important;color:var(--text,#ECE4D8)!important}
+
+/* Canonical compact footer: legal line left, Made with AIR right. */
+.site-footer{
+  border-top:1px solid var(--border,rgba(236,228,216,.12))!important;
+  margin-top:2rem!important;
+  padding:1.75rem 0!important;
+  color:var(--muted,#9A8F80)!important;
+}
+.site-footer .foot-grid{display:none!important}
+.site-footer .foot-bottom{
+  display:flex!important;
+  justify-content:space-between!important;
+  align-items:center!important;
+  flex-wrap:wrap!important;
+  gap:1rem!important;
+  margin:0!important;
+  padding:0!important;
+  border-top:0!important;
+  font:400 .78rem 'JetBrains Mono',ui-monospace,Menlo,monospace!important;
+}
+.site-footer .legal,.site-footer .made{color:var(--muted,#9A8F80)!important;text-decoration:none!important}
+.site-footer .legal:hover,.site-footer .made:hover{color:var(--brass,#C9A227)!important}
+.site-footer .made{display:inline-flex!important;align-items:center!important;gap:.45rem!important}
+.site-footer .made .mark{width:16px!important;height:16px!important}
