@@ -65,17 +65,15 @@ def render_header(template: str, manifest: dict, current: str) -> str:
 
 def render_footer(template: str, manifest: dict) -> str:
     footer = manifest["chrome"]["footer"]
-    replacements = {
-        "{{FOOTER_PRODUCT}}": render_links(footer["Product"], indent="        "),
-        "{{FOOTER_EVIDENCE}}": render_links(footer["Evidence"], indent="        "),
-        "{{FOOTER_MORE}}": render_links(footer["More"], indent="        "),
-        "{{FOOTER_LEGAL}}": render_legal(footer["Legal"]),
-    }
-    out = template
-    for marker, value in replacements.items():
-        if out.count(marker) != 1:
-            raise RuntimeError(f"chrome/footer.html must contain exactly one {marker} placeholder")
-        out = out.replace(marker, value)
+    legal = footer.get("Legal")
+    if not isinstance(legal, list):
+        raise RuntimeError("navigation.manifest.json chrome.footer must contain a Legal list")
+    marker = "{{FOOTER_LEGAL}}"
+    if template.count(marker) != 1:
+        raise RuntimeError(f"chrome/footer.html must contain exactly one {marker} placeholder")
+    out = template.replace(marker, render_legal(legal))
+    if "{{FOOTER_" in out:
+        raise RuntimeError("chrome/footer.html contains an unsupported footer placeholder")
     return out
 
 
