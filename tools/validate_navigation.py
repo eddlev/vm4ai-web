@@ -38,6 +38,7 @@ class PageParser(HTMLParser):
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         a = self._attrs(attrs)
         classes = set(a.get("class", "").split())
+
         if tag == "nav" and ("nav" in classes or a.get("aria-label", "").lower() == "primary"):
             self._nav_depth += 1
         elif self._nav_depth:
@@ -138,6 +139,7 @@ def main() -> int:
     homepage = site["homepage"]
     base_url = site["base_url"]
     ignored_schemes = set(validation.get("ignored_href_schemes", []))
+    strict_chrome = args.strict_chrome or validation.get("chrome_mode") == "error"
 
     errors: list[str] = []
     warnings: list[str] = []
@@ -147,7 +149,6 @@ def main() -> int:
     if len(registered) != len(page_entries):
         errors.append("navigation.manifest.json contains duplicate page paths")
 
-    # Every top-level HTML page is either registered or deliberately removed.
     actual_html = {p.name for p in public.glob("*.html") if p.is_file()}
     registered_html = set(registered)
     if validation.get("require_all_top_level_html_registered", False):
@@ -156,7 +157,6 @@ def main() -> int:
         for path in sorted(registered_html - actual_html):
             errors.append(f"manifest page does not exist: public/{path}")
 
-    # Manifest navigation and journey references must resolve to registered pages.
     for item in manifest["chrome"]["primary_nav"]:
         if item["path"] not in registered:
             errors.append(f"primary_nav references unregistered page: {item['path']}")
@@ -169,7 +169,6 @@ def main() -> int:
             if path not in registered:
                 errors.append(f"journey {journey!r} references unregistered page: {path}")
 
-    # Sitemap must match the manifest's explicit sitemap policy.
     if validation.get("require_sitemap_exact_for_registered_pages", False):
         sitemap_actual = read_sitemap(public / site["sitemap"], base_url, homepage)
         sitemap_expected = {p["path"] for p in page_entries if p.get("sitemap", False)}
@@ -178,7 +177,6 @@ def main() -> int:
         for path in sorted(sitemap_actual - sitemap_expected):
             errors.append(f"sitemap.xml contains page not marked sitemap=true: {path}")
 
-    # Parse every registered HTML page once.
     parsed_pages: dict[str, PageParser] = {}
     for path in sorted(registered_html & actual_html):
         p = PageParser()
@@ -210,15 +208,15 @@ def main() -> int:
             if actual < minimum:
                 errors.append(f"insufficient inbound discovery for {path}: {actual} unique source page(s), minimum {minimum}")
 
-    # Shared chrome is intentionally a target contract until the refactor lands.
     target_primary = [(i["path"], i["label"]) for i in manifest["chrome"]["primary_nav"]]
-    primary_signatures: Counter[tuple[tuple[str, str], ...]] = Counter()
-    footer_signatures: Counter[tuple[str, ...]] = Counter()
     target_footer_paths = {
         item["path"]
         for items in manifest["chrome"]["footer"].values()
         for item in items
     }
+    primary_signatures: Counter[tuple[tuple[str, str], ...]] = Counter()
+    footer_signatures: Counter[tuple[str, ...]] = Counter()
+    footer_missing_groups: dict[tuple[str, ...], list[str]] = defaultdict(list)
 
     for source, parsed in parsed_pages.items():
         primary = tuple(
@@ -228,13 +226,18 @@ def main() -> int:
         if primary:
             primary_signatures[primary] += 1
 
-        footer_internal = []
+        footer_internal: list[str] = []
         for href in parsed.footer_links:
             target = local_target(source, href, base_url, homepage, ignored_schemes)
             if target in registered:
                 footer_internal.append(target)
         if footer_internal:
             footer_signatures[tuple(dict.fromkeys(footer_internal))] += 1
+
+        footer_targets = set(footer_internal)
+        missing = tuple(sorted(target_footer_paths - footer_targets))
+        if missing:
+            footer_missing_groups[missing].append(source)
 
     chrome_issues: list[str] = []
     if len(primary_signatures) > 1:
@@ -247,18 +250,16 @@ def main() -> int:
     if len(footer_signatures) > 1:
         chrome_issues.append(f"footer navigation currently has {len(footer_signatures)} distinct internal-link signatures across pages")
 
-    for source, parsed in parsed_pages.items():
-        footer_targets = {
-            local_target(source, href, base_url, homepage, ignored_schemes)
-            for href in parsed.footer_links
-        }
-        missing = sorted(target_footer_paths - footer_targets)
-        if missing:
-            # One aggregate message per signature is enough; avoid flooding output.
-            warnings.append(f"{source}: footer is missing target-contract links: {', '.join(missing)}")
+    for missing, sources in sorted(footer_missing_groups.items(), key=lambda item: (-len(item[1]), item[0])):
+        sample = ", ".join(sorted(sources)[:3])
+        if len(sources) > 3:
+            sample += f", +{len(sources) - 3} more"
+        chrome_issues.append(
+            f"{len(sources)} page(s) missing target footer links [{', '.join(missing)}]; examples: {sample}"
+        )
 
     if chrome_issues:
-        if args.strict_chrome or validation.get("chrome_mode") == "error":
+        if strict_chrome:
             errors.extend(chrome_issues)
         else:
             warnings.extend(chrome_issues)
