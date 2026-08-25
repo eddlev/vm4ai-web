@@ -83,8 +83,14 @@ def normalize_h1(text: str, path: str) -> str:
 
 def normalize_hero(text: str, path: str, patterned: bool) -> str:
     matches = list(HERO_SECTION_RE.finditer(text))
-    if len(matches) != 1:
-        raise SystemExit(f"{path}: expected exactly one hero section, found {len(matches)}")
+    if patterned:
+        if len(matches) != 1:
+            raise SystemExit(f"{path}: orientation page expected exactly one hero section, found {len(matches)}")
+    else:
+        if len(matches) == 0:
+            return text
+        if len(matches) > 1:
+            raise SystemExit(f"{path}: expected at most one hero section, found {len(matches)}")
     match = matches[0]
     tag = match.group(0)
     add = {"hero--patterned" if patterned else "hero--plain"}
