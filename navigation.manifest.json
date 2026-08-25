@@ -8,7 +8,7 @@
     "sitemap": "sitemap.xml"
   },
   "chrome": {
-    "state": "target_for_future_shared_chrome_refactor",
+    "state": "generated_shared_chrome",
     "primary_nav": [
       {"path": "how-it-works.html", "label": "How it works"},
       {"path": "use-cases.html", "label": "Use cases"},
@@ -83,7 +83,7 @@
     "require_sitemap_exact_for_registered_pages": true,
     "require_internal_href_targets_exist": true,
     "require_minimum_inbound_links": true,
-    "chrome_mode": "warn_until_shared_chrome_refactor",
+    "chrome_mode": "error",
     "ignored_href_schemes": ["mailto", "tel", "javascript", "data"]
   }
 }
