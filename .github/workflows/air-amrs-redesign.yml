@@ -1,0 +1,49 @@
+name: Apply AMRS vertical redesign
+
+on:
+  push:
+    branches:
+      - air-amrs-vertical-redesign
+    paths:
+      - .github/workflows/air-amrs-redesign.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: air-amrs-vertical-redesign
+          fetch-depth: 0
+
+      - name: Apply approved AMRS redesign
+        run: python .github/air_amrs_redesign.py
+
+      - name: Verify source structure
+        run: |
+          git diff --check
+          python - <<'PY'
+          from pathlib import Path
+          t = Path('public/how-it-works.html').read_text(encoding='utf-8')
+          assert t.count('<details class="amrs-stage') == 7
+          assert 'NASA-style Technology Readiness Levels' not in t
+          assert 'amrs-rung' not in t
+          positions = [t.index(f'AMRS-{i}', t.index('id="amrs"')) for i in range(7)]
+          assert positions == sorted(positions)
+          assert 'Product analogues are orientation only' in t
+          assert '<details class="amrs-stage" open' not in t
+          print('AMRS source verification passed')
+          PY
+
+      - name: Commit only the final page change
+        run: |
+          rm .github/air_amrs_redesign.py .github/workflows/air-amrs-redesign.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Redesign AMRS readiness progression"
+          git push origin HEAD:air-amrs-vertical-redesign
