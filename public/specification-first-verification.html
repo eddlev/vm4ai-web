@@ -23,7 +23,25 @@
 </style>
 </head>
 <body>
-<header class="site-header"><div class="container nav-row"><a class="brand" href="index.html"><svg class="mark air-eye" viewBox="0 0 64 64" aria-hidden="true"><rect x="9.5" y="9.5" width="45" height="45" rx="13" stroke-width="5"/><circle class="air-pupil" cx="32" cy="32" r="8.5"/></svg>AIR <span class="by">by VM4AI</span></a><nav class="nav" id="nav" aria-label="Primary"><a href="how-it-works.html">How it works</a><a href="air-docs.html">Docs</a><a href="get-started.html">Get started</a><a href="use-cases.html">Use cases</a><a href="about.html">About</a><a href="blog.html">Blog</a></nav><div class="nav-actions"><a class="btn" href="https://github.com/eddlev/vm4ai-air-kit" target="_blank" rel="noopener"><span class="github-label">GitHub</span></a><button class="icon-btn" data-theme-toggle aria-label="Toggle light or dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button><button class="icon-btn menu-btn" data-menu-toggle aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button></div></div></header>
+<header class="site-header">
+  <!-- Generated from chrome/header.html + navigation.manifest.json. Do not edit this block in public HTML. -->
+  <div class="container nav-row">
+    <a class="brand" href="index.html"><svg class="mark air-eye" viewBox="0 0 64 64" aria-hidden="true"><rect x="9.5" y="9.5" width="45" height="45" rx="13" stroke-width="5"/><circle class="air-pupil" cx="32" cy="32" r="8.5"/></svg>AIR <span class="by">by VM4AI</span></a>
+    <nav class="nav" id="nav" aria-label="Primary">
+      <a href="how-it-works.html">How it works</a>
+      <a href="use-cases.html">Use cases</a>
+      <a href="where-air-fits.html">Where AIR fits</a>
+      <a href="air-docs.html">Docs</a>
+      <a href="get-started.html">Get started</a>
+      <a href="explore-air.html">Explore</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn" href="https://github.com/eddlev/vm4ai-air-kit" target="_blank" rel="noopener"><span class="github-label">GitHub</span></a>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle light or dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+      <button class="icon-btn menu-btn" data-menu-toggle aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    </div>
+  </div>
+</header>
 <main>
 <section class="hero brand-field"><div class="container"><div class="eyebrow">AIR method</div><h1>Specification-First Verification.</h1><p class="sub">Passing checks is not enough if the checks never represented what the work was supposed to achieve. AIR's SFV discipline defines the intended outcome and the evidence model before material execution, then tests whether the specification itself is adequate.</p><div class="hero-cta"><a class="btn btn-primary" href="spec-driven-development.html">See AIR and SDD</a><a class="btn" href="air-for-development.html">Use it in development</a></div></div></section>
 <section class="section"><div class="container"><div class="section-head"><div class="eyebrow">The problem</div><h2>A green test suite can still certify the wrong thing.</h2><p>If the planned checks omit a material part of the intended behavior, every check can pass while the result is still wrong. SFV moves that question earlier: before execution, is the specification strong enough to detect a materially incorrect outcome?</p></div><div class="callout"><div class="label">The adequacy question</div><p>Could every planned verification pass while a material part of the intended behavior is still wrong? If yes, the specification or verification plan needs revision before AIR should treat implementation as ready to proceed.</p></div></div></section>
@@ -33,7 +51,49 @@
 <section class="section" style="padding-top:0"><div class="container"><div class="section-head"><div class="eyebrow">Boundaries</div><h2>What SFV does not claim.</h2></div><div class="cards"><div class="card"><div class="k">Not formal proof</div><h3>Verification strength follows the evidence</h3><p>SFV does not turn model judgment into deterministic proof. Formal verification, security review, production testing, operator checks, and external tools remain distinct evidence classes when the task needs them.</p></div><div class="card"><div class="k">Not a replacement for testing disciplines</div><h3>It governs the contract around them</h3><p>SFV can incorporate unit tests, integration tests, regression tests, property checks, security checks, human QA, or other methods. It is the specification-and-evidence discipline around those checks, not a claim that one technique replaces all others.</p></div><div class="card"><div class="k">Not unlimited ceremony</div><h3>Proportionality still applies</h3><p>Low-risk work can stay light. The specification and evidence burden should rise with blast radius, irreversibility, uncertainty, and the cost of being wrong.</p></div><div class="card"><div class="k">Not backend enforcement by itself</div><h3>Prompt AIR is behavioral governance</h3><p>The public AIR Kit is prompt-based. Backend or gateway enforcement must be supported by real backend evidence before AIR may claim it exists.</p></div></div></div></section>
 <section class="section" style="padding-top:0"><div class="container"><div class="callout"><div class="label">In the current AIR Kit</div><p>The public AIR Kit includes a complete <strong>Specification-First Verification Specialist</strong> capability package, including specialist, domain, method, executor, and package-manifest components. Capability remains unbound until it is selected, validated, approved when required, and compiled into the active Orbit 0 artifact.</p></div><p style="margin-top:1rem;color:var(--muted);font-size:.92rem">Source: <a href="https://github.com/eddlev/vm4ai-air-kit" target="_blank" rel="noopener">AIR Kit repository</a>.</p></div></section>
 </main>
-<footer class="site-footer"><div class="container"><div class="foot-grid"><div class="foot-brand"><a class="brand" href="index.html"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="9.5" y="9.5" width="45" height="45" rx="13" stroke-width="5"/><circle cx="32" cy="32" r="8.5"/></svg> AIR <span class="by">by VM4AI</span></a><p>AI work, carried forward. A prompt-based framework for focused work, structured continuity and compatible-platform handoff.</p></div><div class="foot-col"><h4>Product</h4><a href="how-it-works.html">How it works</a><a href="air-docs.html">Documentation</a><a href="get-started.html">Get started</a><a href="use-cases.html">Use cases</a><a href="where-air-fits.html">Where AIR fits</a><a href="blog.html">Blog</a><a href="glossary.html">Glossary</a></div><div class="foot-col"><h4>More</h4><a href="about.html">About</a><a href="services.html">Services</a><a href="https://github.com/eddlev/air-brand" target="_blank" rel="noopener">Brand kit</a></div><div class="foot-col"><h4>Connect</h4><a href="https://github.com/eddlev/vm4ai-air-kit" target="_blank" rel="noopener">GitHub</a><a href="https://github.com/sponsors/eddlev" target="_blank" rel="noopener">Sponsor</a><a href="https://github.com/eddlev/vm4ai-air-kit/discussions" target="_blank" rel="noopener">Support</a></div></div><div class="foot-bottom"><span>© 2026 VM4AI · Apache-2.0 (code) · <a class="legal" href="privacy.html">Privacy</a> · <a class="legal" href="terms.html">Terms</a></span><a class="made" href="made-with-air.html"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="9.5" y="9.5" width="45" height="45" rx="13" stroke-width="5"/><circle cx="32" cy="32" r="8.5"/></svg> Made with AIR</a></div></div></footer>
+<footer class="site-footer">
+  <!-- Generated from chrome/footer.html + navigation.manifest.json. Do not edit this block in public HTML. -->
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="index.html"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="9.5" y="9.5" width="45" height="45" rx="13" stroke-width="5"/><circle cx="32" cy="32" r="8.5"/></svg> AIR <span class="by">by VM4AI</span></a>
+        <p>AI work, carried forward. A prompt-based framework for focused work, structured continuity and compatible-platform handoff.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Product</h4>
+        <a href="how-it-works.html">How it works</a>
+        <a href="air-docs.html">Documentation</a>
+        <a href="get-started.html">Get started</a>
+        <a href="use-cases.html">Use cases</a>
+        <a href="where-air-fits.html">Where AIR fits</a>
+        <a href="explore-air.html">Explore AIR</a>
+        <a href="blog.html">Blog</a>
+        <a href="glossary.html">Glossary</a>
+      </div>
+      <div class="foot-col">
+        <h4>Evidence</h4>
+        <a href="testing-and-evidence.html">Testing &amp; Evidence</a>
+        <a href="built-with-air.html">Built with AIR</a>
+        <a href="recovered-with-air.html">Recovered with AIR</a>
+        <a href="real-boot-vs-roleplay.html">AIR load integrity</a>
+      </div>
+      <div class="foot-col">
+        <h4>More</h4>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="from-morphic-to-air.html">From Morphic to AIR</a>
+        <a href="https://github.com/eddlev/vm4ai-air-kit" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/eddlev/air-brand" target="_blank" rel="noopener">Brand kit</a>
+        <a href="https://github.com/sponsors/eddlev" target="_blank" rel="noopener">Sponsor</a>
+        <a href="https://github.com/eddlev/vm4ai-air-kit/discussions" target="_blank" rel="noopener">Support</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 VM4AI · Apache-2.0 (code) · <a class="legal" href="privacy.html">Privacy</a> · <a class="legal" href="terms.html">Terms</a></span>
+      <a class="made" href="made-with-air.html"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="9.5" y="9.5" width="45" height="45" rx="13" stroke-width="5"/><circle cx="32" cy="32" r="8.5"/></svg> Made with AIR</a>
+    </div>
+  </div>
+</footer>
 <script src="air-v2.js"></script>
 </body>
 </html>
