@@ -1,0 +1,63 @@
+name: Apply home nav visual cleanup
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply approved home, nav and visual cleanup
+        run: python3 tools/apply_home_nav_visual_cleanup.py
+
+      - name: Render canonical shared navigation
+        run: python3 tools/render_chrome.py --write
+
+      - name: Validate approved cleanup
+        run: python3 tools/validate_home_nav_visual_cleanup.py
+
+      - name: Validate navigation contract
+        run: python3 tools/validate_navigation.py --strict-chrome
+
+      - name: Verify shared chrome idempotence
+        run: python3 tools/render_chrome.py --check
+
+      - name: Restrict generated diff
+        shell: bash
+        run: |
+          set -euo pipefail
+          allowed='^(navigation\.manifest\.json|public/air-v2\.css|public/[^/]+\.html)$'
+          changed="$(git diff --name-only)"
+          if [ -z "$changed" ]; then
+            echo 'No generated changes.'
+            exit 0
+          fi
+          printf '%s\n' "$changed"
+          bad="$(printf '%s\n' "$changed" | grep -Ev "$allowed" || true)"
+          if [ -n "$bad" ]; then
+            echo 'Unexpected files changed:'
+            echo "$bad"
+            exit 1
+          fi
+
+      - name: Commit validated cleanup
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet; then
+            echo 'Nothing to commit.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add navigation.manifest.json public/*.html public/air-v2.css
+          git commit -m 'Simplify home navigation and visual hierarchy'
+          git push
