@@ -77,6 +77,22 @@
       "services.html"
     ]
   },
+  "context_back": {
+    "air-docs.html": "explore-air.html",
+    "glossary.html": "air-docs.html",
+    "use-cases.html": "explore-air.html",
+    "air-for-development.html": "use-cases.html",
+    "spec-driven-development.html": "air-for-development.html",
+    "specification-first-verification.html": "spec-driven-development.html",
+    "testing-and-evidence.html": "explore-air.html",
+    "real-boot-vs-roleplay.html": "testing-and-evidence.html",
+    "showcase.html": "get-started.html",
+    "blog.html": "about.html",
+    "built-with-air.html": "blog.html",
+    "recovered-with-air.html": "blog.html",
+    "from-morphic-to-air.html": "about.html",
+    "services.html": "about.html"
+  },
   "pages": [
     {
       "path": "index.html",
