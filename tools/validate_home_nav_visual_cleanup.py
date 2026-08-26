@@ -27,6 +27,7 @@ H1_RE = re.compile(r'<h1\b([^>]*)>', re.IGNORECASE)
 MAIN_RE = re.compile(r'<main>(.*?)</main>', re.IGNORECASE | re.DOTALL)
 NAV_RE = re.compile(r'<nav\b[^>]*\bid=["\']nav["\'][^>]*>(.*?)</nav>', re.IGNORECASE | re.DOTALL)
 NAV_LINK_RE = re.compile(r'<a\b[^>]*href="([^"]+)"[^>]*>(.*?)</a>', re.IGNORECASE | re.DOTALL)
+FOOT_GRID_MARKUP_RE = re.compile(r'<(?:div|section)\b[^>]*class="[^"]*\bfoot-grid\b[^"]*"', re.IGNORECASE)
 TAG_RE = re.compile(r'<[^>]+>')
 
 
@@ -87,7 +88,7 @@ def main() -> int:
 
         if text.count('class="btn github-btn"') != 1:
             fail(errors, f"{path}: canonical github-btn control missing or duplicated")
-        if "foot-grid" in text:
+        if FOOT_GRID_MARKUP_RE.search(text):
             fail(errors, f"{path}: obsolete multi-column footer markup remains")
         if text.count('class="foot-bottom"') != 1:
             fail(errors, f"{path}: compact foot-bottom missing or duplicated")
