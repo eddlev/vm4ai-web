@@ -10,7 +10,24 @@
 <link rel="stylesheet" href="air-v2.css"><style>.article{max-width:46rem;margin:0 auto}.backlink{display:inline-flex;margin-bottom:1.5rem;color:var(--muted);text-decoration:none;font:400 .8rem 'JetBrains Mono',ui-monospace,monospace}.article-cat,.article-meta{font:400 .74rem 'JetBrains Mono',ui-monospace,monospace;color:var(--muted)}.article-cat{text-transform:uppercase;letter-spacing:.1em;color:var(--brass)}.article h1{font-size:var(--air-page-title-size);margin:.7rem 0 .8rem}.article-meta{margin-bottom:2rem}.prose p,.prose li{font-size:1.04rem;line-height:1.75}.prose h2{font-size:1.5rem;margin:2.4rem 0 .8rem}.prose ul{padding-left:1.2rem}</style><link rel="stylesheet" href="air-visual-contract.css">
 </head>
 <body>
-<header class="site-header"><div class="container nav-row"><a class="brand" href="index.html"><svg class="mark air-eye" viewBox="0 0 64 64" aria-hidden="true"><rect x="9.5" y="9.5" width="45" height="45" rx="13" stroke-width="5"/><circle class="air-pupil" cx="32" cy="32" r="8.5"/></svg>AIR <span class="by">by VM4AI</span></a><nav class="nav" id="nav" aria-label="Primary"><a href="how-it-works.html">How it works</a><a href="where-air-fits.html">Where AIR fits</a><a href="explore-air.html">Explore</a><a href="get-started.html">Get started</a><a href="about.html">About</a></nav><div class="nav-actions"><a class="btn github-btn" href="https://github.com/eddlev/vm4ai-air-kit" target="_blank" rel="noopener"><span class="github-label">GitHub</span></a><button class="icon-btn" data-theme-toggle aria-label="Toggle light or dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button><button class="icon-btn menu-btn" data-menu-toggle aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button></div></div></header>
+<header class="site-header">
+  <!-- Generated from chrome/header.html + navigation.manifest.json. Do not edit this block in public HTML. -->
+  <div class="container nav-row">
+    <a class="brand" href="index.html"><svg class="mark air-eye" viewBox="0 0 64 64" aria-hidden="true"><rect x="9.5" y="9.5" width="45" height="45" rx="13" stroke-width="5"/><circle class="air-pupil" cx="32" cy="32" r="8.5"/></svg>AIR <span class="by">by VM4AI</span></a>
+    <nav class="nav" id="nav" aria-label="Primary">
+      <a href="how-it-works.html">How it works</a>
+      <a href="where-air-fits.html">Where AIR fits</a>
+      <a href="explore-air.html">Explore</a>
+      <a href="get-started.html">Get started</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn github-btn" href="https://github.com/eddlev/vm4ai-air-kit" target="_blank" rel="noopener"><span class="github-label">GitHub</span></a>
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle light or dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+      <button class="icon-btn menu-btn" data-menu-toggle aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    </div>
+  </div>
+</header>
 <main><section class="section"><div class="container"><article class="article"><a class="backlink" href="blog.html">← Blog</a><div class="article-cat">Case study</div><h1 class="page-title">Recovering from session loss — with AIR</h1><div class="article-meta">June 2026 · Written by AIR, steered by Edward Levin</div><div class="prose">
 <p>A framework built for continuity should be stress-tested when a session dies without warning — not only in theory, but on real project work reported honestly. This site, its brand, and the kit behind it were built across several sessions. Twice, a working session stopped before it could hand off. In those two incidents, the available AIR state and conversation history were sufficient to reconstruct the project and continue without an observed loss that blocked the work. This is an account of those outcomes — not a guarantee of exact state transfer or identical inference.</p>
 <h2>The setup</h2><p>AIR carries a project across sessions with a Handoff Card: a structured transfer record of where the work stands, including the active step, open decisions, blockers, and working agreement. The intended flow is to create the card before a session ends, save it, and let the next compatible AIR session validate and rebind from it. Twice, that tidy plan did not survive contact with reality.</p>
@@ -21,5 +38,13 @@
 <h2>The limits</h2><p>Recovery is not guaranteed. It depends on authoritative enough source material still existing to reconstruct the current state. If the conversation is gone and no project evidence was saved, there may be nothing reliable to recover from. The preferred path is still to create a Handoff Card before the active session becomes unusable.</p>
 <h2>The takeaway</h2><p>The two incidents do not prove lossless persistence. They show something more useful and more supportable: explicit project structure gave later sessions enough shape to reconstruct and continue real work after unplanned session failure. The session remained disposable; the project was more recoverable because its state had been made explicit.</p><p>Read <a href="how-it-works.html">how AIR continuity works</a>, inspect <a href="testing-and-evidence.html">the evidence boundaries</a>, or <a href="get-started.html">boot a session</a>.</p>
 </div></article></div></section></main>
-<footer class="site-footer"><div class="container"><div class="foot-bottom"><span>© 2026 VM4AI · Apache-2.0 (code) · <a class="legal" href="privacy.html">Privacy</a> · <a class="legal" href="terms.html">Terms</a></span><a class="made" href="made-with-air.html"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="9.5" y="9.5" width="45" height="45" rx="13" stroke-width="5"/><circle cx="32" cy="32" r="8.5"/></svg> Made with AIR</a></div></div></footer><script src="air-v2.js"></script>
+<footer class="site-footer">
+  <!-- Generated from chrome/footer.html + navigation.manifest.json. Do not edit this block in public HTML. -->
+  <div class="container">
+    <div class="foot-bottom">
+      <span>© 2026 VM4AI · Apache-2.0 (code) · <a class="legal" href="privacy.html">Privacy</a> · <a class="legal" href="terms.html">Terms</a></span>
+      <a class="made" href="made-with-air.html"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="9.5" y="9.5" width="45" height="45" rx="13" stroke-width="5"/><circle cx="32" cy="32" r="8.5"/></svg> Made with AIR</a>
+    </div>
+  </div>
+</footer><script src="air-v2.js"></script>
 </body></html>
