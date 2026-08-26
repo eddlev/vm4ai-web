@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import html
 import json
 import re
 import sys
@@ -18,10 +19,15 @@ EXPECTED_NAV = [
     {"path": "where-air-fits.html", "label": "Where AIR fits"},
     {"path": "explore-air.html", "label": "Explore"},
     {"path": "get-started.html", "label": "Get started"},
+    {"path": "about.html", "label": "About"},
 ]
+EXPECTED_NAV_SIGNATURE = [(item["path"], item["label"]) for item in EXPECTED_NAV]
 
 H1_RE = re.compile(r'<h1\b([^>]*)>', re.IGNORECASE)
 MAIN_RE = re.compile(r'<main>(.*?)</main>', re.IGNORECASE | re.DOTALL)
+NAV_RE = re.compile(r'<nav\b[^>]*\bid=["\']nav["\'][^>]*>(.*?)</nav>', re.IGNORECASE | re.DOTALL)
+NAV_LINK_RE = re.compile(r'<a\b[^>]*href="([^"]+)"[^>]*>(.*?)</a>', re.IGNORECASE | re.DOTALL)
+TAG_RE = re.compile(r'<[^>]+>')
 
 
 def fail(errors: list[str], message: str) -> None:
@@ -33,12 +39,25 @@ def classes_from_attrs(attrs: str) -> set[str]:
     return set(match.group(1).split()) if match else set()
 
 
+def nav_signature(text: str, path: str, errors: list[str]) -> list[tuple[str, str]] | None:
+    matches = list(NAV_RE.finditer(text))
+    if len(matches) != 1:
+        fail(errors, f"{path}: expected exactly one primary nav, found {len(matches)}")
+        return None
+    signature: list[tuple[str, str]] = []
+    for href, raw_label in NAV_LINK_RE.findall(matches[0].group(1)):
+        label = html.unescape(TAG_RE.sub("", raw_label))
+        label = " ".join(label.split())
+        signature.append((href, label))
+    return signature
+
+
 def main() -> int:
     errors: list[str] = []
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
 
     if manifest["chrome"]["primary_nav"] != EXPECTED_NAV:
-        fail(errors, "primary navigation does not match the approved four-item contract")
+        fail(errors, "primary navigation does not match the approved five-item contract")
 
     footer = manifest["chrome"]["footer"]
     if set(footer) != {"Legal"}:
@@ -53,16 +72,18 @@ def main() -> int:
         if f'href="{required}"' not in explore:
             fail(errors, f"{required} must remain discoverable from Explore")
 
-    pages = [str(entry["path"]) for entry in manifest["pages"] if str(entry["path"]) != "404.html"]
-    for path in pages:
+    registered_pages = [str(entry["path"]) for entry in manifest["pages"]]
+    content_pages = [path for path in registered_pages if path != "404.html"]
+
+    for path in registered_pages:
         text = (PUBLIC / path).read_text(encoding="utf-8")
+
+        signature = nav_signature(text, path, errors)
+        if signature is not None and signature != EXPECTED_NAV_SIGNATURE:
+            fail(errors, f"{path}: primary nav differs from canonical five-item sequence: {signature!r}")
+
         if VISUAL_CONTRACT_LINK + "\n</head>" not in text:
             fail(errors, f"{path}: shared visual contract is not loaded last in the head")
-        if "brand-field" in text:
-            fail(errors, f"{path}: legacy brand-field texture class remains")
-        for obsolete in ("hero--patterned", "hero--plain"):
-            if obsolete in text:
-                fail(errors, f"{path}: obsolete {obsolete} texture semantic remains")
 
         if text.count('class="btn github-btn"') != 1:
             fail(errors, f"{path}: canonical github-btn control missing or duplicated")
@@ -77,6 +98,14 @@ def main() -> int:
         ]:
             if required_footer_marker not in text:
                 fail(errors, f"{path}: compact footer missing {required_footer_marker}")
+
+    for path in content_pages:
+        text = (PUBLIC / path).read_text(encoding="utf-8")
+        if "brand-field" in text:
+            fail(errors, f"{path}: legacy brand-field texture class remains")
+        for obsolete in ("hero--patterned", "hero--plain"):
+            if obsolete in text:
+                fail(errors, f"{path}: obsolete {obsolete} texture semantic remains")
 
         h1 = list(H1_RE.finditer(text))
         if len(h1) != 1:
@@ -148,6 +177,11 @@ def main() -> int:
         "background-size:26px 26px!important",
         "background-attachment:fixed!important",
         ".hero{background-color:transparent!important;background-image:none!important}",
+        ".site-header .nav{gap:4px!important}",
+        ".site-header .nav a{",
+        "font:500 .91rem/1 'Space Grotesk',system-ui,sans-serif!important",
+        "color:var(--muted,#A99E91)!important",
+        ".site-header .nav a[aria-current=\"page\"]{",
         ".site-header .github-btn{",
         ".site-footer .foot-grid{display:none!important}",
         ".site-footer .foot-bottom{",
@@ -163,13 +197,14 @@ def main() -> int:
             print(f"- {error}", file=sys.stderr)
         return 1
 
-    print(f"home/nav visual cleanup validation: PASS ({len(pages)} content pages)")
-    print("primary nav: How it works | Where AIR fits | Explore | Get started")
+    print(f"home/nav visual cleanup validation: PASS ({len(registered_pages)} registered pages)")
+    print("primary nav: How it works | Where AIR fits | Explore | Get started | About")
+    print("primary nav visual: canonical landing-page typography/spacing/colors")
     print("global canvas texture: Showcase-style radial pattern")
     print("header GitHub control: canonical landing-page button")
     print("footer: compact Legal + Made with AIR")
     print("deep discovery: Explore")
-    print("shared visual contract: loaded last on every content page")
+    print("shared visual contract: loaded last on every registered page")
     print("homepage sections: 6")
     return 0
 
