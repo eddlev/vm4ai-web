@@ -1,0 +1,141 @@
+name: Apply social preview metadata
+
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-social-preview-metadata.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate social preview asset
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('public/air-social-preview-20260826.jpg')
+          if not path.exists():
+              raise SystemExit('missing social preview asset')
+          data = path.read_bytes()
+          if data[:2] != b'\xff\xd8':
+              raise SystemExit('social preview is not a JPEG')
+
+          sof = {0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7, 0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF}
+          i = 2
+          width = height = None
+          while i + 4 < len(data):
+              if data[i] != 0xFF:
+                  i += 1
+                  continue
+              while i < len(data) and data[i] == 0xFF:
+                  i += 1
+              if i >= len(data):
+                  break
+              marker = data[i]
+              i += 1
+              if marker in {0xD8, 0xD9}:
+                  continue
+              if i + 2 > len(data):
+                  break
+              length = int.from_bytes(data[i:i+2], 'big')
+              if length < 2 or i + length > len(data):
+                  raise SystemExit('invalid JPEG segment')
+              if marker in sof:
+                  if length < 7:
+                      raise SystemExit('invalid JPEG SOF segment')
+                  height = int.from_bytes(data[i+3:i+5], 'big')
+                  width = int.from_bytes(data[i+5:i+7], 'big')
+                  break
+              i += length
+
+          if (width, height) != (1200, 630):
+              raise SystemExit(f'expected 1200x630, got {width}x{height}')
+          print(f'validated {path}: {width}x{height}, {len(data)} bytes')
+          PY
+
+      - name: Patch homepage social metadata
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('public/index.html')
+          text = path.read_text(encoding='utf-8')
+          old_url = 'https://vm4ai.com/og-image.png'
+          new_url = 'https://vm4ai.com/air-social-preview-20260826.jpg'
+
+          if new_url not in text:
+              old_og = '<meta property="og:url" content="https://vm4ai.com/"><meta property="og:image" content="https://vm4ai.com/og-image.png">'
+              new_og = ('<meta property="og:url" content="https://vm4ai.com/">'
+                        '<meta property="og:image" content="https://vm4ai.com/air-social-preview-20260826.jpg">\n'
+                        '<meta property="og:image:secure_url" content="https://vm4ai.com/air-social-preview-20260826.jpg">\n'
+                        '<meta property="og:image:type" content="image/jpeg">')
+              if old_og not in text:
+                  raise SystemExit('expected legacy og:image block not found')
+              text = text.replace(old_og, new_og, 1)
+
+              old_dims = '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'
+              new_dims = (old_dims + '\n'
+                          '<meta property="og:image:alt" content="AIR by VM4AI — AI work, carried forward">')
+              if old_dims not in text:
+                  raise SystemExit('expected og:image dimensions block not found')
+              text = text.replace(old_dims, new_dims, 1)
+
+              old_twitter = ('<meta name="twitter:description" content="Continue complex AI projects across sessions and compatible platforms without rebuilding the work every time.">'
+                             '<meta name="twitter:image" content="https://vm4ai.com/og-image.png">')
+              new_twitter = ('<meta name="twitter:description" content="Continue complex AI projects across sessions and compatible platforms without rebuilding the work every time.">'
+                             '<meta name="twitter:image" content="https://vm4ai.com/air-social-preview-20260826.jpg">\n'
+                             '<meta name="twitter:image:alt" content="AIR by VM4AI — AI work, carried forward">')
+              if old_twitter not in text:
+                  raise SystemExit('expected legacy twitter:image block not found')
+              text = text.replace(old_twitter, new_twitter, 1)
+
+          if old_url in text:
+              raise SystemExit('legacy social image URL remains in homepage metadata')
+          required = [
+              '<meta property="og:image" content="https://vm4ai.com/air-social-preview-20260826.jpg">',
+              '<meta property="og:image:secure_url" content="https://vm4ai.com/air-social-preview-20260826.jpg">',
+              '<meta property="og:image:type" content="image/jpeg">',
+              '<meta property="og:image:width" content="1200">',
+              '<meta property="og:image:height" content="630">',
+              '<meta property="og:image:alt" content="AIR by VM4AI — AI work, carried forward">',
+              '<meta name="twitter:card" content="summary_large_image">',
+              '<meta name="twitter:image" content="https://vm4ai.com/air-social-preview-20260826.jpg">',
+              '<meta name="twitter:image:alt" content="AIR by VM4AI — AI work, carried forward">',
+          ]
+          missing = [item for item in required if item not in text]
+          if missing:
+              raise SystemExit('missing required social metadata: ' + repr(missing))
+
+          path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Restrict generated diff
+        run: |
+          changed="$(git diff --name-only)"
+          printf '%s\n' "$changed"
+          bad="$(printf '%s\n' "$changed" | grep -v '^public/index.html$' || true)"
+          if [ -n "$bad" ]; then
+            echo "unexpected generated paths:" >&2
+            printf '%s\n' "$bad" >&2
+            exit 1
+          fi
+
+      - name: Commit validated metadata
+        run: |
+          if git diff --quiet; then
+            echo 'social metadata already current'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/index.html
+          git commit -m 'Use cache-busting AIR social preview'
+          git push
