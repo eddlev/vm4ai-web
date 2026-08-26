@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "navigation.manifest.json"
 
 BLOCK_RE = re.compile(
-    r"\s*<!-- CONTEXT_BACK_START -->.*?<!-- CONTEXT_BACK_END -->\s*",
+    r"<!-- CONTEXT_BACK_START -->.*?<!-- CONTEXT_BACK_END -->",
     re.IGNORECASE | re.DOTALL,
 )
 LEGACY_BACKLINK_RE = re.compile(
@@ -84,10 +84,10 @@ def validate_parent_map(manifest: dict) -> tuple[dict[str, str], dict[str, str]]
 
 def back_block(parent: str, label: str) -> str:
     return (
-        "\n<!-- CONTEXT_BACK_START -->\n"
+        "<!-- CONTEXT_BACK_START -->\n"
         f'<a class="context-back" href="{html.escape(parent, quote=True)}">'
         f'← {html.escape(label)}</a>\n'
-        "<!-- CONTEXT_BACK_END -->\n"
+        "<!-- CONTEXT_BACK_END -->"
     )
 
 
@@ -95,17 +95,26 @@ def insert_block(source: str, block: str, path: str) -> str:
     for pattern in (HERO_CONTAINER_RE, ARTICLE_RE, SECTION_CONTAINER_RE):
         match = pattern.search(source)
         if match:
-            return source[: match.end()] + block + source[match.end() :]
+            return source[: match.end()] + "\n" + block + "\n" + source[match.end() :]
     raise RuntimeError(f"{path}: no supported contextual-back insertion point found")
 
 
 def transform(source: str, path: str, parents: dict[str, str], labels: dict[str, str]) -> str:
-    rendered = BLOCK_RE.sub("\n", source)
+    rendered = source
+    blocks = list(BLOCK_RE.finditer(rendered))
+    if len(blocks) > 1:
+        raise RuntimeError(f"{path}: expected at most one contextual back block, found {len(blocks)}")
 
     if path in parents:
         rendered = LEGACY_BACKLINK_RE.sub("\n", rendered)
         parent = parents[path]
-        rendered = insert_block(rendered, back_block(parent, labels[parent]), path)
+        canonical = back_block(parent, labels[parent])
+        if blocks:
+            rendered = BLOCK_RE.sub(canonical, rendered, count=1)
+        else:
+            rendered = insert_block(rendered, canonical, path)
+    elif blocks:
+        rendered = BLOCK_RE.sub("", rendered, count=1)
 
     if path == "how-it-works.html":
         if OLD_ASSURANCE in rendered:
