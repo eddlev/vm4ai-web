@@ -9,6 +9,23 @@ body{
 .page-title,.hero h1.page-title{font-size:var(--air-page-title-size)!important}
 .hero{background-color:transparent!important;background-image:none!important}
 
+/* Contextual parent navigation for secondary/deep pages. */
+.context-back{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:.35rem!important;
+  margin:0 0 1.35rem!important;
+  padding:0!important;
+  font:400 .8rem/1.35 'JetBrains Mono',ui-monospace,Menlo,monospace!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+  color:var(--muted,#A99E91)!important;
+  background:transparent!important;
+  border:0!important;
+  text-decoration:none!important;
+}
+.context-back:hover,.context-back:focus-visible{color:var(--brass,#C9A227)!important}
+
 /* Canonical primary navigation: landing-page typography and state treatment everywhere. */
 .site-header .nav{gap:4px!important}
 .site-header .nav a{
