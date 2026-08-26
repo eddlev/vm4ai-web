@@ -9,6 +9,30 @@ body{
 .page-title,.hero h1.page-title{font-size:var(--air-page-title-size)!important}
 .hero{background-color:transparent!important;background-image:none!important}
 
+/* Canonical primary navigation: landing-page typography and state treatment everywhere. */
+.site-header .nav{gap:4px!important}
+.site-header .nav a{
+  padding:7px 9px!important;
+  margin:0!important;
+  font:500 .91rem/1 'Space Grotesk',system-ui,sans-serif!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+  text-decoration:none!important;
+  color:var(--muted,#A99E91)!important;
+  border-radius:8px!important;
+  background:transparent!important;
+}
+.site-header .nav a:hover,
+.site-header .nav a:focus-visible,
+.site-header .nav a.active,
+.site-header .nav a[aria-current="page"]{
+  color:var(--text,#ECE4D8)!important;
+}
+.site-header .nav a.active,
+.site-header .nav a[aria-current="page"]{
+  font-weight:500!important;
+}
+
 /* Canonical header GitHub control: matches the landing-page button. */
 .site-header .github-btn{
   display:inline-flex!important;
