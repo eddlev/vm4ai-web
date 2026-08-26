@@ -26,6 +26,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Canonicalize shared visual contract link
+        run: python3 tools/ensure_visual_contract_links.py
+
       - name: Render contextual parent links
         run: python3 tools/render_context_back.py --write
 
