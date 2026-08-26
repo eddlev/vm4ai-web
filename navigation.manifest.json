@@ -25,6 +25,10 @@
       {
         "path": "get-started.html",
         "label": "Get started"
+      },
+      {
+        "path": "about.html",
+        "label": "About"
       }
     ],
     "footer": {
