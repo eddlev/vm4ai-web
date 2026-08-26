@@ -6,8 +6,11 @@ on:
     paths:
       - navigation.manifest.json
       - chrome/**
+      - public/air-visual-contract.css
+      - tools/ensure_visual_contract_links.py
       - tools/render_chrome.py
       - tools/validate_navigation.py
+      - tools/validate_home_nav_visual_cleanup.py
       - .github/workflows/render-shared-chrome.yml
   workflow_dispatch:
 
@@ -27,11 +30,17 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Ensure shared visual contract is loaded everywhere
+        run: python3 tools/ensure_visual_contract_links.py
+
       - name: Render canonical header and footer
         run: python3 tools/render_chrome.py --write
 
       - name: Require strict navigation contract
         run: python3 tools/validate_navigation.py --strict-chrome
+
+      - name: Require site-wide visual chrome contract
+        run: python3 tools/validate_home_nav_visual_cleanup.py
 
       - name: Verify renderer is idempotent
         run: python3 tools/render_chrome.py --check
@@ -51,7 +60,7 @@ jobs:
         run: |
           set -euo pipefail
           if git diff --quiet -- public; then
-            echo "Shared chrome is already current."
+            echo "Shared chrome and visual contract links are already current."
             exit 0
           fi
           git config user.name "github-actions[bot]"
