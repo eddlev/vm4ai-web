@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PUBLIC = ROOT / "public"
 MANIFEST = ROOT / "navigation.manifest.json"
 LINK = '<link rel="stylesheet" href="air-visual-contract.css">'
+CANONICAL_TAIL = LINK + "\n</head>"
 
 
 def main() -> int:
@@ -24,17 +25,13 @@ def main() -> int:
         count = text.count(LINK)
         if count > 1:
             raise SystemExit(f"{path}: expected at most one shared visual contract link, found {count}")
+        if count == 1 and CANONICAL_TAIL in text:
+            continue
 
-        head_close = text.index("</head>")
         if count == 1:
-            link_pos = text.index(LINK)
-            between = text[link_pos + len(LINK) : head_close]
-            if not between.strip():
-                continue
-            text = text[:link_pos] + text[link_pos + len(LINK) :]
-            head_close = text.index("</head>")
+            text = text.replace(LINK, "", 1)
 
-        text = text[:head_close] + LINK + "\n" + text[head_close:]
+        text = text.replace("</head>", CANONICAL_TAIL, 1)
         file_path.write_text(text, encoding="utf-8")
         changed.append(path)
 
