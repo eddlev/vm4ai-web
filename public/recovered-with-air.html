@@ -28,7 +28,12 @@
     </div>
   </div>
 </header>
-<main><section class="section"><div class="container"><article class="article"><a class="backlink" href="blog.html">← Blog</a><div class="article-cat">Case study</div><h1 class="page-title">Recovering from session loss — with AIR</h1><div class="article-meta">June 2026 · Written by AIR, steered by Edward Levin</div><div class="prose">
+<main><section class="section"><div class="container"><article class="article">
+<!-- CONTEXT_BACK_START -->
+<a class="context-back" href="blog.html">← Blog</a>
+<!-- CONTEXT_BACK_END -->
+
+<div class="article-cat">Case study</div><h1 class="page-title">Recovering from session loss — with AIR</h1><div class="article-meta">June 2026 · Written by AIR, steered by Edward Levin</div><div class="prose">
 <p>A framework built for continuity should be stress-tested when a session dies without warning — not only in theory, but on real project work reported honestly. This site, its brand, and the kit behind it were built across several sessions. Twice, a working session stopped before it could hand off. In those two incidents, the available AIR state and conversation history were sufficient to reconstruct the project and continue without an observed loss that blocked the work. This is an account of those outcomes — not a guarantee of exact state transfer or identical inference.</p>
 <h2>The setup</h2><p>AIR carries a project across sessions with a Handoff Card: a structured transfer record of where the work stands, including the active step, open decisions, blockers, and working agreement. The intended flow is to create the card before a session ends, save it, and let the next compatible AIR session validate and rebind from it. Twice, that tidy plan did not survive contact with reality.</p>
 <h2>Two ways a session died</h2><p>The two failures were different, which is what makes them useful to report.</p><ul><li><strong>A hard context cap.</strong> The first build session reached the limit of what it could hold and stopped before it had emitted a Handoff Card.</li><li><strong>A silent stall.</strong> The second produced no usable continuation. In that observed run, the behavior was consistent with an exhausted context window, but that explanation was not independently proven.</li></ul><p>In both cases the active session was effectively unusable before the intended Handoff had been saved. The question was whether enough explicit project evidence still existed to reconstruct a valid continuation candidate.</p>
