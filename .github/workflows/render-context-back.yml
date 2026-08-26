@@ -1,0 +1,75 @@
+name: Render contextual back navigation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - navigation.manifest.json
+      - public/air-visual-contract.css
+      - tools/render_context_back.py
+      - .github/workflows/render-context-back.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: render-context-back-main
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Render contextual parent links
+        run: python3 tools/render_context_back.py --write
+
+      - name: Verify contextual navigation is canonical
+        run: python3 tools/render_context_back.py --check
+
+      - name: Require strict navigation contract
+        run: python3 tools/validate_navigation.py --strict-chrome
+
+      - name: Require site-wide visual chrome contract
+        run: python3 tools/validate_home_nav_visual_cleanup.py
+
+      - name: Restrict generated diff to approved contextual pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          manifest = json.loads(Path('navigation.manifest.json').read_text(encoding='utf-8'))
+          allowed = {f"public/{path}" for path in manifest.get('context_back', {})}
+          allowed.add('public/how-it-works.html')
+          changed = {
+              line.strip()
+              for line in subprocess.check_output(['git', 'diff', '--name-only'], text=True).splitlines()
+              if line.strip()
+          }
+          unexpected = sorted(changed - allowed)
+          if unexpected:
+              raise SystemExit('Unexpected generated files:\n' + '\n'.join(unexpected))
+          PY
+
+      - name: Commit generated static HTML
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- public; then
+            echo "Contextual navigation is already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/*.html
+          git commit -m "Render contextual back navigation"
+          git push
