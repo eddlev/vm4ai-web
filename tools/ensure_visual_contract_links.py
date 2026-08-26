@@ -15,8 +15,6 @@ def main() -> int:
     changed: list[str] = []
     for entry in manifest["pages"]:
         path = str(entry["path"])
-        if path == "404.html":
-            continue
         file_path = PUBLIC / path
         text = file_path.read_text(encoding="utf-8")
         if LINK in text:
