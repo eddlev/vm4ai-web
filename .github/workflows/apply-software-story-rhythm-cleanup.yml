@@ -1,0 +1,61 @@
+name: Apply software story rhythm cleanup
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - tools/apply_software_story_rhythm_cleanup.py
+      - .github/workflows/apply-software-story-rhythm-cleanup.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: software-story-rhythm-main
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply requested software-story rhythm cleanup
+        run: python3 tools/apply_software_story_rhythm_cleanup.py --write
+
+      - name: Validate requested software-story rhythm cleanup
+        run: python3 tools/apply_software_story_rhythm_cleanup.py --check
+
+      - name: Require strict navigation contract
+        run: python3 tools/validate_navigation.py --strict-chrome
+
+      - name: Require site-wide visual chrome contract
+        run: python3 tools/validate_home_nav_visual_cleanup.py
+
+      - name: Restrict generated diff to approved software-story pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          unexpected="$(git diff --name-only | grep -vE '^public/(where-air-fits|air-for-development|spec-driven-development|specification-first-verification)\.html$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf 'Unexpected generated files:\n%s\n' "$unexpected" >&2
+            exit 1
+          fi
+
+      - name: Commit generated page cleanup
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- public; then
+            echo "Software-story rhythm is already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/where-air-fits.html public/air-for-development.html public/spec-driven-development.html public/specification-first-verification.html
+          git commit -m "Normalize software-story section rhythm"
+          git push
