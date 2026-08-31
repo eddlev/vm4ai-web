@@ -1,0 +1,60 @@
+name: Align website to AIR 2.5.0 preview
+
+on:
+  push:
+    branches: [air250-preview-align]
+    paths: [.air250-align-ready]
+
+permissions:
+  contents: write
+
+jobs:
+  align:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: air250-preview-align
+      - name: Patch and validate AIR public references
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('public/air-docs.html')
+          s = p.read_text()
+          replacements = {
+            'Current foundation: Core 2.4.3 · Control 2.4.3 · Governance 2.2.0 · Starter 2.4.3 · Handoff schema 2.2.0': 'Current foundation: Core 2.5.0 · Control 2.5.0 · Governance 2.3.0 · Starter 2.5.0 · Handoff schema 2.3.0',
+            '<tr><td>Core Runtime</td><td>2.4.3</td>': '<tr><td>Core Runtime</td><td>2.5.0</td>',
+            '<tr><td>Control Surface</td><td>2.4.3</td>': '<tr><td>Control Surface</td><td>2.5.0</td>',
+            '<tr><td>Governance supplement</td><td>2.2.0</td>': '<tr><td>Governance supplement</td><td>2.3.0</td>',
+            '<tr><td>Default Starter Profile</td><td>2.4.3</td>': '<tr><td>Default Starter Profile</td><td>2.5.0</td>',
+            '<tr><td>Handoff Card Template</td><td>schema 2.2.0</td>': '<tr><td>Handoff Card Template</td><td>schema 2.3.0</td>',
+          }
+          for old,new in replacements.items():
+              if old not in s:
+                  raise SystemExit(f'missing expected air-docs marker: {old}')
+              s=s.replace(old,new)
+          p.write_text(s)
+          p=Path('public/index.html')
+          s=p.read_text()
+          old='Stable across sessions and platforms.'
+          new='Designed for continuity across sessions and compatible platforms.'
+          if old not in s:
+              raise SystemExit('missing expected homepage continuity phrase')
+          p.write_text(s.replace(old,new))
+          report=Path('AIR_2.5.0_PREVIEW_ALIGNMENT.md')
+          report.write_text('# AIR 2.5.0 preview website alignment\n\n- Foundation: Core/Control/Starter 2.5.0\n- Governance/Handoff: 2.3.0\n- Public channel: 2.5.0-preview.1\n- Continuity wording is bounded to compatible platforms.\n')
+          PY
+          grep -q 'Core 2.5.0 · Control 2.5.0 · Governance 2.3.0 · Starter 2.5.0 · Handoff schema 2.3.0' public/air-docs.html
+          grep -q 'Designed for continuity across sessions and compatible platforms.' public/index.html
+          ! grep -q 'Current foundation: Core 2.4.3' public/air-docs.html
+      - name: Commit alignment
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'AIR Deployment Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add public/air-docs.html public/index.html AIR_2.5.0_PREVIEW_ALIGNMENT.md
+          git commit -m 'Align website to AIR 2.5.0 preview'
+          git push origin HEAD:air250-preview-align
