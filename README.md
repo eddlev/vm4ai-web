@@ -13,11 +13,19 @@
 
 **Focused. Fluid. AIR.** — AI work, carried forward.
 
-The source for **[vm4ai.com](https://vm4ai.com)**, the public site for **AIR**, the prompt-based framework from VM4AI.
+The source for **[vm4ai.com](https://vm4ai.com)**, a VM4AI project portfolio for **AIR, SLUSE and BinLing** with AIR documentation retained.
 
 The deployable site lives in [`public/`](public/) and has no Cloudflare build step. The homepage is the Brand v2 implementation: outcome-first positioning, the Focused / Fluid / AIR visual grammar, light/dark parity, structured continuity messaging, and explicit prompt-layer trust boundaries.
 
 ---
+
+## VM4AI projects
+
+- **AIR Kit:** public Apache-2.0 prompt framework; no independent external execution enforcement.
+- **SLUSE:** private-development agent-action gateway with AIR backend as sole governance decision authority. A new proprietary integrated release is planned, not yet shipped.
+- **BinLing:** capsule transport concepts and deterministic runtime research; version-specific licensing and no native SLUSE wire integration to date.
+
+The project inventory and license distinctions live in `public/projects.html`. Do not publish private repository links, secret material or internal implementation details from unpublished VM4AI work.
 
 ## Brand center
 
@@ -162,6 +170,6 @@ The site deploys via Cloudflare Pages Git integration:
 
 This site's own code and content are © Edward Levin (VM4AI) — all rights reserved. The included font licenses are SIL Open Font License 1.1.
 
-The AIR framework is licensed **Apache-2.0**. The **AIR** and **VM4AI** names and the dot-in-frame mark are reserved; see the brand usage terms in `air-brand`.
+The public AIR Kit is **Apache-2.0**. Other VM4AI projects have distinct version-specific rights (including historical Apache-2.0 SLUSE v0.0.1 and BinLing's historical MIT/AGPL-3.0 releases). A future proprietary SLUSE license is not yet issued. VM4AI/AIR names and marks are reserved; see `air-brand`.
 
 — [vm4ai.com](https://vm4ai.com)

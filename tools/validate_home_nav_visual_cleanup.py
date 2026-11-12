@@ -16,7 +16,7 @@ VISUAL_CONTRACT_LINK = '<link rel="stylesheet" href="air-visual-contract.css">'
 
 EXPECTED_NAV = [
     {"path": "how-it-works.html", "label": "How it works"},
-    {"path": "where-air-fits.html", "label": "Where AIR fits"},
+    {"path": "projects.html", "label": "Projects"},
     {"path": "explore-air.html", "label": "Explore"},
     {"path": "get-started.html", "label": "Get started"},
     {"path": "about.html", "label": "About"},
@@ -128,8 +128,8 @@ def main() -> int:
         fail(errors, "index.html: main element missing")
     else:
         section_count = len(re.findall(r'<section\b', main_match.group(1), re.IGNORECASE))
-        if section_count != 6:
-            fail(errors, f"index.html: expected 6 main sections after reduction, found {section_count}")
+        if section_count != 7:
+            fail(errors, f"index.html: expected 7 main sections including project portfolio, found {section_count}")
 
     for required in [
         "Your project shouldn’t reset with the session.",
@@ -199,14 +199,14 @@ def main() -> int:
         return 1
 
     print(f"home/nav visual cleanup validation: PASS ({len(registered_pages)} registered pages)")
-    print("primary nav: How it works | Where AIR fits | Explore | Get started | About")
+    print("primary nav: How it works | Projects | Explore | Get started | About")
     print("primary nav visual: canonical landing-page typography/spacing/colors")
     print("global canvas texture: Showcase-style radial pattern")
     print("header GitHub control: canonical landing-page button")
     print("footer: compact Legal + Made with AIR")
     print("deep discovery: Explore")
     print("shared visual contract: loaded last on every registered page")
-    print("homepage sections: 6")
+    print("homepage sections: 7")
     return 0
 
 
