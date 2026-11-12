@@ -1,0 +1,22 @@
+name: Validate VM4AI website
+on:
+  pull_request:
+    paths:
+      - 'public/**'
+      - 'navigation.manifest.json'
+      - 'chrome/**'
+      - 'tools/**'
+      - '.github/workflows/verify-site-pr.yml'
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check shared chrome
+        run: python3 tools/render_chrome.py --check
+      - name: Check navigation
+        run: python3 tools/validate_navigation.py --strict-chrome
+      - name: Check visual and homepage
+        run: python3 tools/validate_home_nav_visual_cleanup.py

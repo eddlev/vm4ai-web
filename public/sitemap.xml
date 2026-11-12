@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://vm4ai.com/</loc><lastmod>2026-08-25</lastmod></url>
+  <url><loc>https://vm4ai.com/</loc><lastmod>2026-11-12</lastmod></url>
+  <url><loc>https://vm4ai.com/projects.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://vm4ai.com/explore-air.html</loc><lastmod>2026-08-25</lastmod></url>
   <url><loc>https://vm4ai.com/how-it-works.html</loc><lastmod>2026-08-24</lastmod></url>
   <url><loc>https://vm4ai.com/where-air-fits.html</loc><lastmod>2026-08-25</lastmod></url>
@@ -11,7 +12,7 @@
   <url><loc>https://vm4ai.com/spec-driven-development.html</loc><lastmod>2026-08-25</lastmod></url>
   <url><loc>https://vm4ai.com/specification-first-verification.html</loc><lastmod>2026-08-25</lastmod></url>
   <url><loc>https://vm4ai.com/services.html</loc><lastmod>2026-08-24</lastmod></url>
-  <url><loc>https://vm4ai.com/about.html</loc><lastmod>2026-08-24</lastmod></url>
+  <url><loc>https://vm4ai.com/about.html</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://vm4ai.com/glossary.html</loc><lastmod>2026-08-24</lastmod></url>
   <url><loc>https://vm4ai.com/blog.html</loc><lastmod>2026-08-24</lastmod></url>
   <url><loc>https://vm4ai.com/built-with-air.html</loc><lastmod>2026-08-24</lastmod></url>
@@ -21,6 +22,6 @@
   <url><loc>https://vm4ai.com/showcase.html</loc><lastmod>2026-08-24</lastmod></url>
   <url><loc>https://vm4ai.com/made-with-air.html</loc><lastmod>2026-08-24</lastmod></url>
   <url><loc>https://vm4ai.com/privacy.html</loc><lastmod>2026-08-24</lastmod></url>
-  <url><loc>https://vm4ai.com/terms.html</loc><lastmod>2026-08-24</lastmod></url>
-  <url><loc>https://vm4ai.com/air-docs.html</loc><lastmod>2026-08-24</lastmod></url>
+  <url><loc>https://vm4ai.com/terms.html</loc><lastmod>2026-11-12</lastmod></url>
+  <url><loc>https://vm4ai.com/air-docs.html</loc><lastmod>2026-11-12</lastmod></url>
 </urlset>

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "site": {
-    "name": "AIR by VM4AI",
+    "name": "VM4AI",
     "base_url": "https://vm4ai.com",
     "public_root": "public",
     "homepage": "index.html",
@@ -15,8 +15,8 @@
         "label": "How it works"
       },
       {
-        "path": "where-air-fits.html",
-        "label": "Where AIR fits"
+        "path": "projects.html",
+        "label": "Projects"
       },
       {
         "path": "explore-air.html",
@@ -71,6 +71,7 @@
       "made-with-air.html"
     ],
     "vm4ai": [
+      "projects.html",
       "from-morphic-to-air.html",
       "about.html",
       "blog.html",
@@ -91,7 +92,8 @@
     "built-with-air.html": "blog.html",
     "recovered-with-air.html": "blog.html",
     "from-morphic-to-air.html": "about.html",
-    "services.html": "about.html"
+    "services.html": "about.html",
+    "projects.html": "about.html"
   },
   "pages": [
     {
@@ -99,168 +101,241 @@
       "label": "Home",
       "sitemap": true,
       "min_inbound": 1,
-      "roles": ["home"]
+      "roles": [
+        "home"
+      ]
+    },
+    {
+      "path": "projects.html",
+      "label": "VM4AI projects",
+      "sitemap": true,
+      "min_inbound": 3,
+      "roles": [
+        "vm4ai",
+        "projects",
+        "licensing"
+      ]
     },
     {
       "path": "explore-air.html",
       "label": "Explore AIR",
       "sitemap": true,
       "min_inbound": 2,
-      "roles": ["map", "discovery"]
+      "roles": [
+        "map",
+        "discovery"
+      ]
     },
     {
       "path": "how-it-works.html",
       "label": "How it works",
       "sitemap": true,
       "min_inbound": 2,
-      "roles": ["core", "understand"]
+      "roles": [
+        "core",
+        "understand"
+      ]
     },
     {
       "path": "where-air-fits.html",
       "label": "Where AIR fits",
       "sitemap": true,
       "min_inbound": 2,
-      "roles": ["core", "landscape"]
+      "roles": [
+        "core",
+        "landscape"
+      ]
     },
     {
       "path": "air-docs.html",
       "label": "Documentation",
       "sitemap": true,
       "min_inbound": 1,
-      "roles": ["reference"]
+      "roles": [
+        "reference"
+      ]
     },
     {
       "path": "get-started.html",
       "label": "Get started",
       "sitemap": true,
       "min_inbound": 2,
-      "roles": ["start"]
+      "roles": [
+        "start"
+      ]
     },
     {
       "path": "use-cases.html",
       "label": "Use cases",
       "sitemap": true,
       "min_inbound": 2,
-      "roles": ["use"]
+      "roles": [
+        "use"
+      ]
     },
     {
       "path": "air-for-development.html",
       "label": "AIR for software development",
       "sitemap": true,
       "min_inbound": 2,
-      "roles": ["use", "software"]
+      "roles": [
+        "use",
+        "software"
+      ]
     },
     {
       "path": "spec-driven-development.html",
       "label": "Spec-driven development with AIR",
       "sitemap": true,
       "min_inbound": 2,
-      "roles": ["software", "category"]
+      "roles": [
+        "software",
+        "category"
+      ]
     },
     {
       "path": "specification-first-verification.html",
       "label": "Specification-First Verification",
       "sitemap": true,
       "min_inbound": 2,
-      "roles": ["software", "method"]
+      "roles": [
+        "software",
+        "method"
+      ]
     },
     {
       "path": "testing-and-evidence.html",
       "label": "Testing & Evidence",
       "sitemap": true,
       "min_inbound": 1,
-      "roles": ["evidence", "trust"]
+      "roles": [
+        "evidence",
+        "trust"
+      ]
     },
     {
       "path": "glossary.html",
       "label": "Glossary",
       "sitemap": true,
       "min_inbound": 2,
-      "roles": ["reference"]
+      "roles": [
+        "reference"
+      ]
     },
     {
       "path": "showcase.html",
       "label": "Showcase",
       "sitemap": true,
       "min_inbound": 1,
-      "roles": ["evidence", "start"]
+      "roles": [
+        "evidence",
+        "start"
+      ]
     },
     {
       "path": "built-with-air.html",
       "label": "Built with AIR",
       "sitemap": true,
       "min_inbound": 1,
-      "roles": ["evidence", "case-study"]
+      "roles": [
+        "evidence",
+        "case-study"
+      ]
     },
     {
       "path": "recovered-with-air.html",
       "label": "Recovered with AIR",
       "sitemap": true,
       "min_inbound": 1,
-      "roles": ["evidence", "case-study"]
+      "roles": [
+        "evidence",
+        "case-study"
+      ]
     },
     {
       "path": "real-boot-vs-roleplay.html",
       "label": "AIR load integrity",
       "sitemap": true,
       "min_inbound": 1,
-      "roles": ["evidence", "integrity"]
+      "roles": [
+        "evidence",
+        "integrity"
+      ]
     },
     {
       "path": "made-with-air.html",
       "label": "Made with AIR",
       "sitemap": true,
       "min_inbound": 1,
-      "roles": ["attribution"]
+      "roles": [
+        "attribution"
+      ]
     },
     {
       "path": "from-morphic-to-air.html",
       "label": "From Morphic to AIR",
       "sitemap": true,
       "min_inbound": 1,
-      "roles": ["history", "vm4ai"]
+      "roles": [
+        "history",
+        "vm4ai"
+      ]
     },
     {
       "path": "about.html",
       "label": "About",
       "sitemap": true,
       "min_inbound": 1,
-      "roles": ["vm4ai"]
+      "roles": [
+        "vm4ai"
+      ]
     },
     {
       "path": "blog.html",
       "label": "Blog",
       "sitemap": true,
       "min_inbound": 2,
-      "roles": ["vm4ai", "updates"]
+      "roles": [
+        "vm4ai",
+        "updates"
+      ]
     },
     {
       "path": "services.html",
       "label": "Services",
       "sitemap": true,
       "min_inbound": 1,
-      "roles": ["vm4ai", "commercial"]
+      "roles": [
+        "vm4ai",
+        "commercial"
+      ]
     },
     {
       "path": "privacy.html",
       "label": "Privacy",
       "sitemap": true,
       "min_inbound": 1,
-      "roles": ["legal"]
+      "roles": [
+        "legal"
+      ]
     },
     {
       "path": "terms.html",
       "label": "Terms",
       "sitemap": true,
       "min_inbound": 1,
-      "roles": ["legal"]
+      "roles": [
+        "legal"
+      ]
     },
     {
       "path": "404.html",
       "label": "Not found",
       "sitemap": false,
       "min_inbound": 0,
-      "roles": ["system"]
+      "roles": [
+        "system"
+      ]
     }
   ],
   "validation": {
@@ -269,6 +344,11 @@
     "require_internal_href_targets_exist": true,
     "require_minimum_inbound_links": true,
     "chrome_mode": "error",
-    "ignored_href_schemes": ["mailto", "tel", "javascript", "data"]
+    "ignored_href_schemes": [
+      "mailto",
+      "tel",
+      "javascript",
+      "data"
+    ]
   }
 }
